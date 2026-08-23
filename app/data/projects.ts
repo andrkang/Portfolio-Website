@@ -55,7 +55,7 @@ export const projects: Project[] = [
         caption: "Building and wiring the robot",
       },
       {
-        src: "/images/bda-simulation-experiment.jpg",
+        src: "/images/bda-simulation-experiment.png",
         alt: "Annotated BDA flume experiment showing the water level sensor, data acquisition system, test dam, and physical BDA configurations",
         caption: "BDA flume simulation experiment",
       },
