@@ -54,6 +54,11 @@ export const projects: Project[] = [
         alt: "Andrew Kang assembling the robotic arm and internal electronics",
         caption: "Building and wiring the robot",
       },
+      {
+        src: "/images/bda-simulation-experiment.jpg",
+        alt: "Annotated BDA flume experiment showing the water level sensor, data acquisition system, test dam, and physical BDA configurations",
+        caption: "BDA flume simulation experiment",
+      },
     ],
     chapters: [
       { number: "01", title: "The wetland problem", prompt: "Context, field observations, and the restoration challenge." },

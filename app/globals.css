@@ -179,6 +179,8 @@ a { text-decoration: none; }
 .gallery-item-1 img { object-position: center 58%; }
 .gallery-item-2 img { object-position: 52% center; }
 .gallery-item-3 img { object-position: center; }
+.gallery-item-4 { grid-column: 1 / -1; aspect-ratio: 24 / 7; background: #000; }
+.gallery-item-4 img { object-fit: contain; object-position: center; }
 .gallery-item:hover img { transform: scale(1.018); }
 
 .gallery-item figcaption {
@@ -267,6 +269,7 @@ a { text-decoration: none; }
   .project-gallery { padding-block: 60px; grid-template-columns: 1fr; }
   .gallery-item, .gallery-item-1 { grid-column: auto; aspect-ratio: 4 / 5; }
   .gallery-item-1 { aspect-ratio: 5 / 4; }
+  .gallery-item-4 { aspect-ratio: 3 / 2; background: #000; }
   .experience-video { padding-bottom: 80px; }
 }
 

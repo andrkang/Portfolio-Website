@@ -30,6 +30,7 @@ test("renders the single-page project switcher", async () => {
   assert.match(html, /\/images\/bda-robot\.jpg/);
   assert.match(html, /\/images\/bda-controller-display\.jpg/);
   assert.match(html, /\/images\/bda-building\.jpg/);
+  assert.match(html, /\/images\/bda-simulation-experiment\.jpg/);
   assert.doesNotMatch(html, /The story, in three parts/);
   assert.doesNotMatch(html, /href="\/work\//);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
