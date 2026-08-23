@@ -107,25 +107,6 @@ export default function PortfolioExperience() {
           </section>
         )}
 
-        <section className="case-study experience-shell" aria-labelledby="case-study-title">
-          <div className="case-study-intro">
-            <span className="experience-kicker">Project structure</span>
-            <h3 id="case-study-title">The story, in three parts.</h3>
-          </div>
-          <div className="chapter-list-single">
-            {project.chapters.map((chapter) => (
-              <article className="chapter-single" key={chapter.number}>
-                <span>{chapter.number}</span>
-                <div>
-                  <h4>{chapter.title}</h4>
-                  <p>{chapter.prompt}</p>
-                </div>
-                <div className="chapter-slot">Media module</div>
-              </article>
-            ))}
-          </div>
-        </section>
-
         {project.video ? (
           <section className="experience-video experience-shell" aria-labelledby="video-title">
             <div>
