@@ -21,12 +21,13 @@ test("renders the single-page project switcher", async () => {
   const html = await response.text();
   assert.match(html, /Andrew Kang.*Portfolio/);
   assert.match(html, /role="tablist"/);
-  assert.match(html, /Robotic Beaver Dam Analog/);
+  assert.match(html, /Robotic Assistance for Data-Driven Beaver Dam Analog Construction/);
   assert.match(html, /BDA Robot/);
   assert.match(html, /ADAPTIV/);
-  assert.match(html, /3D Workshops/);
-  assert.match(html, /Bit Infinite/);
-  assert.match(html, /Service/);
+  assert.match(html, /AI CAD Internship/);
+  assert.match(html, /3D Printing Access/);
+  assert.match(html, /Seattle U Workshop/);
+  assert.match(html, /Volunteer Automation/);
   assert.doesNotMatch(html, /href="\/work\//);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });

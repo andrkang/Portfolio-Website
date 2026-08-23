@@ -73,17 +73,14 @@ export default function PortfolioExperience() {
             <h2>{project.title}</h2>
           </div>
           <div className="project-summary">
-            <span className="project-index">Project {project.index} / 05</span>
+            <span className="project-index">Project {project.index} / {String(projects.length).padStart(2, "0")}</span>
             <p>{project.statement}</p>
           </div>
         </section>
 
         <section className="detail-facts experience-shell" aria-label={`${project.title} details`}>
           <div><span>Role</span><strong>{project.role}</strong></div>
-          <div><span>Focus</span><strong>{project.field}</strong></div>
-          <div><span>Tools</span><strong>{project.tools}</strong></div>
           <div><span>Timeline</span><strong>{project.year}</strong></div>
-          <div><span>Status</span><strong>{project.status}</strong></div>
         </section>
 
         <section className="visual-grid experience-shell" aria-label={`${project.title} media placeholders`}>
@@ -122,8 +119,8 @@ export default function PortfolioExperience() {
           <section className="experience-video experience-shell" aria-labelledby="video-title">
             <div>
               <span className="experience-kicker">Field note / Video</span>
-              <h3 id="video-title">Environmental service in action</h3>
-              <p>Green Club, the volunteer opportunity project, and the Seattle University presentation live together here.</p>
+              <h3 id="video-title">{project.videoTitle}</h3>
+              <p>{project.videoDescription}</p>
             </div>
             <div className="experience-video-frame">
               <iframe
