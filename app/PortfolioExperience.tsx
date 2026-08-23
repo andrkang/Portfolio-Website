@@ -41,7 +41,7 @@ export default function PortfolioExperience() {
 
       <section className="compact-intro experience-shell" id="top">
         <p className="experience-kicker">Selected extracurricular work</p>
-        <h1>Ideas built<br />into <em>systems.</em></h1>
+        <h1>Andrew Kang<br /><em>Selected Works</em></h1>
         <p className="compact-deck">Designing machines, products, and environmental systems through research and experimentation.</p>
       </section>
 
