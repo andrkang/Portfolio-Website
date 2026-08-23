@@ -88,13 +88,13 @@ a { text-decoration: none; }
 
 .project-tabs { display: grid; grid-template-columns: repeat(6, 1fr); }
 .project-tabs button {
-  min-height: 66px;
-  padding: 9px 16px;
+  min-height: 82px;
+  padding: 10px 14px;
   border: 0;
   border-right: 1px solid color-mix(in srgb, var(--experience-fg) 22%, transparent);
   background: transparent;
   text-align: left;
-  font: 520 .78rem var(--font-geist-sans), Arial, sans-serif;
+  font: 520 .69rem/1.22 var(--font-geist-sans), Arial, sans-serif;
   cursor: pointer;
   transition: background .25s ease, color .25s ease;
 }
@@ -231,7 +231,7 @@ a { text-decoration: none; }
   .compact-deck { grid-column: 1; grid-row: 3; margin-top: 22px; max-width: 96%; }
   .project-tabs { overflow-x: auto; grid-template-columns: repeat(6, minmax(126px, 1fr)); scrollbar-width: none; }
   .project-tabs::-webkit-scrollbar { display: none; }
-  .project-tabs button { min-height: 61px; padding-inline: 12px; }
+  .project-tabs button { min-height: 76px; padding-inline: 12px; }
   .project-view { scroll-margin-top: 62px; }
   .project-overview { min-height: 500px; padding-top: 42px; grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
   .project-heading { grid-row: 1; }

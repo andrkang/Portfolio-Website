@@ -22,12 +22,11 @@ test("renders the single-page project switcher", async () => {
   assert.match(html, /Andrew Kang.*Portfolio/);
   assert.match(html, /role="tablist"/);
   assert.match(html, /Robotic Assistance for Data-Driven Beaver Dam Analog Construction/);
-  assert.match(html, /BDA Robot/);
-  assert.match(html, /ADAPTIV/);
-  assert.match(html, /AI CAD Internship/);
-  assert.match(html, /3D Printing Access/);
-  assert.match(html, /Seattle U Workshop/);
-  assert.match(html, /Volunteer Automation/);
+  assert.match(html, /ADAPTIV Studio \| Product Development/);
+  assert.match(html, /AI Parametric CAD Modeling Internship/);
+  assert.match(html, /Bringing 3D Printing into Villages/);
+  assert.match(html, /Environmental Protection Workshop at Seattle University/);
+  assert.match(html, /API-Based Volunteer Opportunity-to-Padlet Automation/);
   assert.doesNotMatch(html, /href="\/work\//);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });

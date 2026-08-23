@@ -60,7 +60,7 @@ export default function PortfolioExperience() {
               onKeyDown={(event) => moveTab(event, index)}
             >
               <span>{item.index}</span>
-              {item.shortTitle}
+              {item.title}
             </button>
           ))}
         </div>
