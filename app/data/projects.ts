@@ -15,6 +15,7 @@ export type Project = {
   foreground: string;
   soft: string;
   chapters: Array<{ number: string; title: string; prompt: string }>;
+  images?: Array<{ src: string; alt: string; caption: string }>;
   video?: string;
   videoTitle?: string;
   videoDescription?: string;
@@ -37,6 +38,23 @@ export const projects: Project[] = [
     background: "#153b2b",
     foreground: "#f3f5e8",
     soft: "#26523e",
+    images: [
+      {
+        src: "/images/bda-robot.jpg",
+        alt: "Completed blue tracked Beaver Dam Analog construction robot with robotic arms and sensing equipment",
+        caption: "Completed BDA construction robot",
+      },
+      {
+        src: "/images/bda-controller-display.jpg",
+        alt: "Game controller mounted below a screen displaying live robot sensor data",
+        caption: "Controller and real-time data display",
+      },
+      {
+        src: "/images/bda-building.jpg",
+        alt: "Andrew Kang assembling the robotic arm and internal electronics",
+        caption: "Building and wiring the robot",
+      },
+    ],
     chapters: [
       { number: "01", title: "The wetland problem", prompt: "Context, field observations, and the restoration challenge." },
       { number: "02", title: "The robotic system", prompt: "Mechanical architecture, sensing, and construction workflow." },

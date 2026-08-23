@@ -83,18 +83,29 @@ export default function PortfolioExperience() {
           <div><span>Timeline</span><strong>{project.year}</strong></div>
         </section>
 
-        <section className="visual-grid experience-shell" aria-label={`${project.title} media placeholders`}>
-          <div className="visual-primary">
-            <span>Primary project visual</span>
-            <strong>{project.shortTitle}</strong>
-            <i aria-hidden="true">{project.index}</i>
-          </div>
-          <div className="visual-process">
-            <span>Process / Evidence</span>
-            <div aria-hidden="true"><i /><i /><i /><i /><i /></div>
-            <p>Reserved for photographs, diagrams, CAD, graphs, and excerpts.</p>
-          </div>
-        </section>
+        {project.images ? (
+          <section className="project-gallery experience-shell" aria-label={`${project.title} photo gallery`}>
+            {project.images.map((image, index) => (
+              <figure className={`gallery-item gallery-item-${index + 1}`} key={image.src}>
+                <img src={image.src} alt={image.alt} loading={index === 0 ? "eager" : "lazy"} />
+                <figcaption><span>P{index + 1}</span>{image.caption}</figcaption>
+              </figure>
+            ))}
+          </section>
+        ) : (
+          <section className="visual-grid experience-shell" aria-label={`${project.title} media placeholders`}>
+            <div className="visual-primary">
+              <span>Primary project visual</span>
+              <strong>{project.shortTitle}</strong>
+              <i aria-hidden="true">{project.index}</i>
+            </div>
+            <div className="visual-process">
+              <span>Process / Evidence</span>
+              <div aria-hidden="true"><i /><i /><i /><i /><i /></div>
+              <p>Reserved for photographs, diagrams, CAD, graphs, and excerpts.</p>
+            </div>
+          </section>
+        )}
 
         <section className="case-study experience-shell" aria-labelledby="case-study-title">
           <div className="case-study-intro">

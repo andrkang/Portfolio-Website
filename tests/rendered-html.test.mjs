@@ -27,6 +27,9 @@ test("renders the single-page project switcher", async () => {
   assert.match(html, /Bringing 3D Printing into Villages/);
   assert.match(html, /Environmental Protection Workshop at Seattle University/);
   assert.match(html, /API-Based Volunteer Opportunity-to-Padlet Automation/);
+  assert.match(html, /\/images\/bda-robot\.jpg/);
+  assert.match(html, /\/images\/bda-controller-display\.jpg/);
+  assert.match(html, /\/images\/bda-building\.jpg/);
   assert.doesNotMatch(html, /href="\/work\//);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
