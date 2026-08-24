@@ -16,6 +16,10 @@ export type Project = {
   soft: string;
   chapters: Array<{ number: string; title: string; prompt: string }>;
   images?: Array<{ src: string; alt: string; caption: string }>;
+  analysis?: {
+    title: string;
+    images: Array<{ src: string; alt: string; caption: string }>;
+  };
   video?: string;
   videoTitle?: string;
   videoDescription?: string;
@@ -60,6 +64,26 @@ export const projects: Project[] = [
         caption: "BDA flume simulation experiment",
       },
     ],
+    analysis: {
+      title: "FLOW-3D Hydro Simulation",
+      images: [
+        {
+          src: "/images/flow3d-hydro-simulation.png",
+          alt: "FLOW-3D velocity magnitude simulation of water moving through a Beaver Dam Analog",
+          caption: "Velocity magnitude through the simulated BDA",
+        },
+        {
+          src: "/images/porosity-water-level-graph.png",
+          alt: "Graph showing the effect of BDA porosity on water-level difference at three flow velocities",
+          caption: "Porosity and water-level difference",
+        },
+        {
+          src: "/images/experiment-loss-rate-graph.png",
+          alt: "Graph comparing loss rate across six experiment codes",
+          caption: "Experimental loss-rate comparison",
+        },
+      ],
+    },
     chapters: [
       { number: "01", title: "The wetland problem", prompt: "Context, field observations, and the restoration challenge." },
       { number: "02", title: "The robotic system", prompt: "Mechanical architecture, sensing, and construction workflow." },

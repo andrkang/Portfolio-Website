@@ -107,6 +107,23 @@ export default function PortfolioExperience() {
           </section>
         )}
 
+        {project.analysis ? (
+          <section className="analysis-section experience-shell" aria-labelledby="analysis-title">
+            <header className="analysis-header">
+              <p className="experience-kicker">Modeling and analysis</p>
+              <h3 id="analysis-title">{project.analysis.title}</h3>
+            </header>
+            <div className="analysis-grid">
+              {project.analysis.images.map((image, index) => (
+                <figure className={`analysis-card analysis-card-${index + 1}`} key={image.src}>
+                  <div><img src={image.src} alt={image.alt} loading="lazy" /></div>
+                  <figcaption><span>A{index + 1}</span>{image.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         {project.video ? (
           <section className="experience-video experience-shell" aria-labelledby="video-title">
             <div>
