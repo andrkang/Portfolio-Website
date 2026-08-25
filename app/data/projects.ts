@@ -179,14 +179,14 @@ const projectRecords: Project[] = [
         caption: "Participants building the BDA demonstration robot",
       },
       {
-        src: "/images/seattle-workshop-2.jpg",
-        alt: "Workshop participants collaborating around robotics components and wetland restoration materials",
-        caption: "Hands-on collaboration during the workshop",
-      },
-      {
         src: "/images/seattle-workshop-3.jpg",
         alt: "Close-up of the sensor-equipped demonstration robot used in the Seattle University workshop",
         caption: "Sensor-equipped workshop prototype",
+      },
+      {
+        src: "/images/seattle-workshop-2.jpg",
+        alt: "Workshop participants collaborating around robotics components and wetland restoration materials",
+        caption: "Hands-on collaboration during the workshop",
       },
     ],
     chapters: [
