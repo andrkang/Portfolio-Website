@@ -167,7 +167,7 @@ const projectRecords: Project[] = [
     role: "Presenter & workshop facilitator",
     tools: "Research / Presentation / Hands-on Learning",
     eyebrow: "Environmental education workshop",
-    statement: "An interactive Seattle University workshop introducing Beaver Dam Analogs, wetland restoration, and environmental protection.",
+    statement: "I designed a miniature version of my BDA robot that participants could assemble during the workshop.",
     accent: "#143d2b",
     background: "#e7f0c9",
     foreground: "#143d2b",
