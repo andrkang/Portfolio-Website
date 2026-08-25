@@ -1,11 +1,18 @@
 "use client";
 
-import { CSSProperties, KeyboardEvent, useState } from "react";
+import { CSSProperties, KeyboardEvent, useEffect, useState } from "react";
 import { projects } from "./data/projects";
 
 export default function PortfolioExperience() {
   const [activeIndex, setActiveIndex] = useState(0);
   const project = projects[activeIndex];
+
+  useEffect(() => {
+    const slug = window.location.hash.slice(1);
+    const hashIndex = projects.findIndex((item) => item.slug === slug);
+    if (hashIndex >= 0) setActiveIndex(hashIndex);
+  }, []);
+
   const theme = {
     "--experience-bg": project.background,
     "--experience-fg": project.foreground,
@@ -91,6 +98,21 @@ export default function PortfolioExperience() {
                 <figcaption><span>P{index + 1}</span>{image.caption}</figcaption>
               </figure>
             ))}
+          </section>
+        ) : project.interactiveTool ? (
+          <section className="interactive-tool experience-shell" aria-labelledby="interactive-tool-title">
+            <header>
+              <div>
+                <p className="experience-kicker">Interactive internship tool</p>
+                <h3 id="interactive-tool-title">{project.interactiveTool.title}</h3>
+              </div>
+              <p>{project.interactiveTool.description}</p>
+            </header>
+            <iframe
+              src={project.interactiveTool.src}
+              title={project.interactiveTool.title}
+              loading="lazy"
+            />
           </section>
         ) : (
           <section className="visual-grid experience-shell" aria-label={`${project.title} media placeholders`}>

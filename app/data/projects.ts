@@ -20,6 +20,11 @@ export type Project = {
     title: string;
     images: Array<{ src: string; alt: string; caption: string }>;
   };
+  interactiveTool?: {
+    title: string;
+    description: string;
+    src: string;
+  };
   video?: string;
   videoTitle?: string;
   videoDescription?: string;
@@ -124,10 +129,15 @@ const projectRecords: Project[] = [
     tools: "Parametric CAD / 3D Printing / UX",
     eyebrow: "AI modeling startup",
     statement: "Making parametric modeling easier to understand, teach, and use inside a growing product team.",
-    accent: "#c8ff3d",
-    background: "#33217a",
-    foreground: "#f5f0ff",
-    soft: "#49349a",
+    accent: "#ff982f",
+    background: "#f7f6f3",
+    foreground: "#11100f",
+    soft: "#ffead0",
+    interactiveTool: {
+      title: "Sparkoh Size Reference Tool",
+      description: "An interactive scale reference I designed to translate millimeter dimensions into familiar physical objects.",
+      src: "/tools/sparkoh-size-reference/index.html",
+    },
     chapters: [
       { number: "01", title: "Understanding the product", prompt: "Mesh versus parametric modeling and the communication gap." },
       { number: "02", title: "Improving the workflow", prompt: "CAD reconstruction, printing guides, and reference tools." },

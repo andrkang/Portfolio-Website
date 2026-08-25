@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sparkoh Size Reference</title>
+  <style>
+    :root {
+      --bg: #f7f6f3;
+      --surface: #ffffff;
+      --ink: #11100f;
+      --muted: #706b65;
+      --line: #ddd7cf;
+      --accent: #ff982f;
+      --accent-soft: #ffead0;
+      --accent-deep: #d96b00;
+      --device: #fbfaf8;
+      --device-edge: #2c231c;
+      --shadow: 0 18px 52px rgba(69, 47, 28, 0.1);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    main {
+      width: min(1040px, calc(100vw - 28px));
+      padding: 20px 0;
+    }
+
+    .size-card {
+      min-height: 640px;
+      display: grid;
+      place-items: center;
+      background: var(--surface);
+      border: 1px solid rgba(111, 98, 84, 0.22);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: clamp(18px, 4vw, 40px);
+    }
+
+    .reference {
+      display: grid;
+      grid-template-columns: 104px minmax(340px, 520px) minmax(88px, 130px);
+      align-items: end;
+      justify-content: center;
+      gap: clamp(22px, 6vw, 54px);
+      width: 100%;
+      min-height: 540px;
+    }
+
+    .slider-side,
+    .stack-side,
+    .ruler-side {
+      height: min(520px, 68vh);
+      min-height: 390px;
+      display: grid;
+      align-items: end;
+      justify-items: center;
+      position: relative;
+    }
+
+    .distance-slider {
+      width: 86px;
+      height: 190px;
+      position: relative;
+      display: grid;
+      justify-items: center;
+      touch-action: none;
+      user-select: none;
+      cursor: ns-resize;
+    }
+
+    .track {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 8px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: #eeeae5;
+      box-shadow: inset 0 0 0 1px rgba(118, 101, 84, 0.18);
+    }
+
+    .fill {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 8px;
+      height: var(--fill-height);
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .thumb {
+      position: absolute;
+      bottom: calc(var(--fill-height) - 11px);
+      left: 50%;
+      width: 22px;
+      height: 22px;
+      transform: translateX(-50%);
+      border: 3px solid #ffffff;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 4px 12px rgba(255, 152, 47, 0.3);
+      pointer-events: none;
+    }
+
+    .distance-slider input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .value-label {
+      position: absolute;
+      left: 0;
+      bottom: calc(var(--fill-height) + 14px);
+      min-width: 86px;
+      transform: translateY(50%);
+      padding: 7px 8px;
+      border: 1px solid rgba(255, 152, 47, 0.28);
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-size: 13px;
+      font-weight: 780;
+      line-height: 1.2;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .value-label span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .stack {
+      position: relative;
+      width: var(--stack-width);
+      height: var(--stack-height);
+      max-height: 100%;
+    }
+
+    .reference-unit {
+      position: absolute;
+      left: 50%;
+      width: var(--unit-width);
+      height: var(--unit-height);
+      transform: translateX(-50%);
+      border: 3px solid var(--device-edge);
+      background: var(--device);
+      box-shadow: 0 8px 18px rgba(69, 47, 28, 0.1);
+    }
+
+    .reference-unit.iphone {
+      border-radius: calc(var(--unit-width) * 0.2);
+    }
+
+    .camera {
+      position: absolute;
+      top: 10%;
+      left: 12%;
+      width: 30%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(44, 35, 28, 0.2);
+      border-radius: 28%;
+      background: #ffffff;
+    }
+
+    .camera i {
+      position: absolute;
+      width: 30%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #2c231c;
+    }
+
+    .camera i:first-child {
+      top: 16%;
+      left: 16%;
+    }
+
+    .camera i:last-child {
+      right: 16%;
+      bottom: 16%;
+    }
+
+    .reference-unit.airpods {
+      border-width: 2px;
+      border-radius: calc(var(--unit-height) * 0.24);
+      background: #fffdfa;
+    }
+
+    .reference-unit.airpods::before {
+      content: "";
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      top: 31%;
+      height: 1px;
+      background: #d8d0c7;
+    }
+
+    .reference-unit.airpods::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 12%;
+      width: 7%;
+      aspect-ratio: 1;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #c6bcb1;
+    }
+
+    .reference-unit.macbook {
+      border-width: 2px;
+      border-radius: calc(var(--unit-width) * 0.045);
+      background: linear-gradient(90deg, #e8e3dd, #faf9f6 48%, #e3ddd6);
+    }
+
+    .reference-unit.macbook::before {
+      content: "";
+      position: absolute;
+      top: 5%;
+      bottom: 5%;
+      right: 5%;
+      width: 3px;
+      border-radius: 999px;
+      background: rgba(72, 59, 48, 0.2);
+    }
+
+    .reference-unit.macbook::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 18%;
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(72, 59, 48, 0.14);
+      border-radius: 50%;
+    }
+
+    .gap {
+      position: absolute;
+      left: 50%;
+      width: calc(var(--unit-width) + 22px);
+      height: var(--gap-height);
+      transform: translateX(-50%);
+      display: grid;
+      place-items: center;
+      border-top: 2px dashed rgba(255, 152, 47, 0.58);
+      border-bottom: 2px dashed rgba(255, 152, 47, 0.58);
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(255, 152, 47, 0.12) 0,
+        rgba(255, 152, 47, 0.12) 8px,
+        rgba(255, 152, 47, 0.03) 8px,
+        rgba(255, 152, 47, 0.03) 16px
+      );
+      color: var(--accent-deep);
+      font-size: 13px;
+      font-weight: 760;
+      text-align: center;
+    }
+
+    .unit-key {
+      position: absolute;
+      left: calc(50% + var(--unit-width) / 2 + 16px);
+      bottom: 0;
+      width: 132px;
+      color: #3a332d;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .unit-key::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      width: 24px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .unit-key b {
+      display: block;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .unit-key span {
+      color: var(--muted);
+    }
+
+    .compression-note {
+      position: absolute;
+      left: 50%;
+      bottom: -30px;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .ruler {
+      position: relative;
+      width: 70px;
+      height: var(--measure-height);
+      min-height: 18px;
+    }
+
+    .ruler::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      transform: translateX(-50%);
+      background: var(--accent);
+    }
+
+    .ruler::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(var(--accent), var(--accent)) top / 48px 2px no-repeat,
+        linear-gradient(var(--accent), var(--accent)) bottom / 48px 2px no-repeat;
+      background-position: top center, bottom center;
+    }
+
+    .tip {
+      position: absolute;
+      left: 50%;
+      width: 0;
+      height: 0;
+      transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+    }
+
+    .tip.top {
+      top: -1px;
+      border-bottom: 9px solid var(--accent);
+    }
+
+    .tip.bottom {
+      bottom: -1px;
+      border-top: 9px solid var(--accent);
+    }
+
+    .ruler-label {
+      position: absolute;
+      left: calc(50% + 18px);
+      top: 50%;
+      width: 120px;
+      transform: translateY(-50%);
+      color: var(--accent-deep);
+      font-size: 13px;
+      font-weight: 780;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+
+    .ruler-label span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        place-items: start center;
+      }
+
+      main {
+        width: min(100vw - 20px, 480px);
+        padding: 10px 0;
+      }
+
+      .size-card {
+        min-height: 590px;
+        padding: 18px 12px;
+      }
+
+      .reference {
+        grid-template-columns: 72px minmax(170px, 1fr) 58px;
+        gap: 10px;
+        min-height: 500px;
+      }
+
+      .slider-side,
+      .stack-side,
+      .ruler-side {
+        height: min(460px, 64vh);
+        min-height: 350px;
+      }
+
+      .value-label {
+        min-width: 76px;
+        font-size: 12px;
+      }
+
+      .distance-slider {
+        height: 170px;
+      }
+
+      .unit-key {
+        left: 50%;
+        bottom: auto;
+        top: calc(100% + 9px);
+        width: 150px;
+        transform: translateX(-50%);
+        text-align: center;
+      }
+
+      .unit-key::before {
+        display: none;
+      }
+
+      .ruler-label {
+        left: 50%;
+        top: -38px;
+        width: 84px;
+        transform: translateX(-50%);
+        text-align: center;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="size-card" aria-label="自动尺寸参照">
+      <div class="reference">
+        <div class="slider-side">
+          <div class="distance-slider" id="distanceSlider">
+            <div class="track"></div>
+            <div class="fill" id="fill"></div>
+            <div class="thumb"></div>
+            <div class="value-label" id="valueLabel">210 mm<span>1.42 台</span></div>
+            <input id="sizeSlider" type="range" min="1" max="3000" step="0.1" value="210" aria-label="目标尺寸">
+          </div>
+        </div>
+
+        <div class="stack-side" aria-hidden="true">
+          <div class="stack" id="stack"></div>
+        </div>
+
+        <div class="ruler-side" aria-hidden="true">
+          <div class="ruler" id="ruler">
+            <i class="tip top"></i>
+            <i class="tip bottom"></i>
+            <div class="ruler-label" id="rulerLabel">210 mm<span>1.42 台</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const REFERENCE_UNITS = {
+        airpods: {
+          type: "airpods",
+          label: "AirPods 4 充电盒高度",
+          heightMm: 46.2,
+          aspectRatio: 50.1 / 46.2,
+          counter: "个"
+        },
+        iphone: {
+          type: "iphone",
+          label: "iPhone 15 高度",
+          heightMm: 147.6,
+          aspectRatio: 0.488,
+          counter: "台"
+        },
+        macbook: {
+          type: "macbook",
+          label: "MacBook Air 14 寸级竖立长边",
+          heightMm: 304.1,
+          aspectRatio: 215 / 304.1,
+          counter: "台"
+        }
+      };
+      const SMALL_REFERENCE_THRESHOLD_MM = REFERENCE_UNITS.airpods.heightMm;
+      const LARGE_REFERENCE_THRESHOLD_MM = REFERENCE_UNITS.macbook.heightMm;
+      const NORMAL_STACK_LIMIT = 8;
+      const COMPRESSED_GAP_HEIGHT = 86;
+      const slider = document.getElementById("sizeSlider");
+      const distanceSlider = document.getElementById("distanceSlider");
+      const stack = document.getElementById("stack");
+      const valueLabel = document.getElementById("valueLabel");
+      const ruler = document.getElementById("ruler");
+      const rulerLabel = document.getElementById("rulerLabel");
+      let dragging = false;
+      let dragStartY = 0;
+      let dragStartValue = 0;
+
+      function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+      }
+
+      function format(value, digits = 2) {
+        return new Intl.NumberFormat("zh-CN", {
+          maximumFractionDigits: digits,
+          minimumFractionDigits: value % 1 === 0 ? 0 : digits
+        }).format(value);
+      }
+
+      function getReferenceUnit(sizeMm) {
+        if (sizeMm <= SMALL_REFERENCE_THRESHOLD_MM) return REFERENCE_UNITS.airpods;
+        if (sizeMm > LARGE_REFERENCE_THRESHOLD_MM) return REFERENCE_UNITS.macbook;
+        return REFERENCE_UNITS.iphone;
+      }
+
+      function addUnit(bottom, height, unit) {
+        const element = document.createElement("div");
+        element.className = `reference-unit ${unit.type}`;
+        element.style.bottom = `${bottom}px`;
+        element.style.height = `${height}px`;
+        element.style.width = `${Math.round(height * unit.aspectRatio)}px`;
+        if (unit.type === "iphone") {
+          element.innerHTML = '<span class="camera"><i></i><i></i></span>';
+        }
+        stack.appendChild(element);
+      }
+
+      function addGap(bottom, hiddenCount) {
+        const gap = document.createElement("div");
+        gap.className = "gap";
+        gap.style.bottom = `${bottom}px`;
+        gap.style.setProperty("--gap-height", `${COMPRESSED_GAP_HEIGHT}px`);
+        gap.textContent = `省略 ${hiddenCount} 个完整参照物`;
+        stack.appendChild(gap);
+      }
+
+      function addUnitKey(unit) {
+        const key = document.createElement("div");
+        key.className = "unit-key";
+        key.innerHTML = `<b>${unit.label}</b><span>${format(unit.heightMm, 1)} mm</span>`;
+        stack.appendChild(key);
+      }
+
+      function addCompressionNote(displayCount, unit) {
+        const note = document.createElement("div");
+        note.className = "compression-note";
+        note.textContent = `${displayCount} 个完整 ${unit.type === "airpods" ? "充电盒" : "设备"}，已压缩显示`;
+        stack.appendChild(note);
+      }
+
+      function getStageBounds(unit, visibleCount) {
+        const stackSide = stack.parentElement;
+        const mobile = window.matchMedia("(max-width: 640px)").matches;
+        const availableHeight = stackSide.clientHeight || (mobile ? 460 : 520);
+        const labelAllowance = mobile ? 12 : 150;
+        const availableUnitWidth = Math.max(stackSide.clientWidth - labelAllowance, 120);
+        const heightFromCanvas = availableHeight / visibleCount;
+        const heightFromWidth = availableUnitWidth / unit.aspectRatio;
+
+        return {
+          availableHeight,
+          unitHeight: Math.max(34, Math.min(heightFromCanvas, heightFromWidth))
+        };
+      }
+
+      function setScale(stackHeight, unitHeight, fillHeight, unit) {
+        const unitWidth = Math.round(unitHeight * unit.aspectRatio);
+        const sideLabelWidth = window.matchMedia("(max-width: 640px)").matches ? 0 : 150;
+        stack.style.setProperty("--stack-height", `${stackHeight}px`);
+        stack.style.setProperty("--stack-width", `${unitWidth + sideLabelWidth}px`);
+        stack.style.setProperty("--unit-height", `${unitHeight}px`);
+        stack.style.setProperty("--unit-width", `${unitWidth}px`);
+        ruler.style.setProperty("--measure-height", `${clamp(fillHeight, 18, stackHeight)}px`);
+      }
+
+      function setSliderControl(sizeMm) {
+        const min = Number(slider.min);
+        const max = Number(slider.max);
+        const trackHeight = distanceSlider.clientHeight || 190;
+        const normalized = (Math.log(sizeMm) - Math.log(min)) / (Math.log(max) - Math.log(min));
+        const sliderLevel = clamp(normalized * trackHeight, 11, trackHeight - 11);
+        distanceSlider.style.setProperty("--fill-height", `${sliderLevel}px`);
+      }
+
+      function renderNormal(displayCount, ratio, unit) {
+        const { unitHeight } = getStageBounds(unit, displayCount);
+        const stackHeight = unitHeight * displayCount;
+        const fillHeight = unitHeight * ratio;
+
+        setScale(stackHeight, unitHeight, fillHeight, unit);
+        for (let i = 0; i < displayCount; i += 1) {
+          addUnit(i * unitHeight, unitHeight, unit);
+        }
+        addUnitKey(unit);
+      }
+
+      function renderCompressed(displayCount, ratio, unit) {
+        const topVisible = 2;
+        const bottomVisible = 3;
+        const visibleCount = topVisible + bottomVisible;
+        const hiddenCount = Math.max(displayCount - topVisible - bottomVisible, 1);
+        const stage = getStageBounds(unit, visibleCount);
+        const unitHeight = Math.min(
+          stage.unitHeight,
+          (stage.availableHeight - COMPRESSED_GAP_HEIGHT) / visibleCount
+        );
+        const bottomBlockHeight = bottomVisible * unitHeight;
+        const stackHeight = bottomBlockHeight + COMPRESSED_GAP_HEIGHT + topVisible * unitHeight;
+        const topStartRatio = displayCount - topVisible;
+        const visibleTopRatio = clamp(ratio - topStartRatio, 0, topVisible);
+        const fillHeight = bottomBlockHeight + COMPRESSED_GAP_HEIGHT + visibleTopRatio * unitHeight;
+
+        setScale(stackHeight, unitHeight, fillHeight, unit);
+
+        for (let i = 0; i < bottomVisible; i += 1) {
+          addUnit(i * unitHeight, unitHeight, unit);
+        }
+        addGap(bottomBlockHeight, hiddenCount);
+
+        const topStart = bottomBlockHeight + COMPRESSED_GAP_HEIGHT;
+        for (let i = 0; i < topVisible; i += 1) {
+          addUnit(topStart + i * unitHeight, unitHeight, unit);
+        }
+        addUnitKey(unit);
+        addCompressionNote(displayCount, unit);
+      }
+
+      function update() {
+        const sizeMm = Number(slider.value);
+        const unit = getReferenceUnit(sizeMm);
+        const ratio = sizeMm / unit.heightMm;
+        const displayCount = Math.max(1, Math.ceil(ratio));
+        stack.innerHTML = "";
+
+        if (displayCount > NORMAL_STACK_LIMIT) {
+          renderCompressed(displayCount, ratio, unit);
+        } else {
+          renderNormal(displayCount, ratio, unit);
+        }
+
+        setSliderControl(sizeMm);
+        valueLabel.innerHTML = `${format(sizeMm, 1)} mm<span>${format(ratio)} ${unit.counter}</span>`;
+        rulerLabel.innerHTML = `${format(sizeMm, 1)} mm<span>${format(ratio)} ${unit.counter}</span>`;
+      }
+
+      function setSliderValue(sizeMm) {
+        const step = Number(slider.step);
+        const nextValue = clamp(Math.round(sizeMm / step) * step, Number(slider.min), Number(slider.max));
+        slider.value = String(nextValue);
+        update();
+      }
+
+      function startDrag(event) {
+        dragging = true;
+        dragStartY = event.clientY;
+        dragStartValue = Number(slider.value);
+        distanceSlider.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      }
+
+      function drag(event) {
+        if (!dragging) return;
+        const min = Number(slider.min);
+        const max = Number(slider.max);
+        const trackHeight = distanceSlider.getBoundingClientRect().height;
+        const logRange = Math.log(max) - Math.log(min);
+        const logValue = Math.log(dragStartValue) + ((dragStartY - event.clientY) / trackHeight) * logRange;
+        setSliderValue(Math.exp(logValue));
+      }
+
+      function stopDrag(event) {
+        if (!dragging) return;
+        dragging = false;
+        if (distanceSlider.hasPointerCapture(event.pointerId)) {
+          distanceSlider.releasePointerCapture(event.pointerId);
+        }
+      }
+
+      slider.addEventListener("input", update);
+      distanceSlider.addEventListener("pointerdown", startDrag);
+      distanceSlider.addEventListener("pointermove", drag);
+      distanceSlider.addEventListener("pointerup", stopDrag);
+      distanceSlider.addEventListener("pointercancel", stopDrag);
+      window.addEventListener("resize", update);
+      update();
+    })();
+  </script>
+</body>
+</html>
