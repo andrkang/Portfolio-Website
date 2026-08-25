@@ -25,10 +25,10 @@ export type Project = {
   videoDescription?: string;
 };
 
-export const projects: Project[] = [
+const projectRecords: Project[] = [
   {
     slug: "beaver-dam-robot",
-    index: "01",
+    index: "02",
     title: "Robotic Assistance for Data-Driven Beaver Dam Analog Construction",
     shortTitle: "BDA Robotics",
     field: "Robotics / Environmental Research",
@@ -92,7 +92,7 @@ export const projects: Project[] = [
   },
   {
     slug: "adaptiv-studio",
-    index: "02",
+    index: "01",
     title: "ADAPTIV Studio | Product Development",
     shortTitle: "ADAPTIV",
     field: "Product Design / 3D Printing",
@@ -114,7 +114,7 @@ export const projects: Project[] = [
   },
   {
     slug: "bit-infinite",
-    index: "03",
+    index: "04",
     title: "AI Parametric CAD Modeling Internship",
     shortTitle: "AI CAD Internship",
     field: "Parametric CAD / Internship",
@@ -136,7 +136,7 @@ export const projects: Project[] = [
   },
   {
     slug: "teaching-3d-printing",
-    index: "04",
+    index: "05",
     title: "Bringing 3D Printing into Villages",
     shortTitle: "3D Printing Access",
     field: "Education / Community Technology",
@@ -158,20 +158,37 @@ export const projects: Project[] = [
   },
   {
     slug: "seattle-environment-workshop",
-    index: "05",
-    title: "Environmental Protection Workshop at Seattle University",
-    shortTitle: "Seattle U Workshop",
+    index: "03",
+    title: "Introducing Beaver Dam Analogs and Wetland Protection at Seattle University",
+    shortTitle: "Seattle U BDA Workshop",
     field: "Environmental Education / BDA Workshop",
     year: "2025",
     status: "Completed",
     role: "Presenter & workshop facilitator",
     tools: "Research / Presentation / Hands-on Learning",
     eyebrow: "Environmental education workshop",
-    statement: "A hands-on workshop connecting wetland restoration, Beaver Dam Analogs, and environmental protection.",
+    statement: "An interactive Seattle University workshop introducing Beaver Dam Analogs, wetland restoration, and environmental protection.",
     accent: "#143d2b",
     background: "#e7f0c9",
     foreground: "#143d2b",
     soft: "#d3e2aa",
+    images: [
+      {
+        src: "/images/seattle-workshop-1.jpg",
+        alt: "Seattle University workshop participants assembling a small Beaver Dam Analog demonstration robot",
+        caption: "Participants building the BDA demonstration robot",
+      },
+      {
+        src: "/images/seattle-workshop-2.jpg",
+        alt: "Workshop participants collaborating around robotics components and wetland restoration materials",
+        caption: "Hands-on collaboration during the workshop",
+      },
+      {
+        src: "/images/seattle-workshop-3.jpg",
+        alt: "Close-up of the sensor-equipped demonstration robot used in the Seattle University workshop",
+        caption: "Sensor-equipped workshop prototype",
+      },
+    ],
     chapters: [
       { number: "01", title: "Framing the challenge", prompt: "Introducing wetland degradation and the role of restoration systems." },
       { number: "02", title: "Presenting the research", prompt: "Explaining Beaver Dam Analogs and the data behind the project." },
@@ -204,6 +221,8 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+export const projects = [...projectRecords].sort((a, b) => Number(a.index) - Number(b.index));
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);

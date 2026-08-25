@@ -84,7 +84,7 @@ export default function PortfolioExperience() {
         </section>
 
         {project.images ? (
-          <section className="project-gallery experience-shell" aria-label={`${project.title} photo gallery`}>
+          <section className={`project-gallery experience-shell project-gallery-${project.slug}`} aria-label={`${project.title} photo gallery`}>
             {project.images.map((image, index) => (
               <figure className={`gallery-item gallery-item-${index + 1}`} key={image.src}>
                 <img src={image.src} alt={image.alt} loading={index === 0 ? "eager" : "lazy"} />

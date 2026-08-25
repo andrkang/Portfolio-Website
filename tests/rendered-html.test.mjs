@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { access } from "node:fs/promises";
 import test from "node:test";
 
 async function render(pathname = "/") {
@@ -25,19 +26,29 @@ test("renders the single-page project switcher", async () => {
   assert.match(html, /ADAPTIV Studio \| Product Development/);
   assert.match(html, /AI Parametric CAD Modeling Internship/);
   assert.match(html, /Bringing 3D Printing into Villages/);
-  assert.match(html, /Environmental Protection Workshop at Seattle University/);
+  assert.match(html, /Introducing Beaver Dam Analogs and Wetland Protection at Seattle University/);
   assert.match(html, /API-Based Volunteer Opportunity-to-Padlet Automation/);
-  assert.match(html, /\/images\/bda-robot\.jpg/);
-  assert.match(html, /\/images\/bda-controller-display\.jpg/);
-  assert.match(html, /\/images\/bda-building\.jpg/);
-  assert.match(html, /\/images\/bda-simulation-experiment\.png/);
-  assert.match(html, /FLOW-3D Hydro Simulation/);
-  assert.match(html, /\/images\/flow3d-hydro-simulation\.png/);
-  assert.match(html, /\/images\/porosity-water-level-graph\.png/);
-  assert.match(html, /\/images\/experiment-loss-rate-graph\.png/);
+  assert.match(html, /ADAPTIV Studio \| Product Development.*Robotic Assistance for Data-Driven Beaver Dam Analog Construction.*Introducing Beaver Dam Analogs and Wetland Protection at Seattle University/);
   assert.doesNotMatch(html, /The story, in three parts/);
   assert.doesNotMatch(html, /href="\/work\//);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
+});
+
+test("keeps project media available", async () => {
+  const assets = [
+    "bda-robot.jpg",
+    "bda-controller-display.jpg",
+    "bda-building.jpg",
+    "bda-simulation-experiment.png",
+    "flow3d-hydro-simulation.png",
+    "porosity-water-level-graph.png",
+    "experiment-loss-rate-graph.png",
+    "seattle-workshop-1.jpg",
+    "seattle-workshop-2.jpg",
+    "seattle-workshop-3.jpg",
+  ];
+
+  await Promise.all(assets.map((asset) => access(new URL(`../public/images/${asset}`, import.meta.url))));
 });
 
 test("keeps search indexing disabled", async () => {

@@ -88,13 +88,13 @@ a { text-decoration: none; }
 
 .project-tabs { display: grid; grid-template-columns: repeat(6, 1fr); }
 .project-tabs button {
-  min-height: 82px;
+  min-height: 96px;
   padding: 10px 14px;
   border: 0;
   border-right: 1px solid color-mix(in srgb, var(--experience-fg) 22%, transparent);
   background: transparent;
   text-align: left;
-  font: 520 .69rem/1.22 var(--font-geist-sans), Arial, sans-serif;
+  font: 520 .66rem/1.2 var(--font-geist-sans), Arial, sans-serif;
   cursor: pointer;
   transition: background .25s ease, color .25s ease;
 }
@@ -183,6 +183,10 @@ a { text-decoration: none; }
 .gallery-item-4 img { height: auto; object-fit: initial; object-position: center; }
 .gallery-item-4 figcaption { position: static; padding: 12px 0 0; background: none; color: var(--experience-fg); }
 .gallery-item:hover img { transform: scale(1.018); }
+
+.project-gallery-seattle-environment-workshop .gallery-item-1 { grid-column: auto; aspect-ratio: 3 / 4; }
+.project-gallery-seattle-environment-workshop .gallery-item-2 { aspect-ratio: 3 / 4; }
+.project-gallery-seattle-environment-workshop .gallery-item-3 { grid-column: 1 / -1; width: min(100%, 720px); justify-self: center; aspect-ratio: 3 / 4; }
 
 .gallery-item figcaption {
   position: absolute;
@@ -286,6 +290,9 @@ a { text-decoration: none; }
   .gallery-item, .gallery-item-1 { grid-column: auto; aspect-ratio: 4 / 5; }
   .gallery-item-1 { aspect-ratio: 5 / 4; }
   .gallery-item-4 { aspect-ratio: auto; background: var(--experience-bg); }
+  .project-gallery-seattle-environment-workshop .gallery-item-1,
+  .project-gallery-seattle-environment-workshop .gallery-item-2,
+  .project-gallery-seattle-environment-workshop .gallery-item-3 { grid-column: auto; width: 100%; aspect-ratio: 3 / 4; }
   .experience-video { padding-bottom: 80px; }
   .analysis-section { padding-bottom: 80px; }
   .analysis-grid { grid-template-columns: 1fr; }
