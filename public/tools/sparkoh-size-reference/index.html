@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -152,6 +152,55 @@
       color: var(--muted);
       font-size: 11px;
       font-weight: 600;
+    }
+
+    .slider-guide {
+      position: absolute;
+      left: 50%;
+      bottom: 248px;
+      z-index: 4;
+      width: 180px;
+      transform: translateX(-50%);
+      padding: 11px 12px;
+      border-radius: 8px;
+      background: var(--ink);
+      box-shadow: 0 10px 28px rgba(17, 16, 15, 0.16);
+      color: #ffffff;
+      font-size: 11px;
+      line-height: 1.35;
+      text-align: left;
+    }
+
+    .slider-guide strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .slider-guide::before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 2px;
+      height: 36px;
+      transform: translateX(-50%);
+      background: var(--accent);
+    }
+
+    .slider-guide::after {
+      content: "";
+      position: absolute;
+      top: calc(100% + 32px);
+      left: 50%;
+      width: 0;
+      height: 0;
+      transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 9px solid var(--accent);
     }
 
     .stack {
@@ -431,6 +480,17 @@
         height: 170px;
       }
 
+      .slider-guide {
+        bottom: 228px;
+        width: 122px;
+        padding: 8px 9px;
+        font-size: 9px;
+      }
+
+      .slider-guide strong {
+        font-size: 10px;
+      }
+
       .unit-key {
         left: 50%;
         bottom: auto;
@@ -457,15 +517,16 @@
 </head>
 <body>
   <main>
-    <section class="size-card" aria-label="自动尺寸参照">
+    <section class="size-card" aria-label="Interactive size reference">
       <div class="reference">
         <div class="slider-side">
+          <div class="slider-guide" id="sliderGuide"><strong>Start here</strong>Drag the orange slider up or down to choose a target size.</div>
           <div class="distance-slider" id="distanceSlider">
             <div class="track"></div>
             <div class="fill" id="fill"></div>
             <div class="thumb"></div>
-            <div class="value-label" id="valueLabel">210 mm<span>1.42 台</span></div>
-            <input id="sizeSlider" type="range" min="1" max="3000" step="0.1" value="210" aria-label="目标尺寸">
+            <div class="value-label" id="valueLabel">210 mm<span>1.42 iPhones</span></div>
+            <input id="sizeSlider" type="range" min="1" max="3000" step="0.1" value="210" aria-label="Target size in millimeters" aria-describedby="sliderGuide">
           </div>
         </div>
 
@@ -477,7 +538,7 @@
           <div class="ruler" id="ruler">
             <i class="tip top"></i>
             <i class="tip bottom"></i>
-            <div class="ruler-label" id="rulerLabel">210 mm<span>1.42 台</span></div>
+            <div class="ruler-label" id="rulerLabel">210 mm<span>1.42 iPhones</span></div>
           </div>
         </div>
       </div>
@@ -489,24 +550,24 @@
       const REFERENCE_UNITS = {
         airpods: {
           type: "airpods",
-          label: "AirPods 4 充电盒高度",
+          label: "AirPods 4 charging case height",
           heightMm: 46.2,
           aspectRatio: 50.1 / 46.2,
-          counter: "个"
+          counter: "cases"
         },
         iphone: {
           type: "iphone",
-          label: "iPhone 15 高度",
+          label: "iPhone 15 height",
           heightMm: 147.6,
           aspectRatio: 0.488,
-          counter: "台"
+          counter: "iPhones"
         },
         macbook: {
           type: "macbook",
-          label: "MacBook Air 14 寸级竖立长边",
+          label: "MacBook Air long edge",
           heightMm: 304.1,
           aspectRatio: 215 / 304.1,
-          counter: "台"
+          counter: "MacBooks"
         }
       };
       const SMALL_REFERENCE_THRESHOLD_MM = REFERENCE_UNITS.airpods.heightMm;
@@ -528,7 +589,7 @@
       }
 
       function format(value, digits = 2) {
-        return new Intl.NumberFormat("zh-CN", {
+        return new Intl.NumberFormat("en-US", {
           maximumFractionDigits: digits,
           minimumFractionDigits: value % 1 === 0 ? 0 : digits
         }).format(value);
@@ -557,7 +618,7 @@
         gap.className = "gap";
         gap.style.bottom = `${bottom}px`;
         gap.style.setProperty("--gap-height", `${COMPRESSED_GAP_HEIGHT}px`);
-        gap.textContent = `省略 ${hiddenCount} 个完整参照物`;
+        gap.textContent = `Skipping ${hiddenCount} complete reference objects`;
         stack.appendChild(gap);
       }
 
@@ -571,7 +632,7 @@
       function addCompressionNote(displayCount, unit) {
         const note = document.createElement("div");
         note.className = "compression-note";
-        note.textContent = `${displayCount} 个完整 ${unit.type === "airpods" ? "充电盒" : "设备"}，已压缩显示`;
+        note.textContent = `${displayCount} complete ${unit.type === "airpods" ? "cases" : "devices"}, compressed for display`;
         stack.appendChild(note);
       }
 
