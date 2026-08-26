@@ -50,6 +50,7 @@ test("keeps project media available", async () => {
 
   await Promise.all(assets.map((asset) => access(new URL(`../public/images/${asset}`, import.meta.url))));
   await access(new URL("../public/tools/sparkoh-size-reference/index.html", import.meta.url));
+  await access(new URL("../public/videos/parametric-model-remake.m4v", import.meta.url));
 });
 
 test("keeps search indexing disabled", async () => {

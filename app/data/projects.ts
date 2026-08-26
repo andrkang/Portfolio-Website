@@ -25,6 +25,11 @@ export type Project = {
     description: string;
     src: string;
   };
+  showcaseVideo?: {
+    title: string;
+    description: string;
+    src: string;
+  };
   video?: string;
   videoTitle?: string;
   videoDescription?: string;
@@ -137,6 +142,11 @@ const projectRecords: Project[] = [
       title: "Sparkoh Size Reference Tool",
       description: "An interactive scale reference I designed to translate millimeter dimensions into familiar physical objects.",
       src: "/tools/sparkoh-size-reference/index.html",
+    },
+    showcaseVideo: {
+      title: "From Fixed Mesh to Adjustable Parametric Model",
+      description: "For a feature displayed on the product homepage, I rebuilt the model shown in this video from a fixed mesh into a parametric model. Users can adjust its parameters to regenerate the same design at any size.",
+      src: "/videos/parametric-model-remake.m4v",
     },
     chapters: [
       { number: "01", title: "Understanding the product", prompt: "Mesh versus parametric modeling and the communication gap." },

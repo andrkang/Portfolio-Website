@@ -146,6 +146,22 @@ export default function PortfolioExperience() {
           </section>
         ) : null}
 
+        {project.showcaseVideo ? (
+          <section className="project-showcase-video experience-shell" aria-labelledby="showcase-video-title">
+            <div className="project-showcase-video-frame">
+              <video controls playsInline preload="metadata" aria-label={project.showcaseVideo.title}>
+                <source src={project.showcaseVideo.src} type="video/mp4" />
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div className="project-showcase-video-copy">
+              <p className="experience-kicker">Homepage product feature</p>
+              <h3 id="showcase-video-title">{project.showcaseVideo.title}</h3>
+              <p>{project.showcaseVideo.description}</p>
+            </div>
+          </section>
+        ) : null}
+
         {project.video ? (
           <section className="experience-video experience-shell" aria-labelledby="video-title">
             <div>
