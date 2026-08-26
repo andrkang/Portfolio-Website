@@ -170,6 +170,28 @@ const projectRecords: Project[] = [
     background: "#ffd84a",
     foreground: "#18120c",
     soft: "#f3c82d",
+    images: [
+      {
+        src: "/images/village-3d-printing-2.jpg",
+        alt: "Andrew presenting product design and 3D printing concepts to students during the village workshop",
+        caption: "Introducing product design and 3D printing",
+      },
+      {
+        src: "/images/village-3d-printing-3.jpg",
+        alt: "Andrew guiding students as they assemble small 3D-printed objects during the workshop",
+        caption: "Guiding participants through hands-on assembly",
+      },
+      {
+        src: "/images/village-3d-printing-4.jpg",
+        alt: "Workshop participants holding their completed 3D-printed models in a group photo",
+        caption: "Participants with their completed printed models",
+      },
+      {
+        src: "/images/village-3d-printing-1.jpg",
+        alt: "Andrew helping a group of students explore a 3D design workflow on a laptop",
+        caption: "Helping students explore the design workflow",
+      },
+    ],
     chapters: [
       { number: "01", title: "Opening access", prompt: "Why the workshops were created and who they serve." },
       { number: "02", title: "Designing the lesson", prompt: "Teaching sequence, demonstrations, and participant work." },
