@@ -46,6 +46,8 @@ test("keeps project media available", async () => {
     "seattle-workshop-1.jpg",
     "seattle-workshop-2.jpg",
     "seattle-workshop-3.jpg",
+    "seattle-workshop-presentation.jpg",
+    "seattle-workshop-guidance.jpg",
     "village-3d-printing-1.jpg",
     "village-3d-printing-2.jpg",
     "village-3d-printing-3.jpg",

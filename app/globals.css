@@ -184,9 +184,24 @@ a { text-decoration: none; }
 .gallery-item-4 figcaption { position: static; padding: 12px 0 0; background: none; color: var(--experience-fg); }
 .gallery-item:hover img { transform: scale(1.018); }
 
-.project-gallery-seattle-environment-workshop .gallery-item-1 { grid-column: auto; aspect-ratio: 3 / 4; }
-.project-gallery-seattle-environment-workshop .gallery-item-2 { aspect-ratio: 3 / 4; }
-.project-gallery-seattle-environment-workshop .gallery-item-3 { grid-column: 1 / -1; width: min(100%, 720px); justify-self: center; aspect-ratio: 3 / 4; }
+.project-gallery-seattle-environment-workshop .gallery-item-1 { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+.project-gallery-seattle-environment-workshop .gallery-item-2,
+.project-gallery-seattle-environment-workshop .gallery-item-3 { aspect-ratio: 3 / 4; }
+.project-gallery-seattle-environment-workshop .gallery-item-4 {
+  grid-column: 1 / -1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid color-mix(in srgb, var(--experience-fg) 34%, transparent);
+  background: var(--experience-soft);
+  overflow: hidden;
+}
+.project-gallery-seattle-environment-workshop .gallery-item-4 img { height: 100%; object-fit: cover; }
+.project-gallery-seattle-environment-workshop .gallery-item-4 figcaption {
+  position: absolute;
+  padding: 34px 16px 14px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .76));
+  color: #fff;
+}
 
 .project-gallery-teaching-3d-printing .gallery-item-1 { aspect-ratio: 16 / 9; }
 .project-gallery-teaching-3d-printing .gallery-item-2,
@@ -344,6 +359,7 @@ a { text-decoration: none; }
   .gallery-item-1 { aspect-ratio: 5 / 4; }
   .gallery-item-4 { aspect-ratio: auto; background: var(--experience-bg); }
   .project-gallery-seattle-environment-workshop .gallery-item-1,
+  .project-gallery-seattle-environment-workshop .gallery-item-4 { grid-column: auto; width: 100%; aspect-ratio: 16 / 9; }
   .project-gallery-seattle-environment-workshop .gallery-item-2,
   .project-gallery-seattle-environment-workshop .gallery-item-3 { grid-column: auto; width: 100%; aspect-ratio: 3 / 4; }
   .project-gallery-teaching-3d-printing .gallery-item-1,

@@ -216,6 +216,11 @@ const projectRecords: Project[] = [
     soft: "#d3e2aa",
     images: [
       {
+        src: "/images/seattle-workshop-presentation.jpg",
+        alt: "Andrew presenting his Beaver Dam Analog research to an audience at Seattle University",
+        caption: "Presenting BDA research at Seattle University",
+      },
+      {
         src: "/images/seattle-workshop-1.jpg",
         alt: "Seattle University workshop participants assembling a small Beaver Dam Analog demonstration robot",
         caption: "Participants building the BDA demonstration robot",
@@ -226,9 +231,9 @@ const projectRecords: Project[] = [
         caption: "Sensor-equipped workshop prototype",
       },
       {
-        src: "/images/seattle-workshop-2.jpg",
-        alt: "Workshop participants collaborating around robotics components and wetland restoration materials",
-        caption: "Hands-on collaboration during the workshop",
+        src: "/images/seattle-workshop-guidance.jpg",
+        alt: "Andrew guiding Seattle University workshop participants as they test the miniature BDA robot",
+        caption: "Guiding participants through the hands-on build",
       },
     ],
     chapters: [
