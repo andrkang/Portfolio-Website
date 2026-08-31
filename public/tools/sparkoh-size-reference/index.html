@@ -73,7 +73,8 @@
 
     .distance-slider {
       width: 86px;
-      height: 190px;
+      height: 100%;
+      min-height: 390px;
       position: relative;
       display: grid;
       justify-items: center;
@@ -477,7 +478,8 @@
       }
 
       .distance-slider {
-        height: 170px;
+        height: 100%;
+        min-height: 350px;
       }
 
       .slider-guide {
@@ -664,7 +666,7 @@
       function setSliderControl(sizeMm) {
         const min = Number(slider.min);
         const max = Number(slider.max);
-        const trackHeight = distanceSlider.clientHeight || 190;
+        const trackHeight = distanceSlider.clientHeight || 520;
         const normalized = (Math.log(sizeMm) - Math.log(min)) / (Math.log(max) - Math.log(min));
         const sliderLevel = clamp(normalized * trackHeight, 11, trackHeight - 11);
         distanceSlider.style.setProperty("--fill-height", `${sliderLevel}px`);
