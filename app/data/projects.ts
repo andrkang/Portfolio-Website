@@ -15,7 +15,12 @@ export type Project = {
   foreground: string;
   soft: string;
   chapters: Array<{ number: string; title: string; prompt: string }>;
-  images?: Array<{ src: string; alt: string; caption: string }>;
+  images?: Array<{
+    src: string;
+    alt: string;
+    caption: string;
+    link?: { href: string; label: string };
+  }>;
   analysis?: {
     title: string;
     images: Array<{ src: string; alt: string; caption: string }>;
@@ -29,12 +34,6 @@ export type Project = {
     title: string;
     description: string;
     src: string;
-  };
-  externalLink?: {
-    title: string;
-    description: string;
-    href: string;
-    label: string;
   };
   video?: string;
   videoTitle?: string;
@@ -186,6 +185,10 @@ const projectRecords: Project[] = [
         src: "/images/village-3d-printing-article.png",
         alt: "Bilingual article coverage describing Andrew's village 3D printing workshop and curriculum",
         caption: "Bilingual coverage of the workshop curriculum",
+        link: {
+          href: "https://m.ycw.com.cn/article/content/6a8cee6c61e1c3cd508b456d/work/%E8%BE%85%E5%AF%BC%E7%AB%99%E6%92%AD%E6%8A%A5.html",
+          label: "Read the original article",
+        },
       },
       {
         src: "/images/village-3d-printing-3.jpg",
@@ -203,12 +206,6 @@ const projectRecords: Project[] = [
         caption: "Helping students explore the design workflow",
       },
     ],
-    externalLink: {
-      title: "Published Workshop Coverage",
-      description: "Read the original report documenting the workshop's modeling, materials, and hands-on learning activities.",
-      href: "https://m.ycw.com.cn/article/content/6a8cee6c61e1c3cd508b456d/work/%E8%BE%85%E5%AF%BC%E7%AB%99%E6%92%AD%E6%8A%A5.html",
-      label: "Read the original article",
-    },
     chapters: [
       { number: "01", title: "Opening access", prompt: "Why the workshops were created and who they serve." },
       { number: "02", title: "Designing the lesson", prompt: "Teaching sequence, demonstrations, and participant work." },

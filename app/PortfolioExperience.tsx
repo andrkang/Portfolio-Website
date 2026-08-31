@@ -95,7 +95,15 @@ export default function PortfolioExperience() {
             {project.images.map((image, index) => (
               <figure className={`gallery-item gallery-item-${index + 1}`} key={image.src}>
                 <img src={image.src} alt={image.alt} loading={index === 0 ? "eager" : "lazy"} />
-                <figcaption><span>P{index + 1}</span>{image.caption}</figcaption>
+                <figcaption>
+                  <span>P{index + 1}</span>
+                  {image.caption}
+                  {image.link ? (
+                    <a href={image.link.href} target="_blank" rel="noreferrer">
+                      {image.link.label}<span aria-hidden="true">↗</span>
+                    </a>
+                  ) : null}
+                </figcaption>
               </figure>
             ))}
           </section>
@@ -128,19 +136,6 @@ export default function PortfolioExperience() {
             </div>
           </section>
         )}
-
-        {project.externalLink ? (
-          <section className="project-source experience-shell" aria-labelledby="project-source-title">
-            <div>
-              <p className="experience-kicker">External coverage</p>
-              <h3 id="project-source-title">{project.externalLink.title}</h3>
-            </div>
-            <p>{project.externalLink.description}</p>
-            <a href={project.externalLink.href} target="_blank" rel="noreferrer">
-              {project.externalLink.label}<span aria-hidden="true"> ↗</span>
-            </a>
-          </section>
-        ) : null}
 
         {project.analysis ? (
           <section className="analysis-section experience-shell" aria-labelledby="analysis-title">
