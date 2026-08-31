@@ -129,6 +129,19 @@ export default function PortfolioExperience() {
           </section>
         )}
 
+        {project.externalLink ? (
+          <section className="project-source experience-shell" aria-labelledby="project-source-title">
+            <div>
+              <p className="experience-kicker">External coverage</p>
+              <h3 id="project-source-title">{project.externalLink.title}</h3>
+            </div>
+            <p>{project.externalLink.description}</p>
+            <a href={project.externalLink.href} target="_blank" rel="noreferrer">
+              {project.externalLink.label}<span aria-hidden="true"> ↗</span>
+            </a>
+          </section>
+        ) : null}
+
         {project.analysis ? (
           <section className="analysis-section experience-shell" aria-labelledby="analysis-title">
             <header className="analysis-header">

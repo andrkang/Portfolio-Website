@@ -52,6 +52,7 @@ test("keeps project media available", async () => {
     "village-3d-printing-2.jpg",
     "village-3d-printing-3.jpg",
     "village-3d-printing-4.jpg",
+    "village-3d-printing-article.png",
   ];
 
   await Promise.all(assets.map((asset) => access(new URL(`../public/images/${asset}`, import.meta.url))));

@@ -203,10 +203,43 @@ a { text-decoration: none; }
   color: #fff;
 }
 
-.project-gallery-teaching-3d-printing .gallery-item-1 { aspect-ratio: 16 / 9; }
-.project-gallery-teaching-3d-printing .gallery-item-2,
-.project-gallery-teaching-3d-printing .gallery-item-3 { aspect-ratio: 16 / 9; }
+.project-gallery-teaching-3d-printing .gallery-item-1 { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+.project-gallery-teaching-3d-printing .gallery-item-2 {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+  border: 0;
+  background: var(--experience-bg);
+  overflow: visible;
+}
+.project-gallery-teaching-3d-printing .gallery-item-2 img {
+  height: auto;
+  object-fit: contain;
+  border: 1px solid color-mix(in srgb, var(--experience-fg) 34%, transparent);
+}
+.project-gallery-teaching-3d-printing .gallery-item-2 figcaption {
+  position: static;
+  padding: 12px 0 0;
+  background: none;
+  color: var(--experience-fg);
+}
+.project-gallery-teaching-3d-printing .gallery-item-3,
 .project-gallery-teaching-3d-printing .gallery-item-4 {
+  grid-column: auto;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid color-mix(in srgb, var(--experience-fg) 34%, transparent);
+  background: var(--experience-soft);
+  overflow: hidden;
+}
+.project-gallery-teaching-3d-printing .gallery-item-3 img,
+.project-gallery-teaching-3d-printing .gallery-item-4 img { height: 100%; object-fit: cover; }
+.project-gallery-teaching-3d-printing .gallery-item-4 figcaption {
+  position: absolute;
+  padding: 34px 16px 14px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .76));
+  color: #fff;
+}
+.project-gallery-teaching-3d-printing .gallery-item-5 {
   grid-column: 1 / -1;
   width: min(100%, 720px);
   justify-self: center;
@@ -215,13 +248,7 @@ a { text-decoration: none; }
   background: var(--experience-soft);
   overflow: hidden;
 }
-.project-gallery-teaching-3d-printing .gallery-item-4 img { height: 100%; object-fit: cover; }
-.project-gallery-teaching-3d-printing .gallery-item-4 figcaption {
-  position: absolute;
-  padding: 34px 16px 14px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, .76));
-  color: #fff;
-}
+.project-gallery-teaching-3d-printing .gallery-item-5 img { height: 100%; object-fit: cover; }
 
 .gallery-item figcaption {
   position: absolute;
@@ -239,6 +266,32 @@ a { text-decoration: none; }
 }
 
 .gallery-item figcaption span { font: .56rem var(--font-geist-mono), monospace; letter-spacing: .1em; opacity: .72; }
+
+.project-source {
+  padding: 0 0 88px;
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(280px, .8fr) auto;
+  gap: clamp(24px, 4vw, 72px);
+  align-items: center;
+}
+
+.project-source > div,
+.project-source > p,
+.project-source > a { padding-top: 28px; border-top: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
+.project-source h3 { margin: 14px 0 0; font-size: clamp(1.75rem, 3vw, 3.2rem); line-height: .98; letter-spacing: -.05em; font-weight: 580; }
+.project-source > p { margin: 0; font-size: .92rem; line-height: 1.5; opacity: .72; }
+.project-source > a {
+  min-width: 220px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  color: inherit;
+  font-size: .78rem;
+  font-weight: 620;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.project-source > a:hover { color: color-mix(in srgb, var(--experience-fg) 55%, transparent); }
 
 .analysis-section { padding: 40px 0 110px; }
 .analysis-header { padding-bottom: 34px; border-bottom: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
@@ -363,9 +416,14 @@ a { text-decoration: none; }
   .project-gallery-seattle-environment-workshop .gallery-item-2,
   .project-gallery-seattle-environment-workshop .gallery-item-3 { grid-column: auto; width: 100%; aspect-ratio: 3 / 4; }
   .project-gallery-teaching-3d-printing .gallery-item-1,
-  .project-gallery-teaching-3d-printing .gallery-item-2,
-  .project-gallery-teaching-3d-printing .gallery-item-3 { grid-column: auto; width: 100%; aspect-ratio: 16 / 9; }
-  .project-gallery-teaching-3d-printing .gallery-item-4 { grid-column: auto; width: 100%; aspect-ratio: 3 / 4; }
+  .project-gallery-teaching-3d-printing .gallery-item-3,
+  .project-gallery-teaching-3d-printing .gallery-item-4 { grid-column: auto; width: 100%; aspect-ratio: 16 / 9; }
+  .project-gallery-teaching-3d-printing .gallery-item-2 { grid-column: auto; width: 100%; aspect-ratio: auto; }
+  .project-gallery-teaching-3d-printing .gallery-item-5 { grid-column: auto; width: 100%; aspect-ratio: 3 / 4; }
+  .project-source { padding-bottom: 72px; grid-template-columns: 1fr; gap: 26px; }
+  .project-source > p,
+  .project-source > a { padding-top: 0; border-top: 0; }
+  .project-source > a { min-width: 0; padding-block: 14px; border-top: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
   .experience-video { padding-bottom: 80px; }
   .analysis-section { padding-bottom: 80px; }
   .analysis-grid { grid-template-columns: 1fr; }
