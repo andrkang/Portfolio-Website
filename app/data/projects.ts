@@ -272,6 +272,13 @@ const projectRecords: Project[] = [
     background: "#12283b",
     foreground: "#eefaff",
     soft: "#1d3b51",
+    images: [
+      {
+        src: "/images/padlet-automation-workflow.png",
+        alt: "Workflow showing the volunteer automation tool collecting Seattle calendar opportunities and publishing them as organized Padlet posts",
+        caption: "Volunteer discovery-to-Padlet publishing workflow",
+      },
+    ],
     video: "https://www.youtube.com/embed/zdGP5_BhiaA",
     videoTitle: "Connecting students to service",
     videoDescription: "The volunteer video and automated Padlet workflow show how opportunities were gathered, organized, and shared.",

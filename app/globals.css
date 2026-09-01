@@ -277,6 +277,25 @@ a { text-decoration: none; }
 }
 .project-gallery-teaching-3d-printing .gallery-item-5 img { height: 100%; object-fit: cover; }
 
+.project-gallery-volunteer-padlet-automation .gallery-item-1 {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.project-gallery-volunteer-padlet-automation .gallery-item-1 img {
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+.project-gallery-volunteer-padlet-automation .gallery-item-1 figcaption {
+  position: static;
+  padding: 12px 0 0;
+  background: none;
+  color: var(--experience-fg);
+}
+
 .gallery-item figcaption {
   position: absolute;
   left: 0;
@@ -423,6 +442,7 @@ a { text-decoration: none; }
   .project-gallery-teaching-3d-printing .gallery-item-2 figcaption { border-top: 0; border-left: 1px solid color-mix(in srgb, var(--experience-fg) 34%, transparent); }
   .project-gallery-teaching-3d-printing .gallery-item-2 figcaption a { margin-top: 14px; }
   .project-gallery-teaching-3d-printing .gallery-item-5 { grid-column: auto; width: 100%; aspect-ratio: 3 / 4; }
+  .project-gallery-volunteer-padlet-automation .gallery-item-1 { grid-column: auto; width: 100%; aspect-ratio: auto; }
   .experience-video { padding-bottom: 80px; }
   .analysis-section { padding-bottom: 80px; }
   .analysis-grid { grid-template-columns: 1fr; }
