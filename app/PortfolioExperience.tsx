@@ -3,6 +3,130 @@
 import { CSSProperties, KeyboardEvent, useEffect, useState } from "react";
 import { projects } from "./data/projects";
 
+const adaptivProducts = [
+  {
+    number: "01",
+    title: "Sclobo Keychain",
+    client: "Sclobo / Washington",
+    category: "Client commission",
+    image: "/images/adaptiv/sclobo-keychain.png",
+    alt: "CAD rendering of the custom bird-emblem keychain developed for Sclobo",
+    description: "A custom keychain developed for Sclobo, a Washington-based street-fashion and gaming company, translating its visual identity into a compact physical product.",
+  },
+  {
+    number: "02",
+    title: "Personal Commission",
+    client: "Independent commission",
+    category: "One-off design",
+    image: "/images/adaptiv/custom-keychain.png",
+    alt: "Black geometric custom keychain designed for a personal commission",
+    description: "A one-off keychain created from a friend’s request—an exercise in interpreting an informal brief and turning it into a resolved, printable object.",
+  },
+  {
+    number: "03",
+    title: "Spanish Honor Society",
+    client: "Sociedad Honoraria Hispánica",
+    category: "Organization piece",
+    image: "/images/adaptiv/spanish-honor-society-keychain.png",
+    alt: "Round Sociedad Honoraria Hispánica keychain with a sun, book, and landscape emblem",
+    description: "A detailed keychain developed for the Spanish Honor Society, adapting its seal, lettering, and layered color system for small-format fabrication.",
+  },
+  {
+    number: "04",
+    title: "NFC Identity Tag",
+    client: "ADAPTIV Studio",
+    category: "Connected product",
+    image: "/images/adaptiv/nfc-keychain.png",
+    alt: "Blue and charcoal ADAPTIV identity keychain designed to contain an NFC tag",
+    description: "An NFC-infused keychain for ADAPTIV Studio that connects a physical object to digital information while doubling as a dimensional brand mark.",
+  },
+  {
+    number: "05",
+    title: "Mechanical Slot Machine",
+    client: "Independent development",
+    category: "Mechanical system",
+    image: "/images/adaptiv/mechanical-slot-machine.png",
+    alt: "Transparent CAD rendering revealing the gears and internal mechanism of a motorless slot machine",
+    description: "A fully mechanical slot machine powered by its lever and internal gear train—designed to operate without a single motor.",
+  },
+];
+
+function AdaptivShowcase() {
+  return (
+    <div className="adaptiv-showcase">
+      <section className="adaptiv-introduction experience-shell" aria-labelledby="adaptiv-studio-heading">
+        <div className="adaptiv-logo-panel">
+          <img src="/images/adaptiv/adaptiv-logo.png" alt="ADAPTIV Studio logo" />
+        </div>
+        <div className="adaptiv-intro-copy">
+          <p className="experience-kicker">Designing from request to reality</p>
+          <h3 id="adaptiv-studio-heading">A studio for objects that begin as questions.</h3>
+          <p>Through ADAPTIV Studio, I turn client requests and personal experiments into manufacturable products—moving from visual identity and CAD through prototyping and final fabrication.</p>
+          <div className="adaptiv-jump-links" aria-label="ADAPTIV case study sections">
+            <a href="#atelier-press"><span>01</span> The Atelier Press</a>
+            <a href="#adaptiv-archive"><span>02</span> Earlier ADAPTIV Work</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="atelier-section" id="atelier-press" aria-labelledby="atelier-heading">
+        <div className="experience-shell">
+          <header className="adaptiv-section-heading">
+            <div>
+              <span className="adaptiv-section-number">01 / Featured collaboration</span>
+              <h3 id="atelier-heading">The Atelier Press</h3>
+            </div>
+            <p>A product developed for Card Atelier. This space is reserved for the full case study, from the original need and early concepts to prototypes and the finished press.</p>
+          </header>
+
+          <div className="atelier-placeholder" aria-label="Reserved space for the Atelier Press case study">
+            <div className="atelier-placeholder-title">
+              <span>Card Atelier × ADAPTIV Studio</span>
+              <strong>Case study<br />coming here.</strong>
+            </div>
+            <div className="atelier-placeholder-plan">
+              <p>Reserved documentation</p>
+              <ol>
+                <li><span>01</span> Context + design brief</li>
+                <li><span>02</span> CAD + prototype iterations</li>
+                <li><span>03</span> Final press + use case</li>
+              </ol>
+            </div>
+            <div className="atelier-placeholder-mark" aria-hidden="true">AP</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="adaptiv-archive experience-shell" id="adaptiv-archive" aria-labelledby="adaptiv-archive-heading">
+        <header className="adaptiv-section-heading adaptiv-archive-heading">
+          <div>
+            <span className="adaptiv-section-number">02 / Product archive</span>
+            <h3 id="adaptiv-archive-heading">Earlier ADAPTIV Work</h3>
+          </div>
+          <p>Five projects that show the range of the studio: client identity pieces, a connected NFC object, and a complete mechanical system.</p>
+        </header>
+
+        <div className="adaptiv-product-list">
+          {adaptivProducts.map((product) => (
+            <article className={`adaptiv-product adaptiv-product-${product.number}`} key={product.number}>
+              <div className="adaptiv-product-image">
+                <span className="adaptiv-product-index">A—{product.number}</span>
+                <img src={product.image} alt={product.alt} loading="lazy" />
+              </div>
+              <div className="adaptiv-product-copy">
+                <p>{product.category}</p>
+                <h4>{product.title}</h4>
+                <span>{product.client}</span>
+                <p>{product.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
 export default function PortfolioExperience() {
   const [activeIndex, setActiveIndex] = useState(0);
   const project = projects[activeIndex];
@@ -90,7 +214,9 @@ export default function PortfolioExperience() {
           <div><span>Timeline</span><strong>{project.year}</strong></div>
         </section>
 
-        {project.images ? (
+        {project.slug === "adaptiv-studio" ? (
+          <AdaptivShowcase />
+        ) : project.images ? (
           <section className={`project-gallery experience-shell project-gallery-${project.slug}`} aria-label={`${project.title} photo gallery`}>
             {project.images.map((image, index) => (
               <figure className={`gallery-item gallery-item-${index + 1}`} key={image.src}>

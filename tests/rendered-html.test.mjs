@@ -30,6 +30,12 @@ test("keeps project media available", async () => {
     "village-3d-printing-4.jpg",
     "village-3d-printing-article.png",
     "padlet-automation-workflow.png",
+    "adaptiv/adaptiv-logo.png",
+    "adaptiv/sclobo-keychain.png",
+    "adaptiv/custom-keychain.png",
+    "adaptiv/spanish-honor-society-keychain.png",
+    "adaptiv/nfc-keychain.png",
+    "adaptiv/mechanical-slot-machine.png",
   ];
 
   await Promise.all(assets.map((asset) => access(new URL(`../dist/images/${asset}`, import.meta.url))));
