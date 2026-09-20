@@ -27,7 +27,7 @@ function rotationMatrix(pitch: number, yaw: number) {
   return multiplyMatrix(rotateY, rotateX);
 }
 
-function ProductModelPreview({ src, fallback, alt }: { src: string; fallback: string; alt: string }) {
+function ProductModelPreview({ src, fallback, alt, title }: { src: string; fallback: string; alt: string; title: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [active, setActive] = useState(false);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -268,7 +268,7 @@ function ProductModelPreview({ src, fallback, alt }: { src: string; fallback: st
 
   return (
     <div className="adaptiv-model-preview adaptiv-model-preview-active">
-      <canvas ref={canvasRef} aria-label="Interactive 3D model of the ADAPTIV NFC identity tag" />
+      <canvas ref={canvasRef} aria-label={`Interactive 3D model of the ${title}`} />
       <div className="adaptiv-model-status" aria-live="polite">
         {status === "loading" ? "Loading 3D model…" : status === "error" ? "3D preview unavailable" : "Drag to rotate · Scroll to zoom"}
       </div>
@@ -284,6 +284,7 @@ const adaptivProducts = [
     client: "Sclobo / Washington",
     category: "Client commission",
     image: "/images/adaptiv/sclobo-keychain.png",
+    model: "/models/adaptiv/sclobo-keychain.stl",
     alt: "CAD rendering of the custom bird-emblem keychain developed for Sclobo",
     description: "A custom keychain developed for Sclobo, a Washington-based street-fashion and gaming company, translating its visual identity into a compact physical product.",
   },
@@ -293,6 +294,7 @@ const adaptivProducts = [
     client: "Independent commission",
     category: "One-off design",
     image: "/images/adaptiv/custom-keychain.png",
+    model: "/models/adaptiv/luka-keychain.stl",
     alt: "Black geometric custom keychain designed for a personal commission",
     description: "A one-off keychain created from a friend’s request—an exercise in interpreting an informal brief and turning it into a resolved, printable object.",
   },
@@ -302,6 +304,7 @@ const adaptivProducts = [
     client: "Sociedad Honoraria Hispánica",
     category: "Organization piece",
     image: "/images/adaptiv/spanish-honor-society-keychain.png",
+    model: "/models/adaptiv/spanish-honor-society-keychain.stl",
     alt: "Round Sociedad Honoraria Hispánica keychain with a sun, book, and landscape emblem",
     description: "A detailed keychain developed for the Spanish Honor Society, adapting its seal, lettering, and layered color system for small-format fabrication.",
   },
@@ -314,15 +317,6 @@ const adaptivProducts = [
     model: "/models/adaptiv/nfc-identity-tag.stl",
     alt: "Blue and charcoal ADAPTIV identity keychain designed to contain an NFC tag",
     description: "An NFC-infused keychain for ADAPTIV Studio that connects a physical object to digital information while doubling as a dimensional brand mark.",
-  },
-  {
-    number: "05",
-    title: "Mechanical Slot Machine",
-    client: "Independent development",
-    category: "Mechanical system",
-    image: "/images/adaptiv/mechanical-slot-machine.png",
-    alt: "Transparent CAD rendering revealing the gears and internal mechanism of a motorless slot machine",
-    description: "A fully mechanical slot machine powered by its lever and internal gear train—designed to operate without a single motor.",
   },
 ];
 
@@ -339,7 +333,8 @@ function AdaptivShowcase() {
           <p>Through ADAPTIV Studio, I turn client requests and personal experiments into manufacturable products—moving from visual identity and CAD through prototyping and final fabrication.</p>
           <div className="adaptiv-jump-links" aria-label="ADAPTIV case study sections">
             <a href="#atelier-press"><span>01</span> The Atelier Press</a>
-            <a href="#adaptiv-archive"><span>02</span> Earlier ADAPTIV Work</a>
+            <a href="#mechanical-slot-machine"><span>02</span> Mechanical Slot Machine</a>
+            <a href="#adaptiv-archive"><span>03</span> Earlier ADAPTIV Work</a>
           </div>
         </div>
       </section>
@@ -372,13 +367,30 @@ function AdaptivShowcase() {
         </div>
       </section>
 
+      <section className="mechanical-feature experience-shell" id="mechanical-slot-machine" aria-labelledby="mechanical-heading">
+        <div className="mechanical-feature-visual">
+          <img src="/images/adaptiv/mechanical-slot-machine.png" alt="Transparent CAD rendering revealing the gears and internal mechanism of a motorless slot machine" loading="lazy" />
+          <span>Independent development / 2025</span>
+        </div>
+        <div className="mechanical-feature-copy">
+          <p className="adaptiv-section-number">02 / Mechanical system</p>
+          <h3 id="mechanical-heading">A slot machine with no motor.</h3>
+          <p>A fully mechanical slot machine powered by its lever and internal gear train. The transparent CAD view is intentionally used here instead of an STL viewer, so the relationship between the casing, gears, reels, and linkage stays visible.</p>
+          <div className="mechanical-feature-facts">
+            <span>Input</span><strong>Manual lever</strong>
+            <span>Motion</span><strong>Gears + linkages</strong>
+            <span>Motor</span><strong>None</strong>
+          </div>
+        </div>
+      </section>
+
       <section className="adaptiv-archive experience-shell" id="adaptiv-archive" aria-labelledby="adaptiv-archive-heading">
         <header className="adaptiv-section-heading adaptiv-archive-heading">
           <div>
-            <span className="adaptiv-section-number">02 / Product archive</span>
+            <span className="adaptiv-section-number">03 / Product archive</span>
             <h3 id="adaptiv-archive-heading">Earlier ADAPTIV Work</h3>
           </div>
-          <p>Five projects that show the range of the studio: client identity pieces, a connected NFC object, and a complete mechanical system.</p>
+          <p>Four client and studio projects that move from visual identity to useful, interactive objects.</p>
         </header>
 
         <div className="adaptiv-product-list">
@@ -387,7 +399,7 @@ function AdaptivShowcase() {
               <div className="adaptiv-product-image">
                 <span className="adaptiv-product-index">A—{product.number}</span>
                 {product.model ? (
-                  <ProductModelPreview src={product.model} fallback={product.image} alt={product.alt} />
+                  <ProductModelPreview src={product.model} fallback={product.image} alt={product.alt} title={product.title} />
                 ) : (
                   <img src={product.image} alt={product.alt} loading="lazy" />
                 )}
