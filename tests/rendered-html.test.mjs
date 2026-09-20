@@ -39,6 +39,7 @@ test("keeps project media available", async () => {
   ];
 
   await Promise.all(assets.map((asset) => access(new URL(`../dist/images/${asset}`, import.meta.url))));
+  await access(new URL("../dist/models/adaptiv/nfc-identity-tag.stl", import.meta.url));
   await access(new URL("../dist/tools/sparkoh-size-reference/index.html", import.meta.url));
   await access(new URL("../dist/videos/parametric-model-remake.m4v", import.meta.url));
 });

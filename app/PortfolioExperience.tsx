@@ -1,7 +1,281 @@
 "use client";
 
-import { CSSProperties, KeyboardEvent, useEffect, useState } from "react";
+import { CSSProperties, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { projects } from "./data/projects";
+
+function multiplyMatrix(a: Float32Array, b: Float32Array) {
+  const result = new Float32Array(16);
+  for (let column = 0; column < 4; column += 1) {
+    for (let row = 0; row < 4; row += 1) {
+      result[column * 4 + row] =
+        a[row] * b[column * 4] +
+        a[4 + row] * b[column * 4 + 1] +
+        a[8 + row] * b[column * 4 + 2] +
+        a[12 + row] * b[column * 4 + 3];
+    }
+  }
+  return result;
+}
+
+function rotationMatrix(pitch: number, yaw: number) {
+  const cx = Math.cos(pitch);
+  const sx = Math.sin(pitch);
+  const cy = Math.cos(yaw);
+  const sy = Math.sin(yaw);
+  const rotateX = new Float32Array([1, 0, 0, 0, 0, cx, sx, 0, 0, -sx, cx, 0, 0, 0, 0, 1]);
+  const rotateY = new Float32Array([cy, 0, -sy, 0, 0, 1, 0, 0, sy, 0, cy, 0, 0, 0, 0, 1]);
+  return multiplyMatrix(rotateY, rotateX);
+}
+
+function ProductModelPreview({ src, fallback, alt }: { src: string; fallback: string; alt: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [active, setActive] = useState(false);
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+
+  useEffect(() => {
+    if (!active || !canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const controller = new AbortController();
+    let dispose = () => {};
+
+    async function loadModel() {
+      try {
+        const response = await fetch(src, { signal: controller.signal });
+        if (!response.ok) throw new Error(`Unable to load model (${response.status})`);
+        const model = await response.arrayBuffer();
+        if (controller.signal.aborted) return;
+
+        const view = new DataView(model);
+        const triangleCount = view.getUint32(80, true);
+        const expectedSize = 84 + triangleCount * 50;
+        if (model.byteLength < expectedSize) throw new Error("Incomplete binary STL");
+
+        const header = new Uint8Array(model, 0, 80);
+        const colorMarker = [67, 79, 76, 79, 82, 61];
+        let colorOffset = -1;
+        for (let i = 0; i <= header.length - colorMarker.length; i += 1) {
+          if (colorMarker.every((value, index) => header[i + index] === value)) {
+            colorOffset = i + colorMarker.length;
+            break;
+          }
+        }
+        const defaultColor = colorOffset >= 0
+          ? [header[colorOffset] / 255, header[colorOffset + 1] / 255, header[colorOffset + 2] / 255]
+          : [0.52, 0.57, 0.64];
+
+        const minimum = [Infinity, Infinity, Infinity];
+        const maximum = [-Infinity, -Infinity, -Infinity];
+        for (let triangle = 0; triangle < triangleCount; triangle += 1) {
+          const start = 84 + triangle * 50 + 12;
+          for (let vertex = 0; vertex < 3; vertex += 1) {
+            for (let axis = 0; axis < 3; axis += 1) {
+              const value = view.getFloat32(start + vertex * 12 + axis * 4, true);
+              minimum[axis] = Math.min(minimum[axis], value);
+              maximum[axis] = Math.max(maximum[axis], value);
+            }
+          }
+        }
+        const center = minimum.map((value, axis) => (value + maximum[axis]) / 2);
+        const largestExtent = Math.max(...maximum.map((value, axis) => value - minimum[axis]));
+        const scale = largestExtent > 0 ? 1.65 / largestExtent : 1;
+        const vertices = new Float32Array(triangleCount * 3 * 9);
+
+        for (let triangle = 0; triangle < triangleCount; triangle += 1) {
+          const record = 84 + triangle * 50;
+          const normal = [0, 1, 2].map((axis) => view.getFloat32(record + axis * 4, true));
+          const packedColor = view.getUint16(record + 48, true);
+          const color = (packedColor & 0x8000) !== 0
+            ? defaultColor
+            : [
+                (packedColor & 0x1f) / 31,
+                ((packedColor >> 5) & 0x1f) / 31,
+                ((packedColor >> 10) & 0x1f) / 31,
+              ];
+
+          for (let vertex = 0; vertex < 3; vertex += 1) {
+            const source = record + 12 + vertex * 12;
+            const target = (triangle * 3 + vertex) * 9;
+            for (let axis = 0; axis < 3; axis += 1) {
+              vertices[target + axis] = (view.getFloat32(source + axis * 4, true) - center[axis]) * scale;
+              vertices[target + 3 + axis] = normal[axis];
+              vertices[target + 6 + axis] = color[axis];
+            }
+          }
+        }
+
+        const gl = canvas.getContext("webgl", { antialias: true, alpha: false });
+        if (!gl) throw new Error("WebGL is unavailable");
+        const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+        const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+        const program = gl.createProgram();
+        const buffer = gl.createBuffer();
+        if (!vertexShader || !fragmentShader || !program || !buffer) throw new Error("Unable to initialize WebGL");
+
+        gl.shaderSource(vertexShader, `
+          attribute vec3 aPosition;
+          attribute vec3 aNormal;
+          attribute vec3 aColor;
+          uniform mat4 uProjection;
+          uniform mat4 uView;
+          uniform mat4 uModel;
+          varying vec3 vNormal;
+          varying vec3 vColor;
+          void main() {
+            gl_Position = uProjection * uView * uModel * vec4(aPosition, 1.0);
+            vNormal = mat3(uModel) * aNormal;
+            vColor = aColor;
+          }
+        `);
+        gl.shaderSource(fragmentShader, `
+          precision mediump float;
+          varying vec3 vNormal;
+          varying vec3 vColor;
+          void main() {
+            vec3 normal = normalize(vNormal);
+            vec3 light = normalize(vec3(0.45, 0.72, 0.8));
+            float diffuse = max(dot(normal, light), 0.0);
+            float reverseLight = max(dot(normal, -light), 0.0) * 0.16;
+            float brightness = 0.42 + diffuse * 0.62 + reverseLight;
+            gl_FragColor = vec4(vColor * brightness, 1.0);
+          }
+        `);
+        gl.compileShader(vertexShader);
+        gl.compileShader(fragmentShader);
+        if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(vertexShader) || "Vertex shader error");
+        if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(fragmentShader) || "Fragment shader error");
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program) || "Shader link error");
+        gl.useProgram(program);
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+        const stride = 9 * Float32Array.BYTES_PER_ELEMENT;
+        const position = gl.getAttribLocation(program, "aPosition");
+        const normal = gl.getAttribLocation(program, "aNormal");
+        const color = gl.getAttribLocation(program, "aColor");
+        gl.enableVertexAttribArray(position);
+        gl.enableVertexAttribArray(normal);
+        gl.enableVertexAttribArray(color);
+        gl.vertexAttribPointer(position, 3, gl.FLOAT, false, stride, 0);
+        gl.vertexAttribPointer(normal, 3, gl.FLOAT, false, stride, 3 * Float32Array.BYTES_PER_ELEMENT);
+        gl.vertexAttribPointer(color, 3, gl.FLOAT, false, stride, 6 * Float32Array.BYTES_PER_ELEMENT);
+        gl.enable(gl.DEPTH_TEST);
+
+        let pitch = -0.58;
+        let yaw = -0.52;
+        let distance = 3.25;
+        let dragging = false;
+        let previousX = 0;
+        let previousY = 0;
+
+        function draw() {
+          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+          const width = Math.max(1, Math.floor(canvas.clientWidth * ratio));
+          const height = Math.max(1, Math.floor(canvas.clientHeight * ratio));
+          if (canvas.width !== width || canvas.height !== height) {
+            canvas.width = width;
+            canvas.height = height;
+          }
+          gl.viewport(0, 0, width, height);
+          gl.clearColor(0.957, 0.953, 0.937, 1);
+          gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+          const fieldOfView = Math.PI / 4;
+          const near = 0.1;
+          const far = 100;
+          const f = 1 / Math.tan(fieldOfView / 2);
+          const projection = new Float32Array([
+            f / (width / height), 0, 0, 0,
+            0, f, 0, 0,
+            0, 0, (far + near) / (near - far), -1,
+            0, 0, (2 * far * near) / (near - far), 0,
+          ]);
+          const camera = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -distance, 1]);
+          gl.uniformMatrix4fv(gl.getUniformLocation(program, "uProjection"), false, projection);
+          gl.uniformMatrix4fv(gl.getUniformLocation(program, "uView"), false, camera);
+          gl.uniformMatrix4fv(gl.getUniformLocation(program, "uModel"), false, rotationMatrix(pitch, yaw));
+          gl.drawArrays(gl.TRIANGLES, 0, triangleCount * 3);
+        }
+
+        const onPointerDown = (event: PointerEvent) => {
+          dragging = true;
+          previousX = event.clientX;
+          previousY = event.clientY;
+          canvas.setPointerCapture(event.pointerId);
+        };
+        const onPointerMove = (event: PointerEvent) => {
+          if (!dragging) return;
+          yaw += (event.clientX - previousX) * 0.009;
+          pitch = Math.max(-1.45, Math.min(1.45, pitch + (event.clientY - previousY) * 0.009));
+          previousX = event.clientX;
+          previousY = event.clientY;
+          draw();
+        };
+        const onPointerUp = () => { dragging = false; };
+        const onWheel = (event: WheelEvent) => {
+          event.preventDefault();
+          distance = Math.max(2.15, Math.min(6, distance + event.deltaY * 0.003));
+          draw();
+        };
+        canvas.addEventListener("pointerdown", onPointerDown);
+        canvas.addEventListener("pointermove", onPointerMove);
+        canvas.addEventListener("pointerup", onPointerUp);
+        canvas.addEventListener("pointercancel", onPointerUp);
+        canvas.addEventListener("wheel", onWheel, { passive: false });
+        const resizeObserver = new ResizeObserver(draw);
+        resizeObserver.observe(canvas);
+        draw();
+        setStatus("ready");
+
+        dispose = () => {
+          resizeObserver.disconnect();
+          canvas.removeEventListener("pointerdown", onPointerDown);
+          canvas.removeEventListener("pointermove", onPointerMove);
+          canvas.removeEventListener("pointerup", onPointerUp);
+          canvas.removeEventListener("pointercancel", onPointerUp);
+          canvas.removeEventListener("wheel", onWheel);
+          gl.deleteBuffer(buffer);
+          gl.deleteProgram(program);
+          gl.deleteShader(vertexShader);
+          gl.deleteShader(fragmentShader);
+        };
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          console.error(error);
+          setStatus("error");
+        }
+      }
+    }
+
+    loadModel();
+    return () => {
+      controller.abort();
+      dispose();
+    };
+  }, [active, src]);
+
+  if (!active) {
+    return (
+      <div className="adaptiv-model-preview">
+        <img src={fallback} alt={alt} loading="lazy" />
+        <button type="button" onClick={() => { setStatus("loading"); setActive(true); }}>
+          <span>Interactive model</span>
+          View in 3D <b aria-hidden="true">↗</b>
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="adaptiv-model-preview adaptiv-model-preview-active">
+      <canvas ref={canvasRef} aria-label="Interactive 3D model of the ADAPTIV NFC identity tag" />
+      <div className="adaptiv-model-status" aria-live="polite">
+        {status === "loading" ? "Loading 3D model…" : status === "error" ? "3D preview unavailable" : "Drag to rotate · Scroll to zoom"}
+      </div>
+      <button className="adaptiv-model-close" type="button" onClick={() => setActive(false)} aria-label="Close 3D model">×</button>
+    </div>
+  );
+}
 
 const adaptivProducts = [
   {
@@ -37,6 +311,7 @@ const adaptivProducts = [
     client: "ADAPTIV Studio",
     category: "Connected product",
     image: "/images/adaptiv/nfc-keychain.png",
+    model: "/models/adaptiv/nfc-identity-tag.stl",
     alt: "Blue and charcoal ADAPTIV identity keychain designed to contain an NFC tag",
     description: "An NFC-infused keychain for ADAPTIV Studio that connects a physical object to digital information while doubling as a dimensional brand mark.",
   },
@@ -111,7 +386,11 @@ function AdaptivShowcase() {
             <article className={`adaptiv-product adaptiv-product-${product.number}`} key={product.number}>
               <div className="adaptiv-product-image">
                 <span className="adaptiv-product-index">A—{product.number}</span>
-                <img src={product.image} alt={product.alt} loading="lazy" />
+                {product.model ? (
+                  <ProductModelPreview src={product.model} fallback={product.image} alt={product.alt} />
+                ) : (
+                  <img src={product.image} alt={product.alt} loading="lazy" />
+                )}
               </div>
               <div className="adaptiv-product-copy">
                 <p>{product.category}</p>
