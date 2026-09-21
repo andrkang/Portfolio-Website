@@ -163,9 +163,7 @@ a { text-decoration: none; }
 .adaptiv-product-index,
 .adaptiv-product-copy > p:first-child,
 .adaptiv-product-copy > span,
-.atelier-placeholder-title > span,
-.atelier-placeholder-plan > p,
-.atelier-placeholder-plan li span {
+.atelier-media figcaption span {
   font-family: var(--font-geist-mono), monospace;
   font-size: .6rem;
   text-transform: uppercase;
@@ -179,31 +177,30 @@ a { text-decoration: none; }
 .adaptiv-section-heading h3 { margin: 0; font-size: clamp(3rem, 6.4vw, 7rem); line-height: .84; letter-spacing: -.07em; font-weight: 620; }
 .adaptiv-section-heading > p { margin: 0; max-width: 530px; font-size: .96rem; line-height: 1.55; opacity: .76; }
 
-.atelier-placeholder {
-  min-height: 560px;
+.atelier-media-grid {
   margin-top: 22px;
-  padding: clamp(24px, 3.5vw, 50px);
   display: grid;
-  grid-template-columns: 1.25fr .75fr;
-  grid-template-rows: 1fr auto;
-  gap: 42px;
-  position: relative;
-  border: 1px solid color-mix(in srgb, var(--experience-bg) 42%, transparent);
-  overflow: hidden;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 20px;
 }
 
-.atelier-placeholder::before,
-.atelier-placeholder::after { content: ""; position: absolute; pointer-events: none; border: 1px solid color-mix(in srgb, var(--experience-bg) 25%, transparent); border-radius: 50%; }
-.atelier-placeholder::before { width: min(70vw, 940px); aspect-ratio: 1; right: -17%; top: -73%; }
-.atelier-placeholder::after { width: min(48vw, 620px); aspect-ratio: 1; right: -5%; top: -46%; }
-.atelier-placeholder-title { display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 1; }
-.atelier-placeholder-title strong { margin-top: 80px; font-size: clamp(3.2rem, 7vw, 7.8rem); line-height: .78; letter-spacing: -.075em; font-weight: 600; }
-.atelier-placeholder-plan { grid-column: 2; grid-row: 2; position: relative; z-index: 1; }
-.atelier-placeholder-plan > p { margin: 0 0 18px; opacity: .6; }
-.atelier-placeholder-plan ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid color-mix(in srgb, var(--experience-bg) 35%, transparent); }
-.atelier-placeholder-plan li { padding: 13px 0; display: flex; gap: 20px; border-bottom: 1px solid color-mix(in srgb, var(--experience-bg) 35%, transparent); font-size: .76rem; }
-.atelier-placeholder-plan li span { opacity: .6; }
-.atelier-placeholder-mark { position: absolute; right: -1vw; bottom: -4.5vw; color: color-mix(in srgb, var(--experience-bg) 8%, transparent); font-size: clamp(13rem, 31vw, 31rem); line-height: .7; letter-spacing: -.12em; font-weight: 750; }
+.atelier-media { min-width: 0; margin: 0; }
+.atelier-media > div {
+  min-height: 590px;
+  padding: clamp(20px, 3.2vw, 50px);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--experience-bg) 24%, transparent);
+  background: #e8eeeb;
+}
+.atelier-media > div::before { content: ""; position: absolute; inset: 18px; border: 1px solid color-mix(in srgb, var(--experience-bg) 13%, transparent); pointer-events: none; }
+.atelier-media img { width: 100%; height: 100%; max-height: 540px; display: block; object-fit: contain; position: relative; z-index: 1; }
+.atelier-media-assembled img { width: 92%; }
+.atelier-media-section img { width: 108%; max-width: none; }
+.atelier-media figcaption { padding: 13px 2px 0; display: flex; justify-content: space-between; gap: 20px; font-size: .75rem; line-height: 1.35; }
+.atelier-media figcaption span { flex: 0 0 auto; opacity: .62; }
 
 .mechanical-feature {
   padding-block: 110px;
@@ -478,6 +475,21 @@ a { text-decoration: none; }
 .project-showcase-video-copy h3 { margin: 20px 0 18px; font-size: clamp(2.2rem, 4vw, 4.4rem); line-height: .95; letter-spacing: -.055em; font-weight: 580; }
 .project-showcase-video-copy > p:last-child { margin: 0; max-width: 430px; font-size: .98rem; line-height: 1.55; opacity: .72; }
 
+.sparkoh-team {
+  padding: 42px 0 110px;
+  display: grid;
+  grid-template-columns: minmax(260px, .55fr) minmax(0, 1.45fr);
+  align-items: end;
+  gap: 6vw;
+  border-top: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent);
+}
+.sparkoh-team-copy h3 { margin: 20px 0 18px; max-width: 440px; font-size: clamp(2.4rem, 4.4vw, 4.8rem); line-height: .92; letter-spacing: -.06em; font-weight: 590; }
+.sparkoh-team-copy > p:last-child { margin: 0; max-width: 410px; font-size: .96rem; line-height: 1.55; opacity: .72; }
+.sparkoh-team figure { min-width: 0; margin: 0; }
+.sparkoh-team figure > img { width: 100%; aspect-ratio: 16 / 9; display: block; object-fit: cover; object-position: center 40%; border: 1px solid color-mix(in srgb, var(--experience-fg) 25%, transparent); }
+.sparkoh-team figcaption { padding-top: 12px; display: flex; justify-content: space-between; gap: 20px; font-size: .75rem; line-height: 1.35; }
+.sparkoh-team figcaption span { font: .56rem var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .1em; opacity: .62; }
+
 .visual-grid { padding-block: 86px; display: grid; grid-template-columns: 1.55fr .75fr; gap: 20px; }
 .visual-grid > div { min-height: 500px; padding: 22px; border: 1px solid color-mix(in srgb, var(--experience-fg) 34%, transparent); background: var(--experience-soft); }
 
@@ -525,6 +537,7 @@ a { text-decoration: none; }
   .visual-grid > div { min-height: 420px; }
   .visual-process { min-height: 280px !important; }
   .experience-video { grid-template-columns: 1fr; gap: 48px; }
+  .sparkoh-team { grid-template-columns: 1fr; gap: 36px; }
   .analysis-card > div { min-height: 380px; }
   .analysis-card-1 > div { min-height: 0; }
 }
@@ -550,10 +563,11 @@ a { text-decoration: none; }
   .atelier-section { padding-block: 62px 68px; }
   .adaptiv-section-heading { padding-bottom: 28px; grid-template-columns: 1fr; gap: 26px; }
   .adaptiv-section-heading h3 { font-size: clamp(3rem, 15vw, 5rem); }
-  .atelier-placeholder { min-height: 570px; padding: 24px 20px; grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
-  .atelier-placeholder-title strong { margin-top: 74px; font-size: clamp(3.15rem, 17vw, 5.2rem); }
-  .atelier-placeholder-plan { grid-column: 1; grid-row: 2; }
-  .atelier-placeholder-mark { right: -4vw; bottom: -2vw; font-size: 15rem; }
+  .atelier-media-grid { grid-template-columns: 1fr; }
+  .atelier-media > div { min-height: 410px; padding: 18px; }
+  .atelier-media-assembled img { width: 96%; }
+  .atelier-media-section img { width: 112%; }
+  .atelier-media figcaption { flex-direction: column; gap: 5px; }
   .mechanical-feature { padding-block: 72px; grid-template-columns: 1fr; gap: 34px; }
   .mechanical-feature-visual { min-height: 430px; padding: 20px; }
   .mechanical-feature-visual img { width: 126%; height: 126%; }
@@ -588,6 +602,8 @@ a { text-decoration: none; }
   .experience-video { padding-bottom: 80px; }
   .analysis-section { padding-bottom: 80px; }
   .analysis-grid { grid-template-columns: 1fr; }
+  .sparkoh-team { padding-block: 24px 72px; }
+  .sparkoh-team figure > img { aspect-ratio: 4 / 3; object-position: center 38%; }
   .analysis-card-1 { grid-column: auto; }
   .analysis-card > div, .analysis-card-1 > div { min-height: 0; padding: 14px; }
   .analysis-card img, .analysis-card-1 img { height: auto; }

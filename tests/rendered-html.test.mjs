@@ -36,6 +36,9 @@ test("keeps project media available", async () => {
     "adaptiv/spanish-honor-society-keychain.png",
     "adaptiv/nfc-keychain.png",
     "adaptiv/mechanical-slot-machine.png",
+    "adaptiv/atelier-press-assembled-cutout.png",
+    "adaptiv/atelier-press-section-cutout.png",
+    "sparkoh/team-office.jpg",
   ];
 
   await Promise.all(assets.map((asset) => access(new URL(`../dist/images/${asset}`, import.meta.url))));

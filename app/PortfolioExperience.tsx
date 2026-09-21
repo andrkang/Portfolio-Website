@@ -348,23 +348,22 @@ function AdaptivShowcase() {
               <span className="adaptiv-section-number">01 / Featured collaboration</span>
               <h3 id="atelier-heading">The Atelier Press</h3>
             </div>
-            <p>A product developed for Card Atelier. This space is reserved for the full case study, from the original need and early concepts to prototypes and the finished press.</p>
+            <p>A product developed for Card Atelier, shown through an assembled CAD view and a section drawing that reveals the press&apos;s internal structure.</p>
           </header>
 
-          <div className="atelier-placeholder" aria-label="Reserved space for the Atelier Press case study">
-            <div className="atelier-placeholder-title">
-              <span>Card Atelier × ADAPTIV Studio</span>
-              <strong>Case study<br />coming here.</strong>
-            </div>
-            <div className="atelier-placeholder-plan">
-              <p>Reserved documentation</p>
-              <ol>
-                <li><span>01</span> Context + design brief</li>
-                <li><span>02</span> CAD + prototype iterations</li>
-                <li><span>03</span> Final press + use case</li>
-              </ol>
-            </div>
-            <div className="atelier-placeholder-mark" aria-hidden="true">AP</div>
+          <div className="atelier-media-grid" aria-label="Atelier Press CAD documentation">
+            <figure className="atelier-media atelier-media-assembled">
+              <div>
+                <img src="/images/adaptiv/atelier-press-assembled-cutout.png" alt="Three-quarter CAD rendering of the Card Atelier press with its card drawer open" loading="eager" />
+              </div>
+              <figcaption><span>01 / Assembled CAD</span>Complete press, storage drawer, and Card Atelier identity.</figcaption>
+            </figure>
+            <figure className="atelier-media atelier-media-section">
+              <div>
+                <img src="/images/adaptiv/atelier-press-section-cutout.png" alt="Section drawing revealing the internal construction of the Card Atelier press" loading="lazy" />
+              </div>
+              <figcaption><span>02 / Section view</span>Internal architecture and the central threaded pressing mechanism.</figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -586,6 +585,20 @@ export default function PortfolioExperience() {
               <h3 id="showcase-video-title">{project.showcaseVideo.title}</h3>
               <p>{project.showcaseVideo.description}</p>
             </div>
+          </section>
+        ) : null}
+
+        {project.slug === "bit-infinite" ? (
+          <section className="sparkoh-team experience-shell" aria-labelledby="sparkoh-team-title">
+            <div className="sparkoh-team-copy">
+              <p className="experience-kicker">Company / Team</p>
+              <h3 id="sparkoh-team-title">The people behind Sparkoh.</h3>
+              <p>A workplace photograph documenting the team I worked with during my product design internship.</p>
+            </div>
+            <figure>
+              <img src="/images/sparkoh/team-office.jpg" alt="Andrew with the Sparkoh team in their office" loading="lazy" />
+              <figcaption><span>Team record</span>Sparkoh office / 2026</figcaption>
+            </figure>
           </section>
         ) : null}
 
