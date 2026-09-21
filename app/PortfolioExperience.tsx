@@ -38,6 +38,7 @@ function adjustModelColor(color: number[], tone: ModelTone) {
 
   if (tone === "charcoal" && brightness < 0.24 && saturation < 0.08) return [0.16, 0.18, 0.2];
   if (tone === "beige" && brightness > 0.62 && brightness < 0.82 && saturation < 0.17) return [0.82, 0.8, 0.74];
+  if (tone === "beige" && brightness >= 0.82 && saturation < 0.08) return [0.44, 0.46, 0.48];
   return color;
 }
 
@@ -350,6 +351,8 @@ function AdaptivShowcase() {
             </div>
             <p>A product developed for Card Atelier, shown through an assembled CAD view and a section drawing that reveals the press&apos;s internal structure.</p>
           </header>
+
+          <p className="atelier-purpose"><span>What it does</span>A hand-operated press designed to flatten collectible cards evenly and keep them organized in an integrated storage drawer.</p>
 
           <div className="atelier-media-grid" aria-label="Atelier Press CAD documentation">
             <figure className="atelier-media atelier-media-assembled">
