@@ -27,7 +27,21 @@ function rotationMatrix(pitch: number, yaw: number) {
   return multiplyMatrix(rotateY, rotateX);
 }
 
-function ProductModelPreview({ src, fallback, alt, title }: { src: string; fallback: string; alt: string; title: string }) {
+type ModelTone = "charcoal" | "beige" | undefined;
+
+function adjustModelColor(color: number[], tone: ModelTone) {
+  if (!tone) return color;
+  const maximum = Math.max(...color);
+  const minimum = Math.min(...color);
+  const brightness = color[0] * 0.2126 + color[1] * 0.7152 + color[2] * 0.0722;
+  const saturation = maximum - minimum;
+
+  if (tone === "charcoal" && brightness < 0.24) return [0.25, 0.29, 0.31];
+  if (tone === "beige" && brightness > 0.38 && saturation < 0.17) return [0.79, 0.74, 0.63];
+  return color;
+}
+
+function ProductModelPreview({ src, fallback, alt, title, tone, fit = 1.65 }: { src: string; fallback: string; alt: string; title: string; tone?: ModelTone; fit?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [active, setActive] = useState(false);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -77,20 +91,21 @@ function ProductModelPreview({ src, fallback, alt, title }: { src: string; fallb
         }
         const center = minimum.map((value, axis) => (value + maximum[axis]) / 2);
         const largestExtent = Math.max(...maximum.map((value, axis) => value - minimum[axis]));
-        const scale = largestExtent > 0 ? 1.65 / largestExtent : 1;
+        const scale = largestExtent > 0 ? fit / largestExtent : 1;
         const vertices = new Float32Array(triangleCount * 3 * 9);
 
         for (let triangle = 0; triangle < triangleCount; triangle += 1) {
           const record = 84 + triangle * 50;
           const normal = [0, 1, 2].map((axis) => view.getFloat32(record + axis * 4, true));
           const packedColor = view.getUint16(record + 48, true);
-          const color = (packedColor & 0x8000) !== 0
+          const rawColor = (packedColor & 0x8000) !== 0
             ? defaultColor
             : [
                 (packedColor & 0x1f) / 31,
                 ((packedColor >> 5) & 0x1f) / 31,
                 ((packedColor >> 10) & 0x1f) / 31,
               ];
+          const color = adjustModelColor(rawColor, tone);
 
           for (let vertex = 0; vertex < 3; vertex += 1) {
             const source = record + 12 + vertex * 12;
@@ -178,7 +193,7 @@ function ProductModelPreview({ src, fallback, alt, title }: { src: string; fallb
             canvas.height = height;
           }
           gl.viewport(0, 0, width, height);
-          gl.clearColor(0.957, 0.953, 0.937, 1);
+          gl.clearColor(0.863, 0.91, 0.929, 1);
           gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
           const fieldOfView = Math.PI / 4;
           const near = 0.1;
@@ -252,7 +267,7 @@ function ProductModelPreview({ src, fallback, alt, title }: { src: string; fallb
       controller.abort();
       dispose();
     };
-  }, [active, src]);
+  }, [active, src, tone, fit]);
 
   if (!active) {
     return (
@@ -295,6 +310,8 @@ const adaptivProducts = [
     category: "One-off design",
     image: "/images/adaptiv/custom-keychain.png",
     model: "/models/adaptiv/luka-keychain.stl",
+    tone: "charcoal" as const,
+    fit: 1.25,
     alt: "Black geometric custom keychain designed for a personal commission",
     description: "A one-off keychain created from a friend’s request—an exercise in interpreting an informal brief and turning it into a resolved, printable object.",
   },
@@ -305,6 +322,7 @@ const adaptivProducts = [
     category: "Organization piece",
     image: "/images/adaptiv/spanish-honor-society-keychain.png",
     model: "/models/adaptiv/spanish-honor-society-keychain.stl",
+    tone: "beige" as const,
     alt: "Round Sociedad Honoraria Hispánica keychain with a sun, book, and landscape emblem",
     description: "A detailed keychain developed for the Spanish Honor Society, adapting its seal, lettering, and layered color system for small-format fabrication.",
   },
@@ -324,10 +342,8 @@ function AdaptivShowcase() {
   return (
     <div className="adaptiv-showcase">
       <section className="adaptiv-introduction experience-shell" aria-labelledby="adaptiv-studio-heading">
-        <div className="adaptiv-logo-panel">
-          <img src="/images/adaptiv/adaptiv-logo.png" alt="ADAPTIV Studio logo" />
-        </div>
         <div className="adaptiv-intro-copy">
+          <img className="adaptiv-inline-logo" src="/images/adaptiv/adaptiv-logo.png" alt="ADAPTIV Studio logo" />
           <p className="experience-kicker">Designing from request to reality</p>
           <h3 id="adaptiv-studio-heading">A studio for objects that begin as questions.</h3>
           <p>Through ADAPTIV Studio, I turn client requests and personal experiments into manufacturable products—moving from visual identity and CAD through prototyping and final fabrication.</p>
@@ -399,7 +415,7 @@ function AdaptivShowcase() {
               <div className="adaptiv-product-image">
                 <span className="adaptiv-product-index">A—{product.number}</span>
                 {product.model ? (
-                  <ProductModelPreview src={product.model} fallback={product.image} alt={product.alt} title={product.title} />
+                  <ProductModelPreview src={product.model} fallback={product.image} alt={product.alt} title={product.title} tone={product.tone} fit={product.fit} />
                 ) : (
                   <img src={product.image} alt={product.alt} loading="lazy" />
                 )}
