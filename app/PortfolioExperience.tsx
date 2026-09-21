@@ -341,20 +341,6 @@ const adaptivProducts = [
 function AdaptivShowcase() {
   return (
     <div className="adaptiv-showcase">
-      <section className="adaptiv-introduction experience-shell" aria-labelledby="adaptiv-studio-heading">
-        <div className="adaptiv-intro-copy">
-          <img className="adaptiv-inline-logo" src="/images/adaptiv/adaptiv-logo.png" alt="ADAPTIV Studio logo" />
-          <p className="experience-kicker">Designing from request to reality</p>
-          <h3 id="adaptiv-studio-heading">A studio for objects that begin as questions.</h3>
-          <p>Through ADAPTIV Studio, I turn client requests and personal experiments into manufacturable products—moving from visual identity and CAD through prototyping and final fabrication.</p>
-          <div className="adaptiv-jump-links" aria-label="ADAPTIV case study sections">
-            <a href="#atelier-press"><span>01</span> The Atelier Press</a>
-            <a href="#mechanical-slot-machine"><span>02</span> Mechanical Slot Machine</a>
-            <a href="#adaptiv-archive"><span>03</span> Earlier ADAPTIV Work</a>
-          </div>
-        </div>
-      </section>
-
       <section className="atelier-section" id="atelier-press" aria-labelledby="atelier-heading">
         <div className="experience-shell">
           <header className="adaptiv-section-heading">

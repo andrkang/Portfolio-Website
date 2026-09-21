@@ -159,39 +159,6 @@ a { text-decoration: none; }
 /* ADAPTIV Studio case study */
 .adaptiv-showcase { overflow: hidden; }
 
-.adaptiv-introduction {
-  position: relative;
-  padding-block: 78px 96px;
-}
-
-.adaptiv-inline-logo {
-  width: clamp(96px, 12vw, 154px);
-  height: auto;
-  position: absolute;
-  top: 78px;
-  right: 0;
-  filter: invert(1) grayscale(1) contrast(.82);
-  mix-blend-mode: screen;
-  opacity: .62;
-}
-
-.adaptiv-intro-copy { max-width: 880px; }
-.adaptiv-intro-copy h3 {
-  margin: 24px 0 30px;
-  max-width: 820px;
-  font-size: clamp(2.7rem, 5.7vw, 6.4rem);
-  line-height: .88;
-  letter-spacing: -.065em;
-  font-weight: 590;
-}
-
-.adaptiv-intro-copy > p:not(.experience-kicker) { margin: 0; max-width: 650px; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.52; opacity: .78; }
-
-.adaptiv-jump-links { margin-top: 46px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
-.adaptiv-jump-links a { padding: 17px 16px 18px 0; display: flex; gap: 14px; align-items: baseline; font-size: .78rem; line-height: 1.25; }
-.adaptiv-jump-links a + a { padding-left: 16px; border-left: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
-.adaptiv-jump-links a:hover { color: var(--experience-accent); }
-.adaptiv-jump-links span,
 .adaptiv-section-number,
 .adaptiv-product-index,
 .adaptiv-product-copy > p:first-child,
@@ -205,7 +172,6 @@ a { text-decoration: none; }
   letter-spacing: .1em;
 }
 
-.adaptiv-jump-links span { opacity: .55; }
 .atelier-section { padding: 88px 0 104px; background: var(--experience-accent); color: #1d2a34; scroll-margin-top: 96px; }
 
 .adaptiv-section-heading { padding-bottom: 40px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(270px, .55fr); align-items: end; gap: 40px; border-bottom: 1px solid currentColor; }
@@ -581,11 +547,6 @@ a { text-decoration: none; }
   .detail-facts { grid-template-columns: minmax(0, 1fr) 120px; }
   .detail-facts > div { padding-block: 12px; grid-template-columns: 1fr; gap: 5px; }
   .detail-facts > div:not(:first-child) { padding-left: 14px; }
-  .adaptiv-introduction { padding-block: 48px 64px; }
-  .adaptiv-inline-logo { width: 92px; top: 42px; opacity: .5; }
-  .adaptiv-intro-copy h3 { font-size: clamp(2.75rem, 14.5vw, 5rem); }
-  .adaptiv-jump-links { grid-template-columns: 1fr; }
-  .adaptiv-jump-links a + a { padding-left: 0; border-left: 0; border-top: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
   .atelier-section { padding-block: 62px 68px; }
   .adaptiv-section-heading { padding-bottom: 28px; grid-template-columns: 1fr; gap: 26px; }
   .adaptiv-section-heading h3 { font-size: clamp(3rem, 15vw, 5rem); }
