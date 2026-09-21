@@ -36,8 +36,8 @@ function adjustModelColor(color: number[], tone: ModelTone) {
   const brightness = color[0] * 0.2126 + color[1] * 0.7152 + color[2] * 0.0722;
   const saturation = maximum - minimum;
 
-  if (tone === "charcoal" && brightness < 0.24) return [0.16, 0.18, 0.2];
-  if (tone === "beige" && brightness > 0.62 && saturation < 0.17) return [0.74, 0.71, 0.64];
+  if (tone === "charcoal" && brightness < 0.24 && saturation < 0.08) return [0.16, 0.18, 0.2];
+  if (tone === "beige" && brightness > 0.62 && brightness < 0.82 && saturation < 0.17) return [0.82, 0.8, 0.74];
   return color;
 }
 
