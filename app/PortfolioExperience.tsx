@@ -422,6 +422,80 @@ function AdaptivShowcase() {
   );
 }
 
+function BaseballInvestmentShowcase() {
+  const modelAreas = [
+    {
+      number: "01",
+      title: "Prospect model",
+      copy: "Normalizes current and archived FanGraphs scouting grades, then separates hitter and pitcher evaluation into role-specific models.",
+    },
+    {
+      number: "02",
+      title: "Outcome calibration",
+      copy: "Uses historical prospect profiles and career results to estimate transparent ceiling, likely, and downside probabilities.",
+    },
+    {
+      number: "03",
+      title: "Market evidence",
+      copy: "Connects the baseball projection to audited 1st Bowman autograph sales and veteran price timelines instead of relying on asking-price guesses.",
+    },
+  ];
+
+  return (
+    <section className="baseball-investment experience-shell" aria-labelledby="baseball-investment-heading">
+      <header className="baseball-investment-hero">
+        <div>
+          <p className="experience-kicker">Current build · September 2026</p>
+          <h3 id="baseball-investment-heading">Prospect<br /><em>Investment Lab</em></h3>
+        </div>
+        <p>I designed the research model, data pipeline, and interface as one system: scouting quality establishes the baseball case, historical outcomes test that case, and verified market evidence determines whether the entry price is compelling.</p>
+      </header>
+
+      <div className="baseball-investment-dashboard" aria-label="Current platform overview">
+        <div className="baseball-investment-dashboard-head">
+          <div>
+            <span>Prospect Investment Lab</span>
+            <strong>Live hitter and pitcher investment ratings</strong>
+          </div>
+          <div className="baseball-investment-metrics">
+            <span><b>70 / 30</b>Model</span>
+            <span><b>0–100</b>Scale</span>
+            <span><b>1,100</b>Historic ranks</span>
+          </div>
+        </div>
+        <div className="baseball-investment-tabs" aria-hidden="true">
+          <span>Prospect calculator</span><span>MLB Pipeline Top 100</span><span>Pipeline history</span><span>Price timelines</span><span>Methodology</span>
+        </div>
+        <div className="baseball-investment-workspace">
+          <div className="baseball-investment-search">
+            <small>Start here</small>
+            <strong>Find prospects</strong>
+            <i />
+            <i />
+            <button type="button" tabIndex={-1}>Run investment model</button>
+          </div>
+          <div className="baseball-investment-result">
+            <div><small>Baseball future</small><b>Scouting + performance</b><span>70%</span></div>
+            <div><small>Hobby relevance</small><b>Market + collector demand</b><span>30%</span></div>
+            <div className="baseball-investment-score"><small>Investment rating</small><strong>Evidence before hype</strong><span>0–100</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="baseball-investment-areas">
+        {modelAreas.map((area) => (
+          <article key={area.number}>
+            <span>{area.number}</span>
+            <h4>{area.title}</h4>
+            <p>{area.copy}</p>
+          </article>
+        ))}
+      </div>
+      <p className="baseball-investment-note">This portfolio view reflects the latest September 22 build, including the Top 100 dashboard, historical pipeline archive, calibrated outcome model, veteran price timelines, and developer data studio.</p>
+    </section>
+  );
+}
+
 export default function PortfolioExperience() {
   const [activeIndex, setActiveIndex] = useState(0);
   const project = projects[activeIndex];
@@ -511,6 +585,8 @@ export default function PortfolioExperience() {
 
         {project.slug === "adaptiv-studio" ? (
           <AdaptivShowcase />
+        ) : project.slug === "baseball-card-investment-index" ? (
+          <BaseballInvestmentShowcase />
         ) : project.images ? (
           <section className={`project-gallery experience-shell project-gallery-${project.slug}`} aria-label={`${project.title} photo gallery`}>
             {project.images.map((image, index) => (

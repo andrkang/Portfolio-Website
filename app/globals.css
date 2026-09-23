@@ -86,7 +86,7 @@ a { text-decoration: none; }
   transition: background-color .55s cubic-bezier(.22, 1, .36, 1);
 }
 
-.project-tabs { display: grid; grid-template-columns: repeat(6, 1fr); }
+.project-tabs { display: grid; grid-template-columns: repeat(7, 1fr); }
 .project-tabs button {
   min-height: 96px;
   padding: 10px 14px;
@@ -500,6 +500,51 @@ a { text-decoration: none; }
 .sparkoh-team figcaption { padding-top: 12px; display: flex; justify-content: space-between; gap: 20px; font-size: .75rem; line-height: 1.35; }
 .sparkoh-team figcaption span { font: .56rem var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .1em; opacity: .62; }
 
+.baseball-investment { padding: 58px 0 110px; }
+.baseball-investment-hero {
+  padding-bottom: 38px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, .62fr);
+  align-items: end;
+  gap: 6vw;
+  border-bottom: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent);
+}
+.baseball-investment-hero h3 { margin: 18px 0 0; font-size: clamp(3.8rem, 7vw, 7.6rem); line-height: .82; letter-spacing: -.075em; font-weight: 590; }
+.baseball-investment-hero h3 em { color: var(--experience-accent); font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+.baseball-investment-hero > p { margin: 0; max-width: 540px; font-size: 1rem; line-height: 1.6; opacity: .76; }
+.baseball-investment-dashboard { margin-top: 22px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--experience-fg) 32%, transparent); background: #f2f0eb; color: #171816; box-shadow: 0 26px 70px rgba(0, 0, 0, .2); }
+.baseball-investment-dashboard-head { min-height: 142px; padding: 24px 28px; display: flex; align-items: end; justify-content: space-between; gap: 32px; background: #123f3c; color: #fff; }
+.baseball-investment-dashboard-head > div:first-child { display: grid; gap: 8px; }
+.baseball-investment-dashboard-head > div:first-child span { color: #f1bc53; font-size: .68rem; font-weight: 720; text-transform: uppercase; letter-spacing: .06em; }
+.baseball-investment-dashboard-head > div:first-child strong { max-width: 670px; font-size: clamp(1.5rem, 3.2vw, 3.2rem); line-height: .95; letter-spacing: -.045em; }
+.baseball-investment-metrics { display: grid; grid-template-columns: repeat(3, minmax(84px, 1fr)); border: 1px solid rgba(255, 255, 255, .22); }
+.baseball-investment-metrics span { min-width: 104px; padding: 12px; display: grid; gap: 4px; border-right: 1px solid rgba(255, 255, 255, .18); color: rgba(255, 255, 255, .7); font-size: .58rem; text-transform: uppercase; letter-spacing: .08em; }
+.baseball-investment-metrics span:last-child { border-right: 0; }
+.baseball-investment-metrics b { color: #fff; font-size: 1rem; letter-spacing: 0; }
+.baseball-investment-tabs { padding: 0 24px; display: flex; gap: 22px; overflow: hidden; border-bottom: 1px solid #cbd2cd; background: #fff; }
+.baseball-investment-tabs span { padding: 14px 0 11px; white-space: nowrap; border-bottom: 4px solid transparent; color: #67706a; font-size: .68rem; font-weight: 650; }
+.baseball-investment-tabs span:first-child { border-color: #c75b3e; color: #173f3a; }
+.baseball-investment-workspace { min-height: 390px; padding: 22px; display: grid; grid-template-columns: minmax(220px, .38fr) minmax(0, 1fr); gap: 18px; }
+.baseball-investment-search, .baseball-investment-result > div { border: 1px solid #ced3cf; background: #fff; }
+.baseball-investment-search { padding: 20px; display: grid; align-content: start; gap: 10px; }
+.baseball-investment-search small { color: #9a3d2b; font-size: .62rem; font-weight: 720; text-transform: uppercase; }
+.baseball-investment-search strong { margin-bottom: 12px; font-size: 1.35rem; }
+.baseball-investment-search i { height: 46px; display: block; border: 1px solid #b8c1bb; background: #fbfcfa; }
+.baseball-investment-search button { margin-top: 8px; padding: 13px; border: 1px solid #963923; border-radius: 4px; background: #a9442d; color: #fff; font-size: .72rem; font-weight: 700; pointer-events: none; }
+.baseball-investment-result { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.baseball-investment-result > div { min-height: 170px; padding: 18px; display: grid; grid-template-columns: 1fr auto; align-content: space-between; gap: 10px; }
+.baseball-investment-result small { grid-column: 1 / -1; color: #68716b; font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; }
+.baseball-investment-result b { align-self: end; max-width: 190px; font-size: 1rem; line-height: 1.25; }
+.baseball-investment-result span { align-self: end; color: #17603f; font: 720 1.8rem var(--font-geist-mono), monospace; }
+.baseball-investment-result .baseball-investment-score { grid-column: 1 / -1; min-height: 150px; background: #e4f2ea; color: #17603f; }
+.baseball-investment-result .baseball-investment-score strong { max-width: none; font-size: clamp(1.7rem, 3.2vw, 3rem); letter-spacing: -.04em; }
+.baseball-investment-areas { margin-top: 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); border-left: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
+.baseball-investment-areas article { min-height: 270px; padding: 22px; display: flex; flex-direction: column; border-right: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
+.baseball-investment-areas article > span { font: .58rem var(--font-geist-mono), monospace; opacity: .58; }
+.baseball-investment-areas h4 { margin: auto 0 14px; color: var(--experience-accent); font-size: clamp(1.55rem, 2.3vw, 2.6rem); line-height: .95; letter-spacing: -.045em; }
+.baseball-investment-areas p { margin: 0; max-width: 370px; font-size: .84rem; line-height: 1.55; opacity: .72; }
+.baseball-investment-note { margin: 24px 0 0 auto; max-width: 700px; font-size: .78rem; line-height: 1.55; opacity: .62; }
+
 .visual-grid { padding-block: 86px; display: grid; grid-template-columns: 1.55fr .75fr; gap: 20px; }
 .visual-grid > div { min-height: 500px; padding: 22px; border: 1px solid color-mix(in srgb, var(--experience-fg) 34%, transparent); background: var(--experience-soft); }
 
@@ -548,6 +593,9 @@ a { text-decoration: none; }
   .visual-process { min-height: 280px !important; }
   .experience-video { grid-template-columns: 1fr; gap: 48px; }
   .sparkoh-team { grid-template-columns: 1fr; gap: 36px; }
+  .baseball-investment-hero { grid-template-columns: 1fr .8fr; }
+  .baseball-investment-dashboard-head { align-items: start; flex-direction: column; }
+  .baseball-investment-metrics { width: 100%; }
   .analysis-card > div { min-height: 380px; }
   .analysis-card-1 > div { min-height: 0; }
 }
@@ -559,7 +607,7 @@ a { text-decoration: none; }
   .compact-intro { min-height: 284px; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
   .compact-intro h1 { grid-row: 2; font-size: clamp(3.45rem, 17.5vw, 6rem); }
   .compact-deck { grid-column: 1; grid-row: 3; margin-top: 22px; max-width: 96%; }
-  .project-tabs { overflow-x: auto; grid-template-columns: repeat(6, minmax(126px, 1fr)); scrollbar-width: none; }
+  .project-tabs { overflow-x: auto; grid-template-columns: repeat(7, minmax(126px, 1fr)); scrollbar-width: none; }
   .project-tabs::-webkit-scrollbar { display: none; }
   .project-tabs button { min-height: 76px; padding-inline: 12px; }
   .project-view { scroll-margin-top: 62px; }
@@ -623,6 +671,16 @@ a { text-decoration: none; }
   .interactive-tool > header { grid-template-columns: 1fr; gap: 20px; }
   .interactive-tool iframe { height: 650px; }
   .project-showcase-video { padding-block: 36px 72px; grid-template-columns: 1fr; gap: 34px; }
+  .baseball-investment { padding-block: 42px 72px; }
+  .baseball-investment-hero { grid-template-columns: 1fr; gap: 28px; }
+  .baseball-investment-hero h3 { font-size: clamp(3.4rem, 16vw, 5.5rem); }
+  .baseball-investment-dashboard-head { padding: 20px; }
+  .baseball-investment-metrics span { min-width: 0; padding: 9px; }
+  .baseball-investment-workspace { grid-template-columns: 1fr; }
+  .baseball-investment-result { grid-template-columns: 1fr; }
+  .baseball-investment-result .baseball-investment-score { grid-column: auto; }
+  .baseball-investment-areas { grid-template-columns: 1fr; }
+  .baseball-investment-areas article { min-height: 220px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

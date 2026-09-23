@@ -288,6 +288,28 @@ const projectRecords: Project[] = [
       { number: "03", title: "Publishing to Padlet", prompt: "Turning raw listings into an organized resource students could use." },
     ],
   },
+  {
+    slug: "baseball-card-investment-index",
+    index: "07",
+    title: "Baseball Card Investment Index",
+    shortTitle: "Card Investment Index",
+    field: "Data Science / Sports Analytics",
+    year: "2026",
+    status: "Active research platform",
+    role: "Founder, researcher & developer",
+    tools: "TypeScript / React / FanGraphs / MLB Data",
+    eyebrow: "Prospect analytics platform",
+    statement: "A decision-support platform combining scouting grades, historical outcomes, and verified card-market evidence to evaluate baseball prospects.",
+    accent: "#f1bc53",
+    background: "#123f3c",
+    foreground: "#f7f5ef",
+    soft: "#1c5752",
+    chapters: [
+      { number: "01", title: "Building the model", prompt: "Turning public scouting grades into comparable hitter and pitcher ratings." },
+      { number: "02", title: "Testing outcomes", prompt: "Calibrating career probabilities against historical prospect cohorts." },
+      { number: "03", title: "Connecting the market", prompt: "Pairing baseball projections with verified card-price evidence." },
+    ],
+  },
 ];
 
 export const projects = [...projectRecords].sort((a, b) => Number(a.index) - Number(b.index));

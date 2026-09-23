@@ -54,3 +54,13 @@ test("keeps search indexing disabled", async () => {
   const robots = await readFile(new URL("../dist/robots.txt", import.meta.url), "utf8");
   assert.match(robots, /Disallow: \//);
 });
+
+test("includes the latest baseball investment case study", async () => {
+  const jsFiles = await import("node:fs/promises").then(({ readdir }) => readdir(new URL("../dist/assets/", import.meta.url)));
+  const script = jsFiles.find((file) => file.endsWith(".js"));
+  assert.ok(script);
+  const source = await readFile(new URL(`../dist/assets/${script}`, import.meta.url), "utf8");
+  assert.match(source, /Baseball Card Investment Index/);
+  assert.match(source, /Prospect Investment Lab/);
+  assert.match(source, /latest September 22 build/);
+});
