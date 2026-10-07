@@ -64,3 +64,33 @@ test("includes the latest baseball investment case study", async () => {
   assert.match(source, /Prospect Investment Lab/);
   assert.match(source, /latest September 22 build/);
 });
+
+test("keeps the admissions-focused project order and copy", async () => {
+  const data = await readFile(new URL("../app/data/projects.ts", import.meta.url), "utf8");
+  const expected = [
+    ["beaver-dam-robot", "01"],
+    ["seattle-environment-workshop", "02"],
+    ["teaching-3d-printing", "03"],
+    ["adaptiv-studio", "04"],
+    ["baseball-card-investment-index", "05"],
+    ["volunteer-padlet-automation", "06"],
+    ["bit-infinite", "07"],
+  ];
+
+  for (const [slug, index] of expected) {
+    assert.match(data, new RegExp(`slug: "${slug}",[\\s\\S]{0,80}index: "${index}"`));
+  }
+
+  assert.match(data, /3D Printing Community Workshop at TCT/);
+  assert.match(data, /Built for my school/);
+});
+
+test("shows the internship team photo before the interactive tool", async () => {
+  const experience = await readFile(new URL("../app/PortfolioExperience.tsx", import.meta.url), "utf8");
+  const teamPhoto = experience.indexOf('className="sparkoh-team experience-shell"');
+  const mainMedia = experience.indexOf('project.slug === "adaptiv-studio"');
+
+  assert.ok(teamPhoto > 0);
+  assert.ok(teamPhoto < mainMedia);
+  assert.equal(experience.match(/className="sparkoh-team experience-shell"/g)?.length, 1);
+});

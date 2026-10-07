@@ -583,6 +583,20 @@ export default function PortfolioExperience() {
           <div><span>Timeline</span><strong>{project.year}</strong></div>
         </section>
 
+        {project.slug === "bit-infinite" ? (
+          <section className="sparkoh-team experience-shell" aria-labelledby="sparkoh-team-title">
+            <div className="sparkoh-team-copy">
+              <p className="experience-kicker">Company / Team</p>
+              <h3 id="sparkoh-team-title">The people behind Sparkoh.</h3>
+              <p>A workplace photograph documenting the team I worked with during my product design internship.</p>
+            </div>
+            <figure>
+              <img src="/images/sparkoh/team-office.jpg" alt="Andrew with the Sparkoh team in their office" loading="eager" />
+              <figcaption><span>Team record</span>Sparkoh office / 2026</figcaption>
+            </figure>
+          </section>
+        ) : null}
+
         {project.slug === "adaptiv-studio" ? (
           <AdaptivShowcase />
         ) : project.slug === "baseball-card-investment-index" ? (
@@ -664,20 +678,6 @@ export default function PortfolioExperience() {
               <h3 id="showcase-video-title">{project.showcaseVideo.title}</h3>
               <p>{project.showcaseVideo.description}</p>
             </div>
-          </section>
-        ) : null}
-
-        {project.slug === "bit-infinite" ? (
-          <section className="sparkoh-team experience-shell" aria-labelledby="sparkoh-team-title">
-            <div className="sparkoh-team-copy">
-              <p className="experience-kicker">Company / Team</p>
-              <h3 id="sparkoh-team-title">The people behind Sparkoh.</h3>
-              <p>A workplace photograph documenting the team I worked with during my product design internship.</p>
-            </div>
-            <figure>
-              <img src="/images/sparkoh/team-office.jpg" alt="Andrew with the Sparkoh team in their office" loading="lazy" />
-              <figcaption><span>Team record</span>Sparkoh office / 2026</figcaption>
-            </figure>
           </section>
         ) : null}
 
