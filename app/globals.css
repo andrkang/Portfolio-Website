@@ -138,7 +138,7 @@ a { text-decoration: none; }
 .detail-facts {
   min-height: 82px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(150px, .42fr);
+  grid-template-columns: minmax(0, 1fr);
   border-bottom: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent);
 }
 
@@ -615,7 +615,7 @@ a { text-decoration: none; }
   .project-heading { grid-row: 1; }
   .project-heading h2 { font-size: clamp(2.65rem, 12vw, 4rem); }
   .project-summary { grid-column: 1; grid-row: 2; }
-  .detail-facts { grid-template-columns: minmax(0, 1fr) 120px; }
+  .detail-facts { grid-template-columns: minmax(0, 1fr); }
   .detail-facts > div { padding-block: 12px; grid-template-columns: 1fr; gap: 5px; }
   .detail-facts > div:not(:first-child) { padding-left: 14px; }
   .atelier-section { padding-block: 62px 68px; }

@@ -580,7 +580,6 @@ export default function PortfolioExperience() {
 
         <section className="detail-facts experience-shell" aria-label={`${project.title} details`}>
           <div><span>Role</span><strong>{project.role}</strong></div>
-          <div><span>Timeline</span><strong>{project.year}</strong></div>
         </section>
 
         {project.slug === "bit-infinite" ? (

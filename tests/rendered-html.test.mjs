@@ -94,3 +94,10 @@ test("shows the internship team photo before the interactive tool", async () => 
   assert.ok(teamPhoto < mainMedia);
   assert.equal(experience.match(/className="sparkoh-team experience-shell"/g)?.length, 1);
 });
+
+test("shows role without a timeline row", async () => {
+  const experience = await readFile(new URL("../app/PortfolioExperience.tsx", import.meta.url), "utf8");
+
+  assert.match(experience, /<span>Role<\/span>/);
+  assert.doesNotMatch(experience, /<span>Timeline<\/span>/);
+});
