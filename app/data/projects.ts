@@ -162,15 +162,15 @@ const projectRecords: Project[] = [
   {
     slug: "teaching-3d-printing",
     index: "03",
-    title: "3D Printing Community Workshop at TCT",
-    shortTitle: "TCT 3D Printing Workshop",
-    field: "Education / Community Technology",
+    title: "3D Printing Education & Outreach",
+    shortTitle: "3D Printing Outreach",
+    field: "Education / Community Outreach",
     year: "2026",
-    status: "Ongoing workshops",
-    role: "Workshop designer & instructor",
+    status: "Three-event series",
+    role: "Workshop designer, instructor & speaker",
     tools: "Curriculum / Demonstrations / Fabrication",
-    eyebrow: "TCT community technology workshop",
-    statement: "A hands-on 3D printing workshop at TCT introducing community participants to modeling, materials, fabrication, and assembly.",
+    eyebrow: "Workshops, online learning, and public speaking",
+    statement: "A three-event 3D printing education series spanning an in-person workshop at Zheng Ze, an online session, and a lecture at TCT Shenzhen.",
     accent: "#ff3b67",
     background: "#ffd84a",
     foreground: "#18120c",
@@ -178,7 +178,7 @@ const projectRecords: Project[] = [
     images: [
       {
         src: "/images/village-3d-printing-2.jpg",
-        alt: "Andrew presenting product design and 3D printing concepts to students during the village workshop",
+        alt: "Andrew presenting product design and 3D printing concepts during the in-person workshop",
         caption: "Introducing product design and 3D printing",
       },
       {
@@ -207,7 +207,7 @@ const projectRecords: Project[] = [
       },
     ],
     chapters: [
-      { number: "01", title: "Opening access", prompt: "Why the TCT workshop was created and who it serves." },
+      { number: "01", title: "Teaching across formats", prompt: "An in-person workshop at Zheng Ze, an online session, and a lecture at TCT Shenzhen." },
       { number: "02", title: "Designing the lesson", prompt: "Teaching sequence, demonstrations, and participant work." },
       { number: "03", title: "Building continuity", prompt: "Equipment donation and the next workshop cycle." },
     ],

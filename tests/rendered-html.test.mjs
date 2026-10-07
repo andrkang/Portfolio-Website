@@ -81,7 +81,8 @@ test("keeps the admissions-focused project order and copy", async () => {
     assert.match(data, new RegExp(`slug: "${slug}",[\\s\\S]{0,80}index: "${index}"`));
   }
 
-  assert.match(data, /3D Printing Community Workshop at TCT/);
+  assert.match(data, /3D Printing Education & Outreach/);
+  assert.match(data, /in-person workshop at Zheng Ze, an online session, and a lecture at TCT Shenzhen/);
   assert.match(data, /Built for my school/);
 });
 
