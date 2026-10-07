@@ -62,7 +62,10 @@ test("includes the latest baseball investment case study", async () => {
   const source = await readFile(new URL(`../dist/assets/${script}`, import.meta.url), "utf8");
   assert.match(source, /Baseball Card Investment Index/);
   assert.match(source, /Prospect Investment Lab/);
-  assert.match(source, /latest September 22 build/);
+  assert.match(source, /Current build · October 3, 2026/);
+  assert.match(source, /Six-path pitcher forecasts/);
+  assert.match(source, /Walk-forward validation/);
+  assert.match(source, /Audited market evidence/);
 });
 
 test("keeps the admissions-focused project order and copy", async () => {

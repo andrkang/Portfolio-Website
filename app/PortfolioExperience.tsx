@@ -426,18 +426,18 @@ function BaseballInvestmentShowcase() {
   const modelAreas = [
     {
       number: "01",
-      title: "Prospect model",
-      copy: "Normalizes current and archived FanGraphs scouting grades, then separates hitter and pitcher evaluation into role-specific models.",
+      title: "Six-path pitcher forecasts",
+      copy: "Classifies pitchers as ace, frontline, established, back-end or swing starter, reliever, or limited using their best qualifying MLB peak.",
     },
     {
       number: "02",
-      title: "Outcome calibration",
-      copy: "Uses historical prospect profiles and career results to estimate transparent ceiling, likely, and downside probabilities.",
+      title: "Walk-forward validation",
+      copy: "Selects model settings with leave-one-out testing, then deploys personalization only when it improves both Brier score and log loss on later classes.",
     },
     {
       number: "03",
-      title: "Market evidence",
-      copy: "Connects the baseball projection to audited 1st Bowman autograph sales and veteran price timelines instead of relying on asking-price guesses.",
+      title: "Audited market evidence",
+      copy: "Uses exact raw, unnumbered 1st Bowman Chrome autograph histories and rejects graded cards, parallels, numbered cards, lots, and unsupported prices.",
     },
   ];
 
@@ -445,10 +445,10 @@ function BaseballInvestmentShowcase() {
     <section className="baseball-investment experience-shell" aria-labelledby="baseball-investment-heading">
       <header className="baseball-investment-hero">
         <div>
-          <p className="experience-kicker">Current build · September 2026</p>
+          <p className="experience-kicker">Current build · October 3, 2026</p>
           <h3 id="baseball-investment-heading">Prospect<br /><em>Investment Lab</em></h3>
         </div>
-        <p>I designed the research model, data pipeline, and interface as one system: scouting quality establishes the baseball case, historical outcomes test that case, and verified market evidence determines whether the entry price is compelling.</p>
+        <p>I designed the research model, evidence pipeline, and interface as one system: FanGraphs scouting establishes the player profile, walk-forward validation governs which probabilities can deploy, and audited card histories test whether the entry price is compelling.</p>
       </header>
 
       <div className="baseball-investment-dashboard" aria-label="Current platform overview">
@@ -458,9 +458,9 @@ function BaseballInvestmentShowcase() {
             <strong>Live hitter and pitcher investment ratings</strong>
           </div>
           <div className="baseball-investment-metrics">
-            <span><b>70 / 30</b>Model</span>
-            <span><b>0–100</b>Scale</span>
-            <span><b>1,100</b>Historic ranks</span>
+            <span><b>2019–21</b>Calibration</span>
+            <span><b>6</b>Pitcher paths</span>
+            <span><b>2</b>Validation gates</span>
           </div>
         </div>
         <div className="baseball-investment-tabs" aria-hidden="true">
@@ -472,12 +472,12 @@ function BaseballInvestmentShowcase() {
             <strong>Find prospects</strong>
             <i />
             <i />
-            <button type="button" tabIndex={-1}>Run investment model</button>
+            <button type="button" tabIndex={-1}>Rate prospect</button>
           </div>
           <div className="baseball-investment-result">
-            <div><small>Baseball future</small><b>Scouting + performance</b><span>70%</span></div>
-            <div><small>Hobby relevance</small><b>Market + collector demand</b><span>30%</span></div>
-            <div className="baseball-investment-score"><small>Investment rating</small><strong>Evidence before hype</strong><span>0–100</span></div>
+            <div><small>Pitcher probability model</small><b>Peak-outcome career paths</b><span>6</span></div>
+            <div><small>Forward validation</small><b>Brier + log loss gates</b><span>2</span></div>
+            <div className="baseball-investment-score"><small>Investment rating</small><strong>40% prospect index · 50% NPV · 10% confidence</strong><span>0–100</span></div>
           </div>
         </div>
       </div>
@@ -491,7 +491,7 @@ function BaseballInvestmentShowcase() {
           </article>
         ))}
       </div>
-      <p className="baseball-investment-note">This portfolio view reflects the latest September 22 build, including the Top 100 dashboard, historical pipeline archive, calibrated outcome model, veteran price timelines, and developer data studio.</p>
+      <p className="baseball-investment-note">This portfolio view reflects the October 3, 2026 build: completed-season cutoffs, six-path pitcher outcomes, walk-forward probability validation, stricter exact-card filters, and an expanded audited veteran benchmark registry.</p>
     </section>
   );
 }
