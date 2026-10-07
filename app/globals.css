@@ -511,7 +511,11 @@ a { text-decoration: none; }
 }
 .baseball-investment-hero h3 { margin: 18px 0 0; font-size: clamp(3.8rem, 7vw, 7.6rem); line-height: .82; letter-spacing: -.075em; font-weight: 590; }
 .baseball-investment-hero h3 em { color: var(--experience-accent); font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
-.baseball-investment-hero > p { margin: 0; max-width: 540px; font-size: 1rem; line-height: 1.6; opacity: .76; }
+.baseball-investment-intro { display: grid; align-content: end; justify-items: start; gap: 18px; }
+.baseball-investment-intro p { margin: 0; max-width: 540px; font-size: 1rem; line-height: 1.6; opacity: .76; }
+.baseball-investment-intro a { padding: 12px 17px; border: 1px solid var(--experience-accent); border-radius: 4px; background: var(--experience-accent); color: #fff; font-size: .78rem; font-weight: 720; text-decoration: none; transition: transform .2s ease, filter .2s ease; }
+.baseball-investment-intro a:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.baseball-investment-intro a:focus-visible { outline: 3px solid color-mix(in srgb, var(--experience-accent) 35%, transparent); outline-offset: 3px; }
 .baseball-investment-dashboard { margin-top: 22px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--experience-fg) 32%, transparent); background: #f2f0eb; color: #171816; box-shadow: 0 26px 70px rgba(0, 0, 0, .2); }
 .baseball-investment-dashboard-head { min-height: 142px; padding: 24px 28px; display: flex; align-items: end; justify-content: space-between; gap: 32px; background: #123f3c; color: #fff; }
 .baseball-investment-dashboard-head > div:first-child { display: grid; gap: 8px; }
@@ -530,7 +534,9 @@ a { text-decoration: none; }
 .baseball-investment-search small { color: #9a3d2b; font-size: .62rem; font-weight: 720; text-transform: uppercase; }
 .baseball-investment-search strong { margin-bottom: 12px; font-size: 1.35rem; }
 .baseball-investment-search i { height: 46px; display: block; border: 1px solid #b8c1bb; background: #fbfcfa; }
-.baseball-investment-search button { margin-top: 8px; padding: 13px; border: 1px solid #963923; border-radius: 4px; background: #a9442d; color: #fff; font-size: .72rem; font-weight: 700; pointer-events: none; }
+.baseball-investment-search > a { margin-top: 8px; padding: 13px; border: 1px solid #963923; border-radius: 4px; background: #a9442d; color: #fff; font-size: .72rem; font-weight: 700; text-align: center; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+.baseball-investment-search > a:hover { transform: translateY(-1px); background: #963923; }
+.baseball-investment-search > a:focus-visible { outline: 3px solid rgba(169, 68, 45, .28); outline-offset: 3px; }
 .baseball-investment-result { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .baseball-investment-result > div { min-height: 170px; padding: 18px; display: grid; grid-template-columns: 1fr auto; align-content: space-between; gap: 10px; }
 .baseball-investment-result small { grid-column: 1 / -1; color: #68716b; font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; }

@@ -423,6 +423,7 @@ function AdaptivShowcase() {
 }
 
 function BaseballInvestmentShowcase() {
+  const liveToolUrl = "https://fangraphs-scouting-grade-collector.andrkang.chatgpt.site";
   const modelAreas = [
     {
       number: "01",
@@ -448,7 +449,10 @@ function BaseballInvestmentShowcase() {
           <p className="experience-kicker">Current build · October 3, 2026</p>
           <h3 id="baseball-investment-heading">Prospect<br /><em>Investment Lab</em></h3>
         </div>
-        <p>I designed the research model, evidence pipeline, and interface as one system: FanGraphs scouting establishes the player profile, walk-forward validation governs which probabilities can deploy, and audited card histories test whether the entry price is compelling.</p>
+        <div className="baseball-investment-intro">
+          <p>I designed the research model, evidence pipeline, and interface as one system: FanGraphs scouting establishes the player profile, walk-forward validation governs which probabilities can deploy, and audited card histories test whether the entry price is compelling.</p>
+          <a href={liveToolUrl} target="_blank" rel="noreferrer">Open live investment tool</a>
+        </div>
       </header>
 
       <div className="baseball-investment-dashboard" aria-label="Current platform overview">
@@ -472,7 +476,7 @@ function BaseballInvestmentShowcase() {
             <strong>Find prospects</strong>
             <i />
             <i />
-            <button type="button" tabIndex={-1}>Rate prospect</button>
+            <a href={liveToolUrl} target="_blank" rel="noreferrer">Open live tool</a>
           </div>
           <div className="baseball-investment-result">
             <div><small>Pitcher probability model</small><b>Peak-outcome career paths</b><span>6</span></div>
