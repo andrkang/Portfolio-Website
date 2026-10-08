@@ -424,23 +424,6 @@ function AdaptivShowcase() {
 
 function BaseballInvestmentShowcase() {
   const staticToolUrl = "/baseball-index/";
-  const modelAreas = [
-    {
-      number: "01",
-      title: "Six-path pitcher forecasts",
-      copy: "Classifies pitchers as ace, frontline, established, back-end or swing starter, reliever, or limited using their best qualifying MLB peak.",
-    },
-    {
-      number: "02",
-      title: "Walk-forward validation",
-      copy: "Selects model settings with leave-one-out testing, then deploys personalization only when it improves both Brier score and log loss on later classes.",
-    },
-    {
-      number: "03",
-      title: "Audited market evidence",
-      copy: "Uses exact raw, unnumbered 1st Bowman Chrome autograph histories and rejects graded cards, parallels, numbered cards, lots, and unsupported prices.",
-    },
-  ];
 
   return (
     <section className="baseball-investment experience-shell" aria-labelledby="baseball-investment-heading">
@@ -454,47 +437,6 @@ function BaseballInvestmentShowcase() {
           <a href={staticToolUrl}>Explore rankings &amp; methodology</a>
         </div>
       </header>
-
-      <div className="baseball-investment-dashboard" aria-label="Current platform overview">
-        <div className="baseball-investment-dashboard-head">
-          <div>
-            <span>Prospect Investment Lab</span>
-            <strong>Sortable MLB Pipeline Top 100 snapshot</strong>
-          </div>
-          <div className="baseball-investment-metrics">
-            <span><b>100</b>Prospects</span>
-            <span><b>30</b>Organizations</span>
-            <span><b>2</b>Research views</span>
-          </div>
-        </div>
-        <div className="baseball-investment-tabs" aria-hidden="true">
-          <span>MLB Pipeline Top 100</span><span>Tool-grade sorting</span><span>Player profiles</span><span>CSV export</span><span>Methodology</span>
-        </div>
-        <div className="baseball-investment-workspace">
-          <div className="baseball-investment-search">
-            <small>Start here</small>
-            <strong>Find prospects</strong>
-            <i />
-            <i />
-            <a href={staticToolUrl}>Open static ranking</a>
-          </div>
-          <div className="baseball-investment-result">
-            <div><small>Pitcher probability model</small><b>Peak-outcome career paths</b><span>6</span></div>
-            <div><small>Forward validation</small><b>Brier + log loss gates</b><span>2</span></div>
-            <div className="baseball-investment-score"><small>Investment rating</small><strong>40% prospect index · 50% NPV · 10% confidence</strong><span>0–100</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div className="baseball-investment-areas">
-        {modelAreas.map((area) => (
-          <article key={area.number}>
-            <span>{area.number}</span>
-            <h4>{area.title}</h4>
-            <p>{area.copy}</p>
-          </article>
-        ))}
-      </div>
     </section>
   );
 }

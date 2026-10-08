@@ -61,12 +61,14 @@ test("includes the latest baseball investment case study", async () => {
   assert.ok(script);
   const source = await readFile(new URL(`../dist${script}`, import.meta.url), "utf8");
   assert.match(source, /Baseball Card Investment Index/);
-  assert.match(source, /Prospect Investment Lab/);
+  assert.match(source, /Prospect/);
+  assert.match(source, /Investment Lab/);
   assert.match(source, /Official data snapshot · October 7, 2026/);
   assert.match(source, /Explore rankings & methodology/);
-  assert.match(source, /Six-path pitcher forecasts/);
-  assert.match(source, /Walk-forward validation/);
-  assert.match(source, /Audited market evidence/);
+  assert.doesNotMatch(source, /Six-path pitcher forecasts/);
+  assert.doesNotMatch(source, /Walk-forward validation/);
+  assert.doesNotMatch(source, /Audited market evidence/);
+  assert.doesNotMatch(source, /Open static ranking/);
 
   const ranking = await readFile(new URL("../dist/baseball-index/index.html", import.meta.url), "utf8");
   const methodology = await readFile(new URL("../dist/baseball-index/methodology.html", import.meta.url), "utf8");
