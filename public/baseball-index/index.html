@@ -38,7 +38,7 @@
         <div class="summary-copy">
           <p class="eyebrow">Static research edition</p>
           <h2 id="summary-heading">One official ranking.<br />Many ways to examine it.</h2>
-          <p>The default order is MLB Pipeline’s official Top 100. Sorting changes only the table view—not a player’s official rank. Open any prospect for the published tool-grade breakdown.</p>
+          <p>The default order is MLB Pipeline’s official Top 100. Sort by the Hobby Index or Investment Rating from my model, or compare profiles and published tool grades. Missing evidence remains N/A.</p>
         </div>
         <dl class="metric-grid" aria-label="Snapshot summary">
           <div><dt>Players</dt><dd id="metric-players">100</dd></div>
@@ -94,6 +94,10 @@
                 <option value="age">Age</option>
                 <option value="fv">Future Value (FV)</option>
               </optgroup>
+              <optgroup label="Prospect Investment Lab scores">
+                <option value="hobbyIndex">Hobby Index</option>
+                <option value="investmentRating">Investment Rating</option>
+              </optgroup>
               <optgroup label="Published scouting grades">
                 <option value="hit">Hit</option>
                 <option value="power">Game Power</option>
@@ -133,6 +137,8 @@
                 <th><button class="column-sort" data-sort="eta" type="button">ETA</button></th>
                 <th class="number-cell"><button class="column-sort" data-sort="age" type="button">Age</button></th>
                 <th class="number-cell"><button class="column-sort" data-sort="fv" type="button">FV</button></th>
+                <th class="number-cell"><button class="column-sort" data-sort="hobbyIndex" type="button">Hobby Index</button></th>
+                <th class="number-cell"><button class="column-sort" data-sort="investmentRating" type="button">Investment</button></th>
                 <th class="number-cell" id="selected-metric-heading">Selected metric</th>
                 <th class="number-cell"><span class="sr-only">Details</span></th>
               </tr>
@@ -144,7 +150,7 @@
           <strong>No prospects match these filters.</strong>
           <button class="text-button" type="button" id="empty-reset">Clear filters</button>
         </div>
-        <p class="data-note">Ranks, biographical information, photos, and tool grades are attributed to MLB Pipeline. This independent interface reorganizes the published data for educational analysis; it does not alter the official ranking.</p>
+        <p class="data-note">Ranks, biographical information, photos, and tool grades are attributed to MLB Pipeline. Hobby Index and Investment Rating are dated model outputs from the Prospect Investment Lab; missing performance or verified price evidence remains N/A.</p>
       </section>
     </main>
 

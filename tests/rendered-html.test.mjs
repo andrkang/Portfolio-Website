@@ -72,8 +72,14 @@ test("includes the latest baseball investment case study", async () => {
   const methodology = await readFile(new URL("../dist/baseball-index/methodology.html", import.meta.url), "utf8");
   const snapshot = JSON.parse(await readFile(new URL("../dist/baseball-index/data/prospects.json", import.meta.url), "utf8"));
   assert.match(ranking, /MLB Pipeline Prospect Index/);
+  assert.match(ranking, /Hobby Index/);
+  assert.match(ranking, /Investment Rating/);
   assert.match(methodology, /How the model works/);
   assert.equal(snapshot.count, 100);
+  const modelScores = JSON.parse(await readFile(new URL("../dist/baseball-index/data/model-scores.json", import.meta.url), "utf8"));
+  assert.equal(modelScores.scores.length, 100);
+  assert.ok(modelScores.scores.some(([, hobby, investment]) => Number.isFinite(hobby) && Number.isFinite(investment)));
+  assert.doesNotMatch(source, /The GitHub Pages edition is frozen/);
 });
 
 test("keeps the admissions-focused project order and copy", async () => {

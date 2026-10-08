@@ -92,6 +92,7 @@ td small { margin-top: 3px; max-width: 190px; color: #6d756f; font-size: .68rem;
 .initials { color: var(--forest); font: 700 .76rem var(--mono); }
 .grade-pill { display: inline-flex; min-width: 37px; min-height: 30px; align-items: center; justify-content: center; border: 1px solid #9fc3b6; background: #edf7f3; color: #205c48; font: 700 .82rem var(--mono); }
 .selected-value { color: var(--teal); font: 700 1rem var(--mono); }
+.model-score { color: var(--ink); font: 700 .94rem var(--mono); }
 .na { color: #929994; font-size: .72rem; }
 .details-button { padding: 7px 10px; border: 1px solid #aeb8b1; border-radius: 3px; background: white; color: var(--forest); font-size: .72rem; font-weight: 700; cursor: pointer; }
 .details-button:hover, .details-button:focus-visible { border-color: var(--teal); background: var(--teal); color: white; outline: none; }
@@ -113,6 +114,7 @@ td small { margin-top: 3px; max-width: 190px; color: #6d756f; font-size: .68rem;
 .dialog-fv span, .dialog-fv strong { display: block; }
 .dialog-fv span { color: #c7d8d4; font: 700 .68rem var(--mono); }
 .dialog-fv strong { margin-top: 5px; color: var(--gold); font: 700 2rem var(--mono); }
+.dialog-score-stack { display: grid; grid-template-columns: repeat(3, minmax(74px, 1fr)); gap: 8px; }
 .dialog-facts { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; border-bottom: 1px solid var(--line); }
 .dialog-facts div { padding: 16px; border-right: 1px solid var(--line); }
 .dialog-facts div:last-child { border-right: 0; }

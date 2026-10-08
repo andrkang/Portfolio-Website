@@ -495,7 +495,6 @@ function BaseballInvestmentShowcase() {
           </article>
         ))}
       </div>
-      <p className="baseball-investment-note">The GitHub Pages edition is frozen to the October 7, 2026 official MLB Pipeline ranking. It preserves official rank while allowing visitors to re-sort by profile fields and published tools; the companion methodology page documents the full model from scouting inputs through Investment Rating.</p>
     </section>
   );
 }

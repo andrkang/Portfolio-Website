@@ -17,6 +17,8 @@ const metricLabels = {
   eta: "ETA",
   age: "Age",
   fv: "Future Value",
+  hobbyIndex: "Hobby Index",
+  investmentRating: "Investment Rating",
   hit: "Hit",
   power: "Game Power",
   speed: "Speed",
@@ -79,14 +81,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   bindControls();
 
   try {
-    const response = await fetch("./data/prospects.json");
-    if (!response.ok) throw new Error(`Snapshot returned ${response.status}.`);
-    state.data = await response.json();
+    const [rankingResponse, scoresResponse] = await Promise.all([
+      fetch("./data/prospects.json"),
+      fetch("./data/model-scores.json"),
+    ]);
+    if (!rankingResponse.ok) throw new Error(`Snapshot returned ${rankingResponse.status}.`);
+    if (!scoresResponse.ok) throw new Error(`Model scores returned ${scoresResponse.status}.`);
+    state.data = await rankingResponse.json();
+    const modelSnapshot = await scoresResponse.json();
+    const scoresByRank = new Map(modelSnapshot.scores.map(([rank, hobbyIndex, investmentRating]) => [rank, { hobbyIndex, investmentRating }]));
+    state.data.modelSnapshotDate = modelSnapshot.snapshotDate;
+    state.data.prospects = state.data.prospects.map((player) => ({ ...player, ...(scoresByRank.get(player.rank) || {}) }));
     hydrateSummary();
     render();
   } catch (error) {
     els.resultCount.textContent = "The ranking snapshot could not be loaded.";
-    els.body.innerHTML = `<tr><td colspan="11" class="load-error">${escapeHtml(error instanceof Error ? error.message : "Unknown error")}</td></tr>`;
+    els.body.innerHTML = `<tr><td colspan="13" class="load-error">${escapeHtml(error instanceof Error ? error.message : "Unknown error")}</td></tr>`;
   }
 });
 
@@ -186,6 +196,7 @@ function metricValue(player, key) {
   if (key === "rank") return player.rank;
   if (["name", "org", "position", "level"].includes(key)) return player[key];
   if (["eta", "age", "fv"].includes(key)) return numeric(player[key]);
+  if (["hobbyIndex", "investmentRating"].includes(key)) return player[key];
   if (key === "best-secondary") {
     return Math.max(0, ...["Slider", "Curveball", "Changeup", "Cutter", "Splitter"].map((tool) => gradeValue(player, tool) || 0)) || undefined;
   }
@@ -209,6 +220,8 @@ function rowMarkup(player, index) {
     <td>${escapeHtml(player.eta || "—")}</td>
     <td class="number-cell">${player.age || "—"}</td>
     <td class="number-cell"><span class="grade-pill">${escapeHtml(player.fv || "N/A")}</span></td>
+    <td class="number-cell model-score">${formatScore(player.hobbyIndex)}</td>
+    <td class="number-cell model-score">${formatScore(player.investmentRating)}</td>
     <td class="number-cell selected-value">${metricDisplay}</td>
     <td class="number-cell"><button class="details-button" type="button" data-player-rank="${player.rank}" aria-label="View ${escapeAttribute(player.name)} details">View</button></td>
   </tr>`;
@@ -230,19 +243,23 @@ function openPlayer(rank) {
     <div class="dialog-hero">
       <div class="dialog-portrait">${portrait}</div>
       <div><p class="eyebrow">MLB Pipeline #${player.rank}</p><h2>${escapeHtml(player.name)}</h2><p>${escapeHtml([player.position, player.org, player.level, player.eta ? `ETA ${player.eta}` : ""].filter(Boolean).join(" · "))}</p></div>
-      <div class="dialog-fv"><span>FV</span><strong>${escapeHtml(player.fv || "N/A")}</strong></div>
+      <div class="dialog-score-stack">
+        <div class="dialog-fv"><span>FV</span><strong>${escapeHtml(player.fv || "N/A")}</strong></div>
+        <div class="dialog-fv"><span>Hobby</span><strong>${formatScoreText(player.hobbyIndex)}</strong></div>
+        <div class="dialog-fv"><span>Investment</span><strong>${formatScoreText(player.investmentRating)}</strong></div>
+      </div>
     </div>
     <dl class="dialog-facts"><div><dt>Organization</dt><dd>${escapeHtml(player.team || player.org || "N/A")}</dd></div><div><dt>Age</dt><dd>${player.age || "N/A"}</dd></div><div><dt>Level</dt><dd>${escapeHtml(player.level || "N/A")}</dd></div><div><dt>ETA</dt><dd>${escapeHtml(player.eta || "N/A")}</dd></div></dl>
     <section class="dialog-tools"><p class="eyebrow">Published scouting grades</p><div class="tool-list">${tools}</div></section>
-    <p class="dialog-note">Snapshot ${formatDate(state.data.snapshotDate)} · Grades attributed to MLB Pipeline.</p>`;
+    <p class="dialog-note">MLB ranking snapshot ${formatDate(state.data.snapshotDate)} · Model score snapshot ${formatDate(state.data.modelSnapshotDate)} · Missing evidence remains N/A.</p>`;
   els.dialog.showModal();
 }
 
 function downloadCsv() {
   const rows = currentRows();
-  const headers = ["View rank", "MLB Pipeline rank", "Player", "Position", "Organization", "Team", "Level", "ETA", "Age", "FV", "Hit", "Game Power", "Speed", "Field", "Arm", "Fastball", "Slider", "Curveball", "Changeup", "Cutter", "Splitter", "Command"];
+  const headers = ["View rank", "MLB Pipeline rank", "Player", "Position", "Organization", "Team", "Level", "ETA", "Age", "FV", "Hobby Index", "Investment Rating", "Hit", "Game Power", "Speed", "Field", "Arm", "Fastball", "Slider", "Curveball", "Changeup", "Cutter", "Splitter", "Command"];
   const output = [headers, ...rows.map((player, index) => [
-    index + 1, player.rank, player.name, player.position, player.org, player.team, player.level, player.eta, player.age, player.fv,
+    index + 1, player.rank, player.name, player.position, player.org, player.team, player.level, player.eta, player.age, player.fv, player.hobbyIndex ?? "", player.investmentRating ?? "",
     ...["Hit", "Game Power", "Speed", "Field", "Arm", "Fastball", "Slider", "Curveball", "Changeup", "Cutter", "Splitter", "Command"].map((tool) => gradeValue(player, tool) ?? ""),
   ])];
   const csv = output.map((row) => row.map((cell) => `"${String(cell ?? "").replaceAll('"', '""')}"`).join(",")).join("\n");
@@ -278,6 +295,14 @@ function formatMetric(value, key) {
   if (value === undefined || value === null || value === "") return `<span class="na">N/A</span>`;
   if (key === "rank") return `#${value}`;
   return escapeHtml(String(value));
+}
+
+function formatScore(value) {
+  return value === undefined || value === null ? `<span class="na">N/A</span>` : `<strong>${Number(value).toFixed(1)}</strong>`;
+}
+
+function formatScoreText(value) {
+  return value === undefined || value === null ? "N/A" : Number(value).toFixed(1);
 }
 
 function gradeValue(player, tool) {
