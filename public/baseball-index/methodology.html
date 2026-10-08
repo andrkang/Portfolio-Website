@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A transparent explanation of the Prospect Investment Lab scoring mechanism." />
+    <title>How the Model Works | Prospect Investment Lab</title>
+    <link rel="icon" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="methodology-page">
+    <a class="skip-link" href="#methodology">Skip to methodology</a>
+    <header class="site-header compact-header">
+      <div class="shell header-grid">
+        <div>
+          <p class="eyebrow gold">Prospect Investment Lab</p>
+          <h1>How the<br /><em>model works</em></h1>
+          <p class="header-copy">The basic mechanism behind the full tool—from published scouting grades to an investment decision.</p>
+        </div>
+        <div class="header-side">
+          <nav class="top-nav" aria-label="Primary navigation">
+            <a href="./index.html">Rankings</a>
+            <a class="active" href="./methodology.html">How the model works</a>
+            <a href="https://zhexiangportfolio.com/#baseball-card-investment-index">Portfolio</a>
+          </nav>
+          <div class="snapshot-stamp">
+            <span>Static ranking snapshot</span>
+            <strong id="method-snapshot-date">October 7, 2026</strong>
+            <small>The complete live calculator uses additional current inputs.</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="methodology" class="shell methodology-layout">
+      <aside class="method-nav">
+        <p class="eyebrow">Formula index</p>
+        <nav aria-label="Methodology sections">
+          <a href="#overview">Overview</a>
+          <a href="#snapshot">Static ranking</a>
+          <a href="#scouting">Scouting</a>
+          <a href="#performance">Performance</a>
+          <a href="#risk">Risk</a>
+          <a href="#hobby">Hobby Index</a>
+          <a href="#outcomes">Career outcomes</a>
+          <a href="#valuation">Valuation</a>
+          <a href="#investment">Investment Rating</a>
+          <a href="#limits">Limits</a>
+        </nav>
+      </aside>
+
+      <article class="method-article">
+        <section id="overview" class="method-section method-intro">
+          <p class="eyebrow">The central idea</p>
+          <h2>Separate player quality from card price.</h2>
+          <p>The full model produces two headline scores. The <strong>Hobby Index</strong> estimates a prospect’s long-term baseball and collector profile. The <strong>Investment Rating</strong> asks whether a standardized raw 1st Bowman autograph price offers sufficient value for that profile.</p>
+          <div class="flow-grid">
+            <div><span>01</span><strong>Measure</strong><p>Normalize scouting, performance, role, and risk.</p></div>
+            <div><span>02</span><strong>Project</strong><p>Combine baseball ability with hobby appeal.</p></div>
+            <div><span>03</span><strong>Value</strong><p>Estimate career paths and price each outcome.</p></div>
+            <div><span>04</span><strong>Decide</strong><p>Compare decision value with the current card price.</p></div>
+          </div>
+          <div class="callout"><strong>Why both scores matter</strong><p>An elite prospect can be a poor investment when the market price already assumes stardom. A less famous player can offer better value when the entry price leaves a larger margin of safety.</p></div>
+        </section>
+
+        <section id="snapshot" class="method-section">
+          <p class="eyebrow">What this GitHub Pages edition contains</p>
+          <h2>The static ranking</h2>
+          <p>The Rankings page freezes the latest official MLB Pipeline Top 100, including rank, organization, position, level, ETA, age, Future Value, and published tool grades. Search, filtering, sorting, player details, and CSV export all run inside the visitor’s browser.</p>
+          <div class="definition-grid">
+            <div><strong>Official rank</strong><p>Always remains the MLB Pipeline rank from the snapshot date.</p></div>
+            <div><strong>View rank</strong><p>Changes when a visitor sorts or filters; it is not a new official ranking.</p></div>
+            <div><strong>Missing values</strong><p>Remain N/A and sort after players who have the selected metric.</p></div>
+          </div>
+        </section>
+
+        <section id="scouting" class="method-section">
+          <p class="eyebrow">Step 1 · 0–100</p>
+          <h2>Scouting percentile</h2>
+          <p>Raw 20–80 tool grades are normalized by role and tool, converted to a common scale, and compared with a fixed historical FanGraphs Top 100 reference cohort.</p>
+          <pre class="formula"><code>normalized tool = clamp(50 + 10 × (grade − tool mean) / tool SD, 20, 80)
+converted tool = (normalized tool − 20) / 60 × 100
+
+Hitter composite = 45% Offense + 20% Athletic/Defense
+                 + 20% FV + 15% Star Ceiling
+
+Pitcher composite = 25% Fastball + 25% Best Secondary
+                  + 15% Other Secondaries + 20% Command
+                  + 15% Starter Projection</code></pre>
+        </section>
+
+        <section id="performance" class="method-section">
+          <p class="eyebrow">Step 2 · 0–100</p>
+          <h2>Current performance</h2>
+          <div class="formula-columns">
+            <div><h3>Hitters</h3><pre class="formula"><code>40% Production
+25% Contact
+20% Power production
+15% Age-to-level</code></pre><p>Inputs: wRC+, strikeout rate, ISO, player age, and league age.</p></div>
+            <div><h3>Pitchers</h3><pre class="formula"><code>40% K−BB
+25% Run prevention
+20% Workload
+15% Age-to-level</code></pre><p>Inputs: K%, BB%, FIP or ERA, workload, player age, and league age.</p></div>
+          </div>
+        </section>
+
+        <section id="risk" class="method-section">
+          <p class="eyebrow">Step 3 · Higher is safer</p>
+          <h2>Risk safety</h2>
+          <pre class="formula"><code>Risk Safety = 100 − Injury Penalty − Prospect Risk Penalty
+            − Performance Risk Penalty − Role Penalty
+            − Distance-to-MLB Penalty</code></pre>
+          <p>For hitters, performance risk primarily reflects strikeout rate. For pitchers, it primarily reflects walk rate. Distance penalties increase from MLB/Triple-A toward the lower minor leagues.</p>
+        </section>
+
+        <section id="hobby" class="method-section">
+          <p class="eyebrow">Steps 4–5</p>
+          <h2>Baseball Future and Hobby Index</h2>
+          <pre class="formula"><code>Hitter Baseball Future = 60% Scouting + 30% Performance + 10% Risk
+
+Pitcher Baseball Future = 40% Scouting + 30% Performance
+                        + 20% Projected MLB Role + 10% Risk
+
+Hobby Relevance = 40% Star Style + 25% Team Appeal
+                + 20% Position/Role Appeal + 15% Marketability
+
+Hobby Index = 70% Baseball Future + 30% Hobby Relevance</code></pre>
+          <p>Marketability combines name recognition, personal story, charisma/visibility, and fanbase reach. These are explicit assumptions in the full calculator and remain editable rather than being presented as objective facts.</p>
+        </section>
+
+        <section id="outcomes" class="method-section">
+          <p class="eyebrow">Historical comparison</p>
+          <h2>Career-outcome probabilities</h2>
+          <p>The model compares each prospect with mature historical FanGraphs profiles using prospect-era tools, FV, rank, age, and position. Similarity-weighted outcomes become the starting probabilities, then small-sample estimates are pulled toward historical base rates.</p>
+          <pre class="formula"><code>similarity weight = exp((similarity − 100) / temperature)
+
+smoothed probability =
+  (neighbor outcome weight + historical rate × prior strength)
+  / (neighbor count + prior strength)</code></pre>
+        </section>
+
+        <section id="valuation" class="method-section">
+          <p class="eyebrow">Card-market model</p>
+          <h2>Outcome value and present value</h2>
+          <p>Each projected career path is paired with resolved-player card-price evidence. The model blends arithmetic and downside-sensitive geometric values, allows for selling costs, and discounts distant outcomes.</p>
+          <pre class="formula"><code>Expected Value = Σ(path probability × path price)
+Downside-Aware Value = exp(Σ(probability × ln(path price)))
+Gross Outcome Value = 70% Downside-Aware + 30% Expected
+Net Present Value = Gross Value × (1 − 15% costs) / 1.12^holding years</code></pre>
+        </section>
+
+        <section id="investment" class="method-section">
+          <p class="eyebrow">Final 0–100 score</p>
+          <h2>Investment Rating</h2>
+          <pre class="formula"><code>Valuation Score = clamp(50 + 30 × ln(NPV / Current Price))
+
+Investment Rating = 40% Hobby Index
+                  + 50% Valuation Score
+                  + 10% Confidence</code></pre>
+          <p>Confidence measures the amount and relevance of the supporting probability, price, and comparable-player evidence. It is not the probability that the forecast is correct.</p>
+        </section>
+
+        <section id="limits" class="method-section">
+          <p class="eyebrow">Responsible use</p>
+          <h2>Limits and interpretation</h2>
+          <ul class="limit-list">
+            <li>This is a screening model, not a guarantee or personalized financial advice.</li>
+            <li>Prospect development, injuries, card condition, scarcity, grading, fees, and collector trends can overwhelm the estimate.</li>
+            <li>Historical samples—especially rare ace and superstar outcomes—are small.</li>
+            <li>Current prices and scouting reports update on different schedules.</li>
+            <li>The GitHub Pages ranking is a dated snapshot, not a live market feed.</li>
+          </ul>
+          <a class="button primary inline-button" href="./index.html">Return to ranking</a>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer"><div class="shell footer-grid"><span>Prospect Investment Lab</span><span>Transparent inputs · Dated evidence · Reproducible ranking</span></div></footer>
+    <script>
+      fetch('./data/prospects.json').then((response) => response.json()).then((data) => {
+        const date = new Date(`${data.snapshotDate}T12:00:00Z`);
+        document.getElementById('method-snapshot-date').textContent = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+      }).catch(() => {});
+    </script>
+  </body>
+</html>

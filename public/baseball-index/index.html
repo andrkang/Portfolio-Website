@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A dated, sortable snapshot of the latest official MLB Pipeline Top 100 prospect ranking." />
+    <title>MLB Pipeline Prospect Index | Andrew Kang</title>
+    <link rel="icon" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#ranking-table">Skip to ranking</a>
+    <header class="site-header">
+      <div class="shell header-grid">
+        <div>
+          <p class="eyebrow gold">Andrew Kang · Baseball Card Research</p>
+          <h1>MLB Pipeline<br /><em>Prospect Index</em></h1>
+          <p class="header-copy">A static, dated view of the official Top 100—built to make the list searchable, comparable, and transparent without requiring a live server.</p>
+        </div>
+        <div class="header-side">
+          <nav class="top-nav" aria-label="Primary navigation">
+            <a class="active" href="./index.html">Rankings</a>
+            <a href="./methodology.html">How the model works</a>
+            <a href="https://zhexiangportfolio.com/#baseball-card-investment-index">Portfolio</a>
+          </nav>
+          <div class="snapshot-stamp">
+            <span>Official data snapshot</span>
+            <strong id="snapshot-date">Loading…</strong>
+            <small>Every number below reflects this date.</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell main-stack">
+      <section class="summary-panel" aria-labelledby="summary-heading">
+        <div class="summary-copy">
+          <p class="eyebrow">Static research edition</p>
+          <h2 id="summary-heading">One official ranking.<br />Many ways to examine it.</h2>
+          <p>The default order is MLB Pipeline’s official Top 100. Sorting changes only the table view—not a player’s official rank. Open any prospect for the published tool-grade breakdown.</p>
+        </div>
+        <dl class="metric-grid" aria-label="Snapshot summary">
+          <div><dt>Players</dt><dd id="metric-players">100</dd></div>
+          <div><dt>Organizations</dt><dd id="metric-orgs">30</dd></div>
+          <div><dt>Hitters</dt><dd id="metric-hitters">—</dd></div>
+          <div><dt>Pitchers</dt><dd id="metric-pitchers">—</dd></div>
+        </dl>
+      </section>
+
+      <section class="ranking-card" aria-labelledby="ranking-heading">
+        <div class="ranking-head">
+          <div>
+            <p class="eyebrow">Official MLB Pipeline data</p>
+            <h2 id="ranking-heading">Top 100 ranking</h2>
+          </div>
+          <div class="ranking-actions">
+            <a id="source-link" class="text-link" href="https://www.mlb.com/milb/prospects/top100" target="_blank" rel="noreferrer">View official source ↗</a>
+            <button id="download-csv" class="button secondary" type="button">Download current view</button>
+          </div>
+        </div>
+
+        <form class="controls" id="ranking-controls" aria-label="Ranking controls">
+          <label class="control search-control">
+            <span>Search</span>
+            <input id="search" type="search" placeholder="Player, team, or organization" autocomplete="off" />
+          </label>
+          <label class="control">
+            <span>Player type</span>
+            <select id="role-filter">
+              <option value="all">All players</option>
+              <option value="hitter">Hitters</option>
+              <option value="pitcher">Pitchers</option>
+            </select>
+          </label>
+          <label class="control">
+            <span>Organization</span>
+            <select id="org-filter"><option value="all">All organizations</option></select>
+          </label>
+          <label class="control">
+            <span>Level</span>
+            <select id="level-filter"><option value="all">All levels</option></select>
+          </label>
+          <label class="control sort-control">
+            <span>Re-rank by</span>
+            <select id="sort-key">
+              <optgroup label="Official ranking and profile">
+                <option value="rank">MLB Pipeline rank</option>
+                <option value="name">Player name</option>
+                <option value="org">Organization</option>
+                <option value="position">Position</option>
+                <option value="level">Level</option>
+                <option value="eta">ETA</option>
+                <option value="age">Age</option>
+                <option value="fv">Future Value (FV)</option>
+              </optgroup>
+              <optgroup label="Published scouting grades">
+                <option value="hit">Hit</option>
+                <option value="power">Game Power</option>
+                <option value="speed">Speed</option>
+                <option value="field">Field</option>
+                <option value="arm">Arm</option>
+                <option value="fastball">Fastball</option>
+                <option value="best-secondary">Best secondary</option>
+                <option value="slider">Slider</option>
+                <option value="curveball">Curveball</option>
+                <option value="changeup">Changeup</option>
+                <option value="cutter">Cutter</option>
+                <option value="splitter">Splitter</option>
+                <option value="command">Command / control</option>
+              </optgroup>
+            </select>
+          </label>
+          <button id="sort-direction" class="button direction" type="button" aria-label="Reverse sort direction">Ascending ↑</button>
+          <button id="reset-controls" class="button ghost" type="button">Reset</button>
+        </form>
+
+        <div class="table-meta" aria-live="polite">
+          <span id="result-count">Loading ranking…</span>
+          <span id="sort-description">Official order</span>
+        </div>
+
+        <div class="table-wrap">
+          <table id="ranking-table">
+            <thead>
+              <tr>
+                <th class="number-cell">View</th>
+                <th class="number-cell"><button class="column-sort" data-sort="rank" type="button">MLB rank</button></th>
+                <th><button class="column-sort" data-sort="name" type="button">Player</button></th>
+                <th><button class="column-sort" data-sort="org" type="button">Organization</button></th>
+                <th><button class="column-sort" data-sort="position" type="button">Position</button></th>
+                <th><button class="column-sort" data-sort="level" type="button">Level</button></th>
+                <th><button class="column-sort" data-sort="eta" type="button">ETA</button></th>
+                <th class="number-cell"><button class="column-sort" data-sort="age" type="button">Age</button></th>
+                <th class="number-cell"><button class="column-sort" data-sort="fv" type="button">FV</button></th>
+                <th class="number-cell" id="selected-metric-heading">Selected metric</th>
+                <th class="number-cell"><span class="sr-only">Details</span></th>
+              </tr>
+            </thead>
+            <tbody id="ranking-body"></tbody>
+          </table>
+        </div>
+        <div id="empty-state" class="empty-state" hidden>
+          <strong>No prospects match these filters.</strong>
+          <button class="text-button" type="button" id="empty-reset">Clear filters</button>
+        </div>
+        <p class="data-note">Ranks, biographical information, photos, and tool grades are attributed to MLB Pipeline. This independent interface reorganizes the published data for educational analysis; it does not alter the official ranking.</p>
+      </section>
+    </main>
+
+    <dialog id="player-dialog" class="player-dialog">
+      <button class="dialog-close" id="dialog-close" type="button" aria-label="Close player details">×</button>
+      <div id="dialog-content"></div>
+    </dialog>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid"><span>Prospect Investment Lab</span><span>Research and education—not financial advice.</span></div>
+    </footer>
+  </body>
+</html>

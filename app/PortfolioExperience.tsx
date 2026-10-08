@@ -423,7 +423,7 @@ function AdaptivShowcase() {
 }
 
 function BaseballInvestmentShowcase() {
-  const liveToolUrl = "https://fangraphs-scouting-grade-collector.andrkang.chatgpt.site";
+  const staticToolUrl = "/baseball-index/";
   const modelAreas = [
     {
       number: "01",
@@ -446,12 +446,12 @@ function BaseballInvestmentShowcase() {
     <section className="baseball-investment experience-shell" aria-labelledby="baseball-investment-heading">
       <header className="baseball-investment-hero">
         <div>
-          <p className="experience-kicker">Current build · October 3, 2026</p>
+          <p className="experience-kicker">Official data snapshot · October 7, 2026</p>
           <h3 id="baseball-investment-heading">Prospect<br /><em>Investment Lab</em></h3>
         </div>
         <div className="baseball-investment-intro">
-          <p>I designed the research model, evidence pipeline, and interface as one system: FanGraphs scouting establishes the player profile, walk-forward validation governs which probabilities can deploy, and audited card histories test whether the entry price is compelling.</p>
-          <a href={liveToolUrl} target="_blank" rel="noreferrer">Open live investment tool</a>
+          <p>I designed the research model, evidence pipeline, and interface as one system. This portfolio edition freezes the latest official MLB Pipeline Top 100 into a fast, reliable ranking with full client-side sorting and a separate explanation of every major calculation.</p>
+          <a href={staticToolUrl}>Explore rankings &amp; methodology</a>
         </div>
       </header>
 
@@ -459,16 +459,16 @@ function BaseballInvestmentShowcase() {
         <div className="baseball-investment-dashboard-head">
           <div>
             <span>Prospect Investment Lab</span>
-            <strong>Live hitter and pitcher investment ratings</strong>
+            <strong>Sortable MLB Pipeline Top 100 snapshot</strong>
           </div>
           <div className="baseball-investment-metrics">
-            <span><b>2019–21</b>Calibration</span>
-            <span><b>6</b>Pitcher paths</span>
-            <span><b>2</b>Validation gates</span>
+            <span><b>100</b>Prospects</span>
+            <span><b>30</b>Organizations</span>
+            <span><b>2</b>Research views</span>
           </div>
         </div>
         <div className="baseball-investment-tabs" aria-hidden="true">
-          <span>Prospect calculator</span><span>MLB Pipeline Top 100</span><span>Pipeline history</span><span>Price timelines</span><span>Methodology</span>
+          <span>MLB Pipeline Top 100</span><span>Tool-grade sorting</span><span>Player profiles</span><span>CSV export</span><span>Methodology</span>
         </div>
         <div className="baseball-investment-workspace">
           <div className="baseball-investment-search">
@@ -476,7 +476,7 @@ function BaseballInvestmentShowcase() {
             <strong>Find prospects</strong>
             <i />
             <i />
-            <a href={liveToolUrl} target="_blank" rel="noreferrer">Open live tool</a>
+            <a href={staticToolUrl}>Open static ranking</a>
           </div>
           <div className="baseball-investment-result">
             <div><small>Pitcher probability model</small><b>Peak-outcome career paths</b><span>6</span></div>
@@ -495,7 +495,7 @@ function BaseballInvestmentShowcase() {
           </article>
         ))}
       </div>
-      <p className="baseball-investment-note">This portfolio view reflects the October 3, 2026 build: completed-season cutoffs, six-path pitcher outcomes, walk-forward probability validation, stricter exact-card filters, and an expanded audited veteran benchmark registry.</p>
+      <p className="baseball-investment-note">The GitHub Pages edition is frozen to the October 7, 2026 official MLB Pipeline ranking. It preserves official rank while allowing visitors to re-sort by profile fields and published tools; the companion methodology page documents the full model from scouting inputs through Investment Rating.</p>
     </section>
   );
 }

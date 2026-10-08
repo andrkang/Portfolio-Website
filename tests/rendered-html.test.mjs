@@ -56,16 +56,24 @@ test("keeps search indexing disabled", async () => {
 });
 
 test("includes the latest baseball investment case study", async () => {
-  const jsFiles = await import("node:fs/promises").then(({ readdir }) => readdir(new URL("../dist/assets/", import.meta.url)));
-  const script = jsFiles.find((file) => file.endsWith(".js"));
+  const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
+  const script = html.match(/<script[^>]+src="([^"]+\.js)"/)?.[1];
   assert.ok(script);
-  const source = await readFile(new URL(`../dist/assets/${script}`, import.meta.url), "utf8");
+  const source = await readFile(new URL(`../dist${script}`, import.meta.url), "utf8");
   assert.match(source, /Baseball Card Investment Index/);
   assert.match(source, /Prospect Investment Lab/);
-  assert.match(source, /Current build · October 3, 2026/);
+  assert.match(source, /Official data snapshot · October 7, 2026/);
+  assert.match(source, /Explore rankings & methodology/);
   assert.match(source, /Six-path pitcher forecasts/);
   assert.match(source, /Walk-forward validation/);
   assert.match(source, /Audited market evidence/);
+
+  const ranking = await readFile(new URL("../dist/baseball-index/index.html", import.meta.url), "utf8");
+  const methodology = await readFile(new URL("../dist/baseball-index/methodology.html", import.meta.url), "utf8");
+  const snapshot = JSON.parse(await readFile(new URL("../dist/baseball-index/data/prospects.json", import.meta.url), "utf8"));
+  assert.match(ranking, /MLB Pipeline Prospect Index/);
+  assert.match(methodology, /How the model works/);
+  assert.equal(snapshot.count, 100);
 });
 
 test("keeps the admissions-focused project order and copy", async () => {
