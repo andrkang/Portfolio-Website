@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./styles.css" />
     <script src="./app.js" defer></script>
   </head>
-  <body>
+  <body class="rankings-page">
     <a class="skip-link" href="#ranking-table">Skip to ranking</a>
     <header class="site-header">
       <div class="shell header-grid">
@@ -19,6 +19,7 @@
           <p class="header-copy">A static, dated view of the official Top 100—built to make the list searchable, comparable, and transparent without requiring a live server.</p>
         </div>
         <div class="header-side">
+          <a class="return-portfolio" href="https://zhexiangportfolio.com/#baseball-card-investment-index">← Return to Andrew’s portfolio</a>
           <nav class="top-nav" aria-label="Primary navigation">
             <a class="active" href="./index.html">Rankings</a>
             <a href="./methodology.html">How the model works</a>
@@ -137,8 +138,8 @@
                 <th><button class="column-sort" data-sort="eta" type="button">ETA</button></th>
                 <th class="number-cell"><button class="column-sort" data-sort="age" type="button">Age</button></th>
                 <th class="number-cell"><button class="column-sort" data-sort="fv" type="button">FV</button></th>
-                <th class="number-cell"><button class="column-sort" data-sort="hobbyIndex" type="button">Hobby Index</button></th>
-                <th class="number-cell"><button class="column-sort" data-sort="investmentRating" type="button">Investment</button></th>
+                <th class="number-cell score-column score-column-hobby"><button class="column-sort" data-sort="hobbyIndex" type="button">Hobby Index</button></th>
+                <th class="number-cell score-column score-column-investment"><button class="column-sort" data-sort="investmentRating" type="button">Investment</button></th>
                 <th class="number-cell" id="selected-metric-heading">Selected metric</th>
                 <th class="number-cell"><span class="sr-only">Details</span></th>
               </tr>

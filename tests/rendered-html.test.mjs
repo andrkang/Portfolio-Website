@@ -76,12 +76,22 @@ test("includes the latest baseball investment case study", async () => {
   assert.match(ranking, /MLB Pipeline Prospect Index/);
   assert.match(ranking, /Hobby Index/);
   assert.match(ranking, /Investment Rating/);
+  assert.match(ranking, /Return to Andrew’s portfolio/);
+  assert.match(ranking, /score-column-hobby/);
+  assert.match(ranking, /score-column-investment/);
   assert.match(methodology, /How the model works/);
   assert.equal(snapshot.count, 100);
   const modelScores = JSON.parse(await readFile(new URL("../dist/baseball-index/data/model-scores.json", import.meta.url), "utf8"));
   assert.equal(modelScores.scores.length, 100);
   assert.ok(modelScores.scores.some(([, hobby, investment]) => Number.isFinite(hobby) && Number.isFinite(investment)));
   assert.doesNotMatch(source, /The GitHub Pages edition is frozen/);
+
+  const rankingScript = await readFile(new URL("../dist/baseball-index/app.js", import.meta.url), "utf8");
+  const rankingStyles = await readFile(new URL("../dist/baseball-index/styles.css", import.meta.url), "utf8");
+  assert.match(rankingScript, /How these ratings are calculated/);
+  assert.match(rankingScript, /70%.*Baseball Future.*30%.*Hobby Relevance/);
+  assert.match(rankingScript, /40%.*Hobby Index.*50%.*Valuation Score.*10%.*Confidence/);
+  assert.match(rankingStyles, /\.table-wrap\s*\{[^}]*max-height:\s*none/);
 });
 
 test("keeps the admissions-focused project order and copy", async () => {

@@ -220,8 +220,8 @@ function rowMarkup(player, index) {
     <td>${escapeHtml(player.eta || "—")}</td>
     <td class="number-cell">${player.age || "—"}</td>
     <td class="number-cell"><span class="grade-pill">${escapeHtml(player.fv || "N/A")}</span></td>
-    <td class="number-cell model-score">${formatScore(player.hobbyIndex)}</td>
-    <td class="number-cell model-score">${formatScore(player.investmentRating)}</td>
+    <td class="number-cell model-score model-score-hobby">${formatScore(player.hobbyIndex)}</td>
+    <td class="number-cell model-score model-score-investment">${formatScore(player.investmentRating)}</td>
     <td class="number-cell selected-value">${metricDisplay}</td>
     <td class="number-cell"><button class="details-button" type="button" data-player-rank="${player.rank}" aria-label="View ${escapeAttribute(player.name)} details">View</button></td>
   </tr>`;
@@ -239,6 +239,12 @@ function openPlayer(rank) {
     : `<p class="muted">No published tool breakdown was available in this snapshot.</p>`;
   const initials = player.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join("");
   const portrait = player.photoUrl ? `<img src="${escapeAttribute(player.photoUrl)}" alt="${escapeAttribute(player.name)}" />` : `<span>${escapeHtml(initials)}</span>`;
+  const hobbyExplanation = player.hobbyIndex == null
+    ? `<strong>N/A</strong><p>A Hobby Index needs both a matched scouting profile and current performance evidence.</p>`
+    : `<strong>${formatScoreText(player.hobbyIndex)}</strong><p><b>70%</b> Baseball Future + <b>30%</b> Hobby Relevance</p>`;
+  const investmentExplanation = player.investmentRating == null
+    ? `<strong>N/A</strong><p>An Investment Rating also needs a verified current card price and valuation evidence.</p>`
+    : `<strong>${formatScoreText(player.investmentRating)}</strong><p><b>40%</b> Hobby Index + <b>50%</b> Valuation Score + <b>10%</b> Confidence</p>`;
   els.dialogContent.innerHTML = `
     <div class="dialog-hero">
       <div class="dialog-portrait">${portrait}</div>
@@ -250,6 +256,14 @@ function openPlayer(rank) {
       </div>
     </div>
     <dl class="dialog-facts"><div><dt>Organization</dt><dd>${escapeHtml(player.team || player.org || "N/A")}</dd></div><div><dt>Age</dt><dd>${player.age || "N/A"}</dd></div><div><dt>Level</dt><dd>${escapeHtml(player.level || "N/A")}</dd></div><div><dt>ETA</dt><dd>${escapeHtml(player.eta || "N/A")}</dd></div></dl>
+    <section class="calculation-summary" aria-labelledby="calculation-heading">
+      <div class="calculation-heading"><p class="eyebrow">Simple score breakdown</p><h3 id="calculation-heading">How these ratings are calculated</h3></div>
+      <div class="calculation-grid">
+        <article class="calculation-card calculation-card-hobby"><span>Hobby Index</span>${hobbyExplanation}</article>
+        <article class="calculation-card calculation-card-investment"><span>Investment Rating</span>${investmentExplanation}</article>
+      </div>
+      <a class="calculation-link" href="./methodology.html">See the complete methodology →</a>
+    </section>
     <section class="dialog-tools"><p class="eyebrow">Published scouting grades</p><div class="tool-list">${tools}</div></section>
     <p class="dialog-note">MLB ranking snapshot ${formatDate(state.data.snapshotDate)} · Model score snapshot ${formatDate(state.data.modelSnapshotDate)} · Missing evidence remains N/A.</p>`;
   els.dialog.showModal();
