@@ -35,6 +35,14 @@ export type Project = {
     description: string;
     src: string;
   };
+  outreachEvent?: {
+    eyebrow: string;
+    title: string;
+    location: string;
+    description: string;
+    takeaway: string;
+    images: Array<{ src: string; alt: string; caption: string }>;
+  };
   video?: string;
   videoTitle?: string;
   videoDescription?: string;
@@ -206,6 +214,20 @@ const projectRecords: Project[] = [
         caption: "Helping students explore the design workflow",
       },
     ],
+    outreachEvent: {
+      eyebrow: "New community event",
+      title: "Rural Seniors Meet 3D Printing for the First Time",
+      location: "Dongcu Village · Liantang Town, Qingpu · October 2026",
+      description: "Ahead of the Double Ninth Festival, I introduced nearly 30 older residents of Dongcu Village to 3D printing. For many participants—including people in their 70s and nearly 90s—it was their first encounter with the technology. I explained additive manufacturing, shared my path from robotics and 3D modeling to making, demonstrated a 3D-printed shoe, and discussed how AI can make digital design more accessible.",
+      takeaway: "The conversation expanded into ideas for using 3D printing to create distinctive village cultural products, including designs for the local hydrangea festival. The experience reinforced a simple principle behind this outreach series: curiosity has no age limit.",
+      images: [
+        {
+          src: "/images/rural-seniors-3d-printing.jpg",
+          alt: "Older residents of Dongcu Village attending Andrew's introductory presentation about 3D printing",
+          caption: "Nearly 30 Dongcu Village residents joined an introduction to 3D printing and AI-assisted design",
+        },
+      ],
+    },
     chapters: [
       { number: "01", title: "Teaching across formats", prompt: "An in-person workshop at Zheng Ze, an online session, and a lecture at TCT Shenzhen." },
       { number: "02", title: "Designing the lesson", prompt: "Teaching sequence, demonstrations, and participant work." },

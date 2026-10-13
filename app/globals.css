@@ -439,6 +439,54 @@ a { text-decoration: none; }
 
 .gallery-item figcaption > span:first-child { font: .56rem var(--font-geist-mono), monospace; letter-spacing: .1em; opacity: .72; }
 
+.outreach-event {
+  padding: 18px 0 110px;
+  display: grid;
+  grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+  gap: clamp(36px, 6vw, 92px);
+  align-items: center;
+  border-top: 1px solid color-mix(in srgb, var(--experience-fg) 30%, transparent);
+}
+.outreach-event-copy { padding-top: 42px; }
+.outreach-event-copy h3 {
+  margin: 22px 0 18px;
+  max-width: 720px;
+  font-size: clamp(2.7rem, 5.4vw, 5.9rem);
+  line-height: .9;
+  letter-spacing: -.065em;
+  font-weight: 590;
+}
+.outreach-event-copy > p:not(.experience-kicker):not(.outreach-event-location) {
+  margin: 18px 0 0;
+  max-width: 680px;
+  font-size: clamp(.94rem, 1.3vw, 1.12rem);
+  line-height: 1.65;
+}
+.outreach-event-location {
+  margin: 0 0 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid color-mix(in srgb, var(--experience-fg) 24%, transparent);
+  font: .66rem/1.45 var(--font-geist-mono), monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: .68;
+}
+.outreach-event-media { padding-top: 42px; }
+.outreach-event-media figure { margin: 0; }
+.outreach-event-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid color-mix(in srgb, var(--experience-fg) 34%, transparent);
+}
+.outreach-event-media figcaption {
+  padding-top: 12px;
+  max-width: 780px;
+  font-size: .76rem;
+  line-height: 1.45;
+  opacity: .72;
+}
+
 .analysis-section { padding: 40px 0 110px; }
 .analysis-header { padding-bottom: 34px; border-bottom: 1px solid color-mix(in srgb, var(--experience-fg) 28%, transparent); }
 .analysis-header h3 { margin: 20px 0 0; font-size: clamp(2.6rem, 5.3vw, 5.8rem); line-height: .9; letter-spacing: -.065em; font-weight: 590; }
@@ -665,6 +713,10 @@ a { text-decoration: none; }
   .project-gallery-teaching-3d-printing .gallery-item-2 figcaption a { margin-top: 14px; }
   .project-gallery-teaching-3d-printing .gallery-item-5 { grid-column: auto; width: 100%; aspect-ratio: 3 / 4; }
   .project-gallery-volunteer-padlet-automation .gallery-item-1 { grid-column: auto; width: 100%; aspect-ratio: auto; }
+  .outreach-event { padding-bottom: 80px; grid-template-columns: 1fr; gap: 12px; }
+  .outreach-event-copy { padding-top: 34px; }
+  .outreach-event-copy h3 { font-size: clamp(3rem, 14vw, 5rem); }
+  .outreach-event-media { padding-top: 20px; }
   .experience-video { padding-bottom: 80px; }
   .analysis-section { padding-bottom: 80px; }
   .analysis-grid { grid-template-columns: 1fr; }

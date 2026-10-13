@@ -592,6 +592,26 @@ export default function PortfolioExperience() {
           </section>
         )}
 
+        {project.outreachEvent ? (
+          <section className="outreach-event experience-shell" aria-labelledby="outreach-event-title">
+            <div className="outreach-event-copy">
+              <p className="experience-kicker">{project.outreachEvent.eyebrow}</p>
+              <h3 id="outreach-event-title">{project.outreachEvent.title}</h3>
+              <p className="outreach-event-location">{project.outreachEvent.location}</p>
+              <p>{project.outreachEvent.description}</p>
+              <p>{project.outreachEvent.takeaway}</p>
+            </div>
+            <div className="outreach-event-media">
+              {project.outreachEvent.images.map((image) => (
+                <figure key={image.src}>
+                  <img src={image.src} alt={image.alt} loading="lazy" />
+                  <figcaption>{image.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         {project.analysis ? (
           <section className="analysis-section experience-shell" aria-labelledby="analysis-title">
             <header className="analysis-header">

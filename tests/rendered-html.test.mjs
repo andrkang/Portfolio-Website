@@ -29,6 +29,7 @@ test("keeps project media available", async () => {
     "village-3d-printing-3.jpg",
     "village-3d-printing-4.jpg",
     "village-3d-printing-article.png",
+    "rural-seniors-3d-printing.jpg",
     "padlet-automation-workflow.png",
     "adaptiv/adaptiv-logo.png",
     "adaptiv/sclobo-keychain.png",
@@ -112,6 +113,8 @@ test("keeps the admissions-focused project order and copy", async () => {
 
   assert.match(data, /3D Printing Education & Outreach/);
   assert.match(data, /in-person workshop at Zheng Ze, an online session, and a lecture at TCT Shenzhen/);
+  assert.match(data, /Rural Seniors Meet 3D Printing for the First Time/);
+  assert.match(data, /curiosity has no age limit/);
   assert.match(data, /Built for my school/);
 });
 
