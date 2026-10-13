@@ -471,7 +471,7 @@ a { text-decoration: none; }
   text-transform: uppercase;
   opacity: .68;
 }
-.outreach-event-media { padding-top: 42px; }
+.outreach-event-media { padding-top: 42px; display: grid; gap: 20px; }
 .outreach-event-media figure { margin: 0; }
 .outreach-event-media img {
   width: 100%;

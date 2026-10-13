@@ -218,13 +218,18 @@ const projectRecords: Project[] = [
       eyebrow: "New community event",
       title: "Rural Seniors Meet 3D Printing for the First Time",
       location: "Dongcu Village · Liantang Town, Qingpu · October 2026",
-      description: "Ahead of the Double Ninth Festival, I introduced nearly 30 older residents of Dongcu Village to 3D printing. For many participants—including people in their 70s and nearly 90s—it was their first encounter with the technology. I explained additive manufacturing, shared my path from robotics and 3D modeling to making, demonstrated a 3D-printed shoe, and discussed how AI can make digital design more accessible.",
-      takeaway: "The conversation expanded into ideas for using 3D printing to create distinctive village cultural products, including designs for the local hydrangea festival. The experience reinforced a simple principle behind this outreach series: curiosity has no age limit.",
+      description: "Ahead of the Double Ninth Festival, I introduced nearly 30 older residents of Dongcu Village—some nearly 90—to 3D printing. I explained additive manufacturing and AI-assisted design, shared a 3D-printed shoe, and led a discussion about creating distinctive products for the village's hydrangea festival.",
+      takeaway: "The session showed that curiosity has no age limit.",
       images: [
         {
           src: "/images/rural-seniors-3d-printing.jpg",
           alt: "Older residents of Dongcu Village attending Andrew's introductory presentation about 3D printing",
           caption: "Nearly 30 Dongcu Village residents joined an introduction to 3D printing and AI-assisted design",
+        },
+        {
+          src: "/images/rural-seniors-3d-printing-introduction.jpg",
+          alt: "An older Dongcu Village resident viewing the opening slide for Andrew's rural 3D printing outreach event",
+          caption: "The event welcomed rural seniors into the world of 3D printing for the first time",
         },
       ],
     },

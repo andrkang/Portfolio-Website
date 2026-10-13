@@ -30,6 +30,7 @@ test("keeps project media available", async () => {
     "village-3d-printing-4.jpg",
     "village-3d-printing-article.png",
     "rural-seniors-3d-printing.jpg",
+    "rural-seniors-3d-printing-introduction.jpg",
     "padlet-automation-workflow.png",
     "adaptiv/adaptiv-logo.png",
     "adaptiv/sclobo-keychain.png",
