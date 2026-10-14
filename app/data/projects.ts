@@ -35,14 +35,14 @@ export type Project = {
     description: string;
     src: string;
   };
-  outreachEvent?: {
+  outreachEvents?: Array<{
     eyebrow: string;
     title: string;
     location: string;
     description: string;
     takeaway: string;
     images: Array<{ src: string; alt: string; caption: string }>;
-  };
+  }>;
   video?: string;
   videoTitle?: string;
   videoDescription?: string;
@@ -214,25 +214,46 @@ const projectRecords: Project[] = [
         caption: "Helping students explore the design workflow",
       },
     ],
-    outreachEvent: {
-      eyebrow: "New community event",
-      title: "Rural Seniors Meet 3D Printing for the First Time",
-      location: "Dongcu Village · Liantang Town, Qingpu · October 2026",
-      description: "Ahead of the Double Ninth Festival, I introduced nearly 30 older residents of Dongcu Village—some nearly 90—to 3D printing. I explained additive manufacturing and AI-assisted design, shared a 3D-printed shoe, and led a discussion about creating distinctive products for the village's hydrangea festival.",
-      takeaway: "The session showed that curiosity has no age limit.",
-      images: [
-        {
-          src: "/images/rural-seniors-3d-printing.jpg",
-          alt: "Older residents of Dongcu Village attending Andrew's introductory presentation about 3D printing",
-          caption: "Nearly 30 Dongcu Village residents joined an introduction to 3D printing and AI-assisted design",
-        },
-        {
-          src: "/images/rural-seniors-3d-printing-introduction.jpg",
-          alt: "An older Dongcu Village resident viewing the opening slide for Andrew's rural 3D printing outreach event",
-          caption: "The event welcomed rural seniors into the world of 3D printing for the first time",
-        },
-      ],
-    },
+    outreachEvents: [
+      {
+        eyebrow: "New community event",
+        title: "Rural Seniors Meet 3D Printing for the First Time",
+        location: "Dongcu Village · Liantang Town, Qingpu · October 2026",
+        description: "Ahead of the Double Ninth Festival, I introduced nearly 30 older residents of Dongcu Village—some nearly 90—to 3D printing. I explained additive manufacturing and AI-assisted design, shared a 3D-printed shoe, and led a discussion about creating distinctive products for the village's hydrangea festival.",
+        takeaway: "The session showed that curiosity has no age limit.",
+        images: [
+          {
+            src: "/images/rural-seniors-3d-printing.jpg",
+            alt: "Older residents of Dongcu Village attending Andrew's introductory presentation about 3D printing",
+            caption: "Nearly 30 Dongcu Village residents joined an introduction to 3D printing and AI-assisted design",
+          },
+          {
+            src: "/images/rural-seniors-3d-printing-introduction.jpg",
+            alt: "An older Dongcu Village resident viewing the opening slide for Andrew's rural 3D printing outreach event",
+            caption: "The event welcomed rural seniors into the world of 3D printing for the first time",
+          },
+        ],
+      },
+      {
+        eyebrow: "Industry talk",
+        title: "Inspiring Young Makers at TCT Shenzhen",
+        location: "TCT Shenzhen · 3D Genius Hub · October 2026",
+        description: "At TCT Shenzhen, I gave a public talk on the barriers young makers face in 3D printing and how design challenges, recognition, and community can help them keep creating.",
+        takeaway: "The talk brought my youth outreach experience to an international additive-manufacturing audience.",
+        images: [
+          {
+            src: "/images/tct-shenzhen-talk-audience.jpg",
+            alt: "Audience attending Andrew's 3D printing talk at the TCT Shenzhen 3D Genius Hub",
+            caption: "Presenting at the 3D Genius Hub during TCT Shenzhen",
+          },
+          {
+            src: "/images/tct-shenzhen-talk-engagement.jpg",
+            alt: "An audience member photographing Andrew's presentation about sustained youth participation in 3D printing",
+            caption: "Sharing strategies for helping young makers stay engaged with 3D printing",
+          },
+        ],
+      },
+    ],
     chapters: [
       { number: "01", title: "Teaching across formats", prompt: "An in-person workshop at Zheng Ze, an online session, and a lecture at TCT Shenzhen." },
       { number: "02", title: "Designing the lesson", prompt: "Teaching sequence, demonstrations, and participant work." },

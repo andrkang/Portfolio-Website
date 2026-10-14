@@ -592,25 +592,28 @@ export default function PortfolioExperience() {
           </section>
         )}
 
-        {project.outreachEvent ? (
-          <section className="outreach-event experience-shell" aria-labelledby="outreach-event-title">
-            <div className="outreach-event-copy">
-              <p className="experience-kicker">{project.outreachEvent.eyebrow}</p>
-              <h3 id="outreach-event-title">{project.outreachEvent.title}</h3>
-              <p className="outreach-event-location">{project.outreachEvent.location}</p>
-              <p>{project.outreachEvent.description}</p>
-              <p>{project.outreachEvent.takeaway}</p>
-            </div>
-            <div className="outreach-event-media">
-              {project.outreachEvent.images.map((image) => (
-                <figure key={image.src}>
-                  <img src={image.src} alt={image.alt} loading="lazy" />
-                  <figcaption>{image.caption}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-        ) : null}
+        {project.outreachEvents?.map((event, eventIndex) => {
+          const titleId = `outreach-event-title-${eventIndex + 1}`;
+          return (
+            <section className="outreach-event experience-shell" aria-labelledby={titleId} key={event.title}>
+              <div className="outreach-event-copy">
+                <p className="experience-kicker">{event.eyebrow}</p>
+                <h3 id={titleId}>{event.title}</h3>
+                <p className="outreach-event-location">{event.location}</p>
+                <p>{event.description}</p>
+                <p>{event.takeaway}</p>
+              </div>
+              <div className="outreach-event-media">
+                {event.images.map((image) => (
+                  <figure key={image.src}>
+                    <img src={image.src} alt={image.alt} loading="lazy" />
+                    <figcaption>{image.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </section>
+          );
+        })}
 
         {project.analysis ? (
           <section className="analysis-section experience-shell" aria-labelledby="analysis-title">
